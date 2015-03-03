@@ -4,7 +4,7 @@ group {{ customer.shortname }} {
         {{ interface.name }} {
             unit {{ interface.unit }} {
                 description "{{ interface.int_descr}}";
-                vlan-id {{ interface.unit }}
+                vlan-id {{ interface.unit }};
                 family inet {
                     address {{ interface.local_ip_address }}/{{ interface.interface_subnet }};
                 {% if not interface.active -%}
