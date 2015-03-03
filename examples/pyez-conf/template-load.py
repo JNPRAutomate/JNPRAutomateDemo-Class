@@ -17,10 +17,10 @@ def log_output(msg):
     Simple function to print consistent output.
     """
     log_divide = "#" * 80 + "\n"
-    log = "# " + str(time()) + " " + msg + "\n"
-    log_end = " " * (80-len(log)) + "#\n"
+    log = "# " + str(time()) + " " + msg
+    log_end = " " * (len(log_divide) - len(log) - 2) + "#\n"
 
-    print log_divide + log + log_divide
+    print log_divide + log + log_end + log_divide
 
 # Collect Arguments
 parser = argparse.ArgumentParser(description="Gather options from the user")
