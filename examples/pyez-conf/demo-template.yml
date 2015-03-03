@@ -1,0 +1,38 @@
+---
+my_details:
+  bgp_as: 65000
+  subnets:
+    - "10.10.0.0/18"
+    - "10.11.0.0/18"
+
+customers:
+  - cust-a:
+    active: true
+    shortname: "CUST_A"
+    bgp_as: 65500
+    desc: "This is Customer A"
+    interfaces:
+      - link:
+        name: ge-0/0/2
+        unit: "100"
+        int_descr: "Customer A Primary Link"
+        active: true
+        bgp_active: true
+        local_ip_address: "192.168.9.1"
+        remote_ip_address: "192.168.9.2"
+        interface_subnet: "30"
+      - link:
+        name: ge-0/0/3
+        unit: "200"
+        int_descr: "Customer A Secondary Link"
+        active: false
+        bgp_active: true
+        local_ip_address: "192.168.9.5"
+        remote_ip_address: "192.168.9.6"
+        interface_subnet: "30"
+    cust_nets:
+      - "172.20.16.0/24"
+      - "172.20.17.0/24"
+    as_paths:
+      - "1234 65500$"
+      - "5678 65500$"

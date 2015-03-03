@@ -1,0 +1,33 @@
+{% for customer in customers %}
+group {{ customer.shortname }} {
+    interfaces { {% for interface in customer.interfaces %}
+        {{ interface.name }} {
+            unit {{ interface.unit }} {
+                description "{{ interface.int_descr}}";
+                vlan-id {{ interface.unit }}
+                family inet {
+                    address {{ interface.local_ip_address }}/{{ interface.interface_subnet }};
+                {% if not interface.active -%}
+                disable;
+                {% endif -%}
+                }
+            }
+        }
+    {% endfor %} }
+    protocols {
+        bgp {
+            group PEER_{{ customer.shortname }} {
+                peer-as {{ customer.bgp_as }};
+                {% for interface in customer.interfaces -%}
+                {% if interface.bgp_active -%}
+                neighbor {{ interface.remote_ip_address }};
+                {% endif -%}
+                {% endfor %}
+            }
+        }
+    }
+}
+{% if customer.active == true -%}
+apply-groups {{ customer.shortname }};
+{% endif -%}
+{% endfor %}

@@ -6,3 +6,6 @@ packer_cache/
 
 # Ignore Vagrant
 .vagrant/
+
+# Ignore OS Junk
+.DS_Store
