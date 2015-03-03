@@ -1,5 +1,5 @@
 {% for customer in customers %}
-group {{ customer.shortname }} {
+groups {{ customer.shortname }} {
     interfaces { {% for interface in customer.interfaces %}
         {{ interface.name }} {
             unit {{ interface.unit }} {
@@ -7,10 +7,10 @@ group {{ customer.shortname }} {
                 vlan-id {{ interface.unit }};
                 family inet {
                     address {{ interface.local_ip_address }}/{{ interface.interface_subnet }};
+                }
                 {% if not interface.active -%}
                 disable;
                 {% endif -%}
-                }
             }
         }
     {% endfor %} }

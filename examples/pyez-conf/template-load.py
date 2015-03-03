@@ -62,7 +62,7 @@ dev.cu
 tvars = yaml.load(open(bundle_vars).read())
 
 log_output("Loading Template to Candidate Config:\n")
-dev.cu.load(template_path=bundle_template, template_vars=tvars, format=args.format)
+dev.cu.load(template_path=str(bundle_template), template_vars=tvars, format=str(args.format))
 
 log_output("Performing Config Diff:")
 commit_diff = dev.cu.diff()
