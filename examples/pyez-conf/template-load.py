@@ -54,7 +54,7 @@ bundle_vars = "%s.yml" % args.bundle
 # but this is a simple example.
 dev = Device( user=args.user, host=args.device, password=args.password )
 
-log_output("Connecting to Device (%s):\n" % args.device)
+log_output("Connecting to Device (%s):" % args.device)
 dev.open()
  
 dev.bind(cu=Config)
@@ -62,7 +62,7 @@ dev.cu
 
 tvars = yaml.load(open(bundle_vars).read())
 
-log_output("Loading Template to Candidate Config:\n")
+log_output("Loading Template to Candidate Config:")
 dev.cu.load(template_path=str(bundle_template), template_vars=tvars, format=str(args.format))
 
 log_output("Performing Config Diff:")
