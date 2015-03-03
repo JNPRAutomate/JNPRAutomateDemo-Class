@@ -16,8 +16,9 @@ def log_output(msg):
     """
     Simple function to print consistent output.
     """
-    log_divide = "#" * 40 + "\n"
+    log_divide = "#" * 80 + "\n"
     log = "# " + str(time()) + " " + msg + "\n"
+    log_end = " " * (80-len(log)) + "#\n"
 
     print log_divide + log + log_divide
 
