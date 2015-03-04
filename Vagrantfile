@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ndo.vm.network "private_network",
       ip: "172.16.0.10",
       virtualbox__intnet: "NetDevOps-StudentInternal"
-    config.vm.synced_folder "", "/vagrant", disabled: false
+    config.vm.synced_folder "", "/vagrant", disabled: true
 
     ndo.vm.provider "virtualbox" do |v|
     #  v.gui = true
