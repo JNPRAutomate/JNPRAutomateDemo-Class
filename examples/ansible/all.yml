@@ -1,0 +1,13 @@
+---
+- name: Configure VPN Headend
+  hosts: vpn-headend
+  connection: local
+  gather_facts: no
+  vars:
+    junos_user: "root"
+    junos_password: "Juniper"
+    build_dir: "/tmp/"
+    vpn_edge_list: [ 0:{'tunid':1}, 1, 2]
+  roles:
+    - VPN_Headend
+

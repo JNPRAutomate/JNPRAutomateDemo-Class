@@ -1,0 +1,7 @@
+---
+- name: Build VPN Edge config template
+  template: src=vpn_edge.conf.js dest={{build_dir}}/vpn_edge.conf.{{ item }}.part
+  with_items: vpn_edge_list 
+
+- name: Apply Config
+  junos_install_config: host={{ foo }} user={{ junos_user }} password={{ junos_password }} file={{ build_dir }}/vpn_edge.conf.part overwrite=no logfile=logs/{{ inventory_hostname }}.log
