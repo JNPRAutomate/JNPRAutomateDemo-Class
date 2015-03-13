@@ -5,10 +5,8 @@ Network and Security Automation Workshop
 
 This repository contains an entire class on creating network automation.
 
-Topology
---------
-
-### Components
+Components
+----------
 
 -	Student
 	-	Laptop running Windows, Mac or Linux
@@ -26,9 +24,14 @@ Topology
 		-	Public Server
 		-	Private Server
 
+Topology
+========
+
+This is the network topology required to successfully create the lab. The components section defines what is required to run the lab. Your choices in hardware can vary. This is based upon a working configuration for the lab.
+
 ```
 
-  +--------------------------------------------+            
+  +--------------------------------------------+
   |  Proctor Host                              |            
   |                        +------------+      |            
   |                        |            |      |            
@@ -84,13 +87,27 @@ Topology
 +----------------------------------------------+                                                                    
 ```
 
+There can be anywhere from one to ~200 students operating on this topology at once. The two limitations are the Headend vSRX performance and the subnet size of the shared LAN.
+
 Course Steps
 ------------
 
 The course is divided into multiple steps.
 
-1.	Topology Overview
-2.	Installing Software
-3.	Basic API Review
-4.	Using PyEZ Library
-5.	Using Ansible
+LINKS ARE CURRENTLY BROKEN
+
+1.	[Topology Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+2.	[Installing Software](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+3.	[Software Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+	1.	[Basic API Review](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+	2.	[Using PyEZ Library](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+	3.	[Using Ansible](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+4.	[Registering your host](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+5.	[Configuring NAT](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+6.	[VPN connection to headend](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+7.	[Enabling Dynamic Routing](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+8.	[Creating Firewall Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+9.	[Creating Application Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+10.	[Creating IPS Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+11.	[Disaster Strikes!](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+12.	[Recovering the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
