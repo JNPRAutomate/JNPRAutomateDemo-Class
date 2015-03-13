@@ -5,17 +5,18 @@
 VAGRANTFILE_API_VERSION = "2"
 
 require "vagrant-host-shell"
+require "vagrant-junos"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
   config.vm.define "ndo", primary: true do |ndo|
-    ndo.vm.box = "juniper/netdevops"
+    ndo.vm.box = "juniper/netdevops-ubuntu1404"
     ndo.vm.hostname = "NetDevOps-Student"
     ndo.vm.network "private_network",
       ip: "172.16.0.10",
       virtualbox__intnet: "NetDevOps-StudentInternal"
-    config.vm.synced_folder "", "/vagrant", disabled: true
+    config.vm.synced_folder "", "/vagrant", disabled: false
 
     ndo.vm.provider "virtualbox" do |v|
     #  v.gui = true
@@ -39,6 +40,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ip: "172.16.0.1",
       virtualbox__intnet: "NetDevOps-StudentInternal",
       nic_type: 'virtio'
+    srx.vm.network "private_network",
+      ip: "10.255.255.10",
+      virtualbox__intnet: "NetDevOps-StudentLAN",
+      nic_type: 'virtio'
+    
     srx.vm.synced_folder "", "/vagrant", disabled: true
 
     srx.ssh.username = 'root'
