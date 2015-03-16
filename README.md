@@ -108,7 +108,7 @@ The course is divided into multiple steps.
 6.	[VPN connection to headend](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/vpnconnectiontoheadend.md)
 7.	[Enabling Dynamic Routing](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/enablingdynamicrouting.md)
 8.	[Creating Firewall Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/creatingfwpolicies.md)
-9.	[Creating Application Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/creatingapppolicies.md.md)
+9.	[Creating Application Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/creatingapppolicies.md)
 10.	[Creating IPS Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/creatingipspolicies.md)
 11.	[Disaster Strikes!](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/disasterstrikes.md)
 12.	[Recovering the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/recoveringthelab.md)
