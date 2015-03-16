@@ -104,13 +104,13 @@ Once connected we need to send back a hello message to the the NETCONF server. O
 
 ```
 
-### Gathering some information
-
-Now that we have an active NETCONF connection to the device we can start sending commands to the host.
-
 #### Message ID
 
 When sending RPC messages it is possible to include a message-id in the request. When the response is returned it will allow you to match the response to the request. This is hugely helpful for when you need to troubleshoot a connection in which you are sending multiple messages at the same time. It helps you map a response to a request. This is optional and it is up to the implementor to use.
+
+### Gathering some information
+
+Now that we have an active NETCONF connection to the device we can start sending commands to the host.
 
 **Request**
 
@@ -140,13 +140,15 @@ When sending RPC messages it is possible to include a message-id in the request.
 
 ### Adding to the configuration via a manual RPC
 
+Now we are going to make a simple configuration change. We do this just as we would from the command line: Open configuration, load change, and commit. For our example we will simply change the hostname.
+
 -	Open Configuration
 -	Load Configuration
 -	Commit Configuration
 
 #### Opening the configuration
 
-To change the configuration we first must open up a candidate configuration.
+To change the configuration we first must open up a candidate configuration. This is just as if you were to type "edit" or "configure" from the CLI.
 
 **Request**
 
@@ -168,10 +170,19 @@ To change the configuration we first must open up a candidate configuration.
 
 ### Loading a configuration
 
+Now that the configuration is open we will load our configuration in the standard XML format that is expected. We can also load other formats such as "set commands" or "Junos config". But to best demonstrate the API we will use the standard XML formatting.
+
 **Request**
 
 ```
 <rpc message-id="3">
+    <load-configuration action="merge">
+    <configuration>
+        <system>
+            <host-name>NETCONFED</host-name>
+        </system>
+    </configuration>
+    </load-configuration>
 </rpc>
 ]]>]]>
 ```
@@ -179,9 +190,17 @@ To change the configuration we first must open up a candidate configuration.
 **Response**
 
 ```
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="3">
+    <load-configuration-results>
+        <ok/>
+    </load-configuration-results>
+</rpc-reply>
+]]>]]>
 ```
 
 ### Committing the configuration
+
+We must now commit the configuration just as we would by do by hand. But again in this case we will use the XML formatting.
 
 **Request**
 
@@ -197,6 +216,99 @@ To change the configuration we first must open up a candidate configuration.
 **Response**
 
 ```
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="4">
+    <ok/>
+</rpc-reply>
+]]>]]>
+```
+
+### Validating the change
+
+Now we want to validate that our change successfully occured. There are numerous ways to do this, but lets reuse an RPC we did earlier in the lab. We will get the software information and this response also includes the hostname. The best practice would be to look at the diff of configuration or by comparing the entire configuration.
+
+**Request**
+
+```
+<rpc message-id="5">
+    <get-software-information/>
+</rpc>
+]]>]]>
+```
+
+**Response**
+
+```
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="5">
+    <software-information>
+        <host-name>NETCONFED</host-name>
+        <product-model>firefly-perimeter</product-model>
+        <product-name>firefly-perimeter</product-name>
+        <package-information>
+            <name>junos</name>
+            <comment>JUNOS Software Release [12.1X47-D10.4]</comment>
+        </package-information>
+    </software-information>
+</rpc-reply>
+]]>]]>
+
+
+```
+
+### Rolling back the change
+
+To keep the lab intact we want to rollback to the previous configuration. This will keep us all on the same page as we progress, plus it gives us an excuse to run a few more RPCs. In this request we are going to rollback to the previous configuration and then commit the change.
+
+**Request**
+
+```
+<rpc message-id="6">
+    <get-rollback-information>
+        <rollback>1</rollback>
+    </get-rollback-information>
+</rpc>
+
+```
+
+**Response**
+
+The response is long and contains the entire configuration. For this example the response has been truncated.
+
+```
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="6">
+    <rollback-information>
+        <ok/>
+        <configuration xmlns="http://xml.juniper.net/xnm/1.1/xnm" junos:changed-seconds="1426531257" junos:changed-localtime="2015-03-16 18:40:57 UTC">
+            <version>12.1X47-D10.4</version>
+            <system>
+                <host-name>NetDevOps-SRX01</host-name>
+            </system>
+            <!-- RESPONSE TRUNCATED -->
+        </configuration>
+    </rollback-information>
+</rpc-reply>
+]]>]]>
+```
+
+Lastly commit the configuration to apply the rollback.
+
+**Request**
+
+```
+<rpc message-id="7">
+    <commit-configuration>
+        <log>Committed via NETCONF by hand!</log>
+    </commit-configuration>
+</rpc>
+]]>]]>
+```
+
+**Response**
+
+```
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="7">
+    <ok/>
+</rpc-reply>
+]]>]]>
 ```
 
 ### Review
