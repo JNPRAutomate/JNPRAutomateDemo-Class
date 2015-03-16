@@ -1,4 +1,4 @@
-Software prerequisites
+Software Prerequisites
 ======================
 
 To run the lab you need a few applications loaded on your laptop.
