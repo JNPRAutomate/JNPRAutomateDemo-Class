@@ -9,6 +9,7 @@ Components
 ----------
 
 -	Student
+
 	-	Laptop running Windows, Mac or Linux
 	-	4GB Ram and 8GB Disk Space
 	-	[Vagrant](http://www.vagrantup.com/downloads.html)
@@ -16,7 +17,9 @@ Components
 	-	Student Vagrant VMs
 	-	vSRX Host
 	-	[NetDevOps Ubuntu 14.04](https://atlas.hashicorp.com/juniper/boxes/netdevops-ubuntu1404)
-	-	Proctor Host
+
+-	Proctor Host
+
 	-	A NetDevOps hardware host or equivalent
 		-	16GB RAM, 80GB Disk, and a VT-x Intel CPU
 	-	vSRX Headend
@@ -96,7 +99,7 @@ The course is divided into multiple steps.
 
 1.	[Topology Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/topologyoverview.md)
 2.	[Installing Software](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/installingsoftware.md)
-3.	[Software Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/softwareoverview.md.md)
+3.	[Software Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/softwareoverview.md)
 	1.	[Basic API Review](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/basicapireview.md)
 	2.	[Using PyEZ Library](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/usingpyezlibrary.md)
 	3.	[Using Ansible](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/usingansible.md)

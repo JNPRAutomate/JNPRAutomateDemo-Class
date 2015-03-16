@@ -1,11 +1,40 @@
 Software prerequisites
 ======================
 
+To run the lab you need a few applications loaded on your laptop.
+
+These tools are Vagrant and Virtual Box. This tool set is very commonly used in a development environment. It makes common tasks such as bringing up a VM, provisioning it, and building multi-box topologies a breeze.
+
 Vagrant
 =======
 
+Vagrant is a virtual machine management tool. It manages the downloading, provisioning, and state management of the virtual machine. It is a common tool used in software development.
+
+**Download Locations**
+
+-	[Mac OS X](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.dmg)
+-	[Windows](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.msi)
+-	[Linux 64-bit DEB](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb)
+-	[Linux 32-bit DEB](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_i686.deb)
+-	[Linux 64-bit RPM](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.rpm)
+-	[Linux 32-bit RPM](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_i686.rpm)
+
+**Installation Instructions**
+
+Install this executable on your operating system of choice just as you would any software for that platform.
+
 Virtual Box
 ===========
+
+For the lab we will be using Virtual Box as our virtualization manager. This tool is free to use and most importantly it is free to use with Vagrant. It also offers some support that VMware Workstation or Fusion do not offer. This includes support for the VirtIO driver and the ability to more simply manage virtual networks.
+
+When installing on Windows it typically will install a network driver. It will prompt you to click "Continue" to take this action. Please hit continue to install the driver.
+
+-	[Mac OS X](http://download.virtualbox.org/virtualbox/4.3.26/VirtualBox-4.3.26-98988-OSX.dmg)
+-	[Windows](http://download.virtualbox.org/virtualbox/4.3.26/VirtualBox-4.3.26-98988-Win.exe)
+-	[Linux 64-bit DEB](http://download.virtualbox.org/virtualbox/4.3.26/virtualbox-4.3_4.3.26-98988~Ubuntu~raring_amd64.deb)
+-	[Linux 32-bit DEB](http://download.virtualbox.org/virtualbox/4.3.26/virtualbox-4.3_4.3.26-98988~Ubuntu~raring_i386.deb)
+-	[Other Linux](https://www.virtualbox.org/wiki/Linux_Downloads)
 
 Installing Boxes
 ================
@@ -18,3 +47,36 @@ Validating Install
 
 Vagrant Global Status
 ---------------------
+
+With the workflow of vagrant it is possible to have many virtual machines running without you being aware of this happening. The only indication of this being a problem is your laptop will begin to run very slowly. To see if you have vagrant hosts running you can use the command "vagrant global-status"
+
+```
+[rcameron:~/code/JNPRAutomateDemo-Student] master(+31/-0) ± vagrant global-status
+id       name       provider      state       directory
+--------------------------------------------------------------------------------------------
+86a431a  default    vmware_fusion not running /Users/rcameron/vagrant/ffp-12.1X46-D20.5
+4407dc1  trusty1    virtualbox    saved       /Users/rcameron/vagrant/3hosttest
+55b10f6  default    virtualbox    saved       /Users/rcameron/vagrant/happyvm
+7879af8  default    virtualbox    saved       /Users/rcameron/vagrant/precise
+b67e217  default    virtualbox    saved       /Users/rcameron/vagrant/ffppm
+2c59020  ndo        virtualbox    running     /Users/rcameron/code/JNPRAutomateDemo-Student
+ec8e606  srx        virtualbox    running     /Users/rcameron/code/JNPRAutomateDemo-Student
+
+The above shows information about all known Vagrant environments
+on this machine. This data is cached and may not be completely
+up-to-date. To interact with any of the machines, you can go to
+that directory and run Vagrant, or you can use the ID directly
+with Vagrant commands from any directory. For example:
+"vagrant destroy 1a2b3c4d"
+[rcameron:~/code/JNPRAutomateDemo-Student] master(+31/-0) ±
+```
+
+**Run command to stop running machines**
+
+You must get the ID of the running VM. This is the hex code in the first column. Simply copy and paste or type that to run the suspend command against that host.
+
+```
+vagrant suspend ec8e606
+==> srx: Saving VM state and suspending execution...
+[rcameron:~/code/JNPRAutomateDemo-Student] master(+52/-0) 7s ±
+```

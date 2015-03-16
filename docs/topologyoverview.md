@@ -81,6 +81,15 @@ LAB IP Subnets
 Student Side
 ------------
 
+-	Student
+	-	Laptop running Windows, Mac or Linux
+	-	4GB Ram and 8GB Disk Space
+	-	[Vagrant](http://www.vagrantup.com/downloads.html)
+	-	[VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+	-	Student Vagrant VMs
+	-	vSRX Host
+	-	[NetDevOps Ubuntu 14.04](https://atlas.hashicorp.com/juniper/boxes/netdevops-ubuntu1404)
+
 Each student is expected to have their own laptop to run the lab on. The tools used are supported on Windows, Mac OS X, and Linux.
 
 Using Vagrant the topology below will be created on your laptop.
@@ -139,6 +148,14 @@ The shared LAN segment is used to interconnect all of the students and the proct
 
 Proctor Side
 ------------
+
+-	Proctor Host
+	-	A NetDevOps hardware host or equivalent
+		-	16GB RAM, 80GB Disk, and a VT-x Intel CPU
+	-	vSRX Headend
+	-	[NetDevOps Ubuntu 14.04](https://atlas.hashicorp.com/juniper/boxes/netdevops-ubuntu1404)
+		-	Public Server
+		-	Private Server
 
 The proctor side of the lab runs on either a laptop or another device. Due to the amount of activity on these hosts it is recommended to run it on a stand-alone device.
 
