@@ -39,11 +39,19 @@ When installing on Windows it typically will install a network driver. It will p
 Installing Boxes
 ================
 
+@routelastresort
+
 Initializing VMs
 ================
 
+@routelastresort
+
+
 Validating Install
 ------------------
+
+@routelastresort
+
 
 Vagrant Global Status
 ---------------------
