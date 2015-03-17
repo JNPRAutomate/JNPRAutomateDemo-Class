@@ -23,6 +23,10 @@ Vagrant is a virtual machine management tool. It manages the downloading, provis
 
 Install this executable on your operating system of choice just as you would any software for that platform.
 
+### Vagrant Plugins
+
+@routelastresort
+
 Virtual Box
 ===========
 
