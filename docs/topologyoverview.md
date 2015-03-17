@@ -1,6 +1,8 @@
 Topology
 ========
 
+There can be anywhere from one to ~200 students operating on this topology at once. The two limitations are the Headend vSRX performance and the subnet size of the shared LAN.
+
 This is the network topology required to successfully create the lab. The components section defines what is required to run the lab. Your choices in hardware can vary. This is based upon a working configuration for the lab.
 
 The IP Address ranges are broken out for each section of the lab to be visually different than any other part. The benefit here is that it is very clear to you what part of the lab that you are using. After staring at IP addresses for a while they tend to blend together and this can cause confusion.
