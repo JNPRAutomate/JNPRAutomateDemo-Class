@@ -23,7 +23,7 @@ Opening a NETCONF session
 First lets open up a NETCONF session from the command line of the NetDevOps VM
 
 ```bash
-ssh root@172.16.0.1 -s netconf
+vagrant@NetDevOps-Student:~$ ssh root@172.16.0.1 -s netconf
 
 ```
 
@@ -72,6 +72,133 @@ To be a good citizen you should also send a hello back to the server. **This ste
 **Response**
 
 ```bash
-Junos will not send a response
+Junos will not send a response. It already said hello to you.
 
+```
+
+Open configuration for changes
+------------------------------
+
+We must now open the configuration so we can load in the NAT configuration. This is the same as if we typed "configure" from the CLI. This gives us a candidate configuration to work with.
+
+**Request**
+
+```xml
+<rpc message-id="1">
+  <open-configuration>
+  </open-configuration>
+</rpc>
+]]>]]>
+```
+
+**Response**
+
+```xml
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="1">
+
+</rpc-reply>
+]]>]]>
+```
+
+Configuring NAT
+---------------
+
+Now that we have a candidate configuration we can load in XML which allows for NAT to occur on the untrust interface. We are specifying the source address to be that of the NetDevOps VM. For simplicity we specify the entire subnet even though there is only a single host.
+
+**Request**
+
+```xml
+<rpc message-id="2">
+    <load-configuration action="merge">
+    <configuration>
+            <security>
+                <nat>
+                    <source>
+                        <rule-set>
+                            <name>LabNAT</name>
+                            <from>
+                                <zone>trust</zone>
+                            </from>
+                            <to>
+                                <zone>untrust</zone>
+                            </to>
+                            <rule>
+                                <name>1</name>
+                                <src-nat-rule-match>
+                                <source-address>172.16.0.0/24</source-address>
+                                </src-nat-rule-match>
+                                <then>
+                                    <source-nat>
+                                        <interface>
+                                        </interface>
+                                    </source-nat>
+                                </then>
+                            </rule>
+                        </rule-set>
+                    </source>
+                </nat>
+            </security>
+    </configuration>
+</load-configuration>
+</rpc>
+]]>]]>
+```
+
+**Response**
+
+```xml
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="2">
+    <load-configuration-results>
+        <ok/>
+    </load-configuration-results>
+</rpc-reply>
+]]>]]>
+```
+
+Commit NAT configuration
+------------------------
+
+Now it is time to enact the configuration. This is done with a simple commit. If you get disconnected from your netconf connection your candidate configuration is still open and you can still commit it. This is a nice feature of the Junos configuration model. It leaves the state of the configuration on the device and you optionally do not have to worry about that in your application.
+
+**Request**
+
+```xml
+<rpc message-id="3">
+    <commit-configuration>
+        <log>Add SNAT configuration</log>
+    </commit-configuration>
+</rpc>
+]]>]]>
+```
+
+**Response**
+
+```xml
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="3">
+    <ok/>
+</rpc-reply>
+]]>]]>
+```
+
+Verifying NAT
+-------------
+
+Now the NAT configuration should be correctly applied to your vSRX instance.
+
+### Validate connectivity
+
+To validate the connectity you can issue a ping command from your NetDevOps VM. If everything is working correctly you should see a response fromt he host.
+
+```bash
+vagrant@NetDevOps-Student:~$ ping 10.10.0.10
+PING 10.10.0.10 (10.10.0.10) 56(84) bytes of data.
+64 bytes from 10.10.0.10: icmp_seq=1 ttl=64 time=0.482 ms
+64 bytes from 10.10.0.10: icmp_seq=2 ttl=64 time=0.480 ms
+64 bytes from 10.10.0.10: icmp_seq=3 ttl=64 time=0.520 ms
+64 bytes from 10.10.0.10: icmp_seq=4 ttl=64 time=0.548 ms
+
+--- 10.10.0.10 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 2999ms
+rtt min/avg/max/mdev = 0.480/0.507/0.548/0.036 ms
+vagrant@NetDevOps-Student:~$
 ```
