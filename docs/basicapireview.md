@@ -51,7 +51,7 @@ Connecting to NETCONF host can easily be done from your NetDevOps VM.
 	-	We can also connect to the NETCONF port directly using "ssh root@172.16.0.1 -p 830 -s netconf" by specifying the port of 830
 -	3 Use the root password of "Juniper" to connect to the device
 
-```
+```bash
 ssh root@172.16.0.1 -s netconf
 
 ```
@@ -62,7 +62,7 @@ Each NETCONF session is given a session ID. This is used to tell you which proce
 
 **Response**
 
-```
+```xml
 <!-- No zombies were killed during the creation of this user interface -->
 <!-- user root, class super-user -->
 <hello>
@@ -86,9 +86,9 @@ The hello response also includes a set of capabilities on the device. These incl
 
 Once connected we need to send back a hello message to the the NETCONF server. On Junos this is not required to be sent. However the best practice is to send this information. Also in the event in the future that we DO enforce it, it is better to be compliant to the specification of the protocol.
 
-**Response**
+**Request**
 
-```
+```xml
 <hello>
     <capabilities>
         <capability>urn:ietf:params:xml:ns:netconf:base:1.0</capability>
@@ -104,6 +104,12 @@ Once connected we need to send back a hello message to the the NETCONF server. O
 
 ```
 
+**Response**
+
+```
+Junos will not send a response
+```
+
 #### Message ID
 
 When sending RPC messages it is possible to include a message-id in the request. When the response is returned it will allow you to match the response to the request. This is hugely helpful for when you need to troubleshoot a connection in which you are sending multiple messages at the same time. It helps you map a response to a request. This is optional and it is up to the implementor to use.
@@ -114,7 +120,7 @@ Now that we have an active NETCONF connection to the device we can start sending
 
 **Request**
 
-```
+```xml
 <rpc message-id="1">
     <get-software-information/>
 </rpc>
@@ -123,7 +129,7 @@ Now that we have an active NETCONF connection to the device we can start sending
 
 **Response**
 
-```
+```xml
 <rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="1">
     <software-information>
         <host-name>NetDevOps-SRX01</host-name>
@@ -152,7 +158,7 @@ To change the configuration we first must open up a candidate configuration. Thi
 
 **Request**
 
-```
+```xml
 <rpc message-id="2">
   <open-configuration>
   </open-configuration>
@@ -162,7 +168,7 @@ To change the configuration we first must open up a candidate configuration. Thi
 
 **Response**
 
-```
+```xml
 <rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="2">
 </rpc-reply>
 ]]>]]>
@@ -174,7 +180,7 @@ Now that the configuration is open we will load our configuration in the standar
 
 **Request**
 
-```
+```xml
 <rpc message-id="3">
     <load-configuration action="merge">
     <configuration>
@@ -189,7 +195,7 @@ Now that the configuration is open we will load our configuration in the standar
 
 **Response**
 
-```
+```xml
 <rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="3">
     <load-configuration-results>
         <ok/>
@@ -204,7 +210,7 @@ We must now commit the configuration just as we would by do by hand. But again i
 
 **Request**
 
-```
+```xml
 <rpc message-id="4">
     <commit-configuration>
         <log>Committed via NETCONF by hand!</log>
@@ -215,7 +221,7 @@ We must now commit the configuration just as we would by do by hand. But again i
 
 **Response**
 
-```
+```xml
 <rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="4">
     <ok/>
 </rpc-reply>
@@ -228,7 +234,7 @@ Now we want to validate that our change successfully occured. There are numerous
 
 **Request**
 
-```
+```xml
 <rpc message-id="5">
     <get-software-information/>
 </rpc>
@@ -237,7 +243,7 @@ Now we want to validate that our change successfully occured. There are numerous
 
 **Response**
 
-```
+```xml
 <rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="5">
     <software-information>
         <host-name>NETCONFED</host-name>
@@ -260,7 +266,7 @@ To keep the lab intact we want to rollback to the previous configuration. This w
 
 **Request**
 
-```
+```xml
 <rpc message-id="6">
     <get-rollback-information>
         <rollback>1</rollback>
@@ -273,7 +279,7 @@ To keep the lab intact we want to rollback to the previous configuration. This w
 
 The response is long and contains the entire configuration. For this example the response has been truncated.
 
-```
+```xml
 <rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="6">
     <rollback-information>
         <ok/>
@@ -293,7 +299,7 @@ Lastly commit the configuration to apply the rollback.
 
 **Request**
 
-```
+```xml
 <rpc message-id="7">
     <commit-configuration>
         <log>Committed via NETCONF by hand!</log>
@@ -304,7 +310,7 @@ Lastly commit the configuration to apply the rollback.
 
 **Response**
 
-```
+```xml
 <rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos" message-id="7">
     <ok/>
 </rpc-reply>
