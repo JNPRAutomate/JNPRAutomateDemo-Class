@@ -4,7 +4,7 @@ Configuring NAT
 Tools
 -----
 
-Using PyEZ
+Using NETCONF
 
 Network Interface SNAT
 ----------------------
