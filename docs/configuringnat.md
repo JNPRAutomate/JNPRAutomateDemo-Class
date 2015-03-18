@@ -71,7 +71,7 @@ To be a good citizen you should also send a hello back to the server. **This ste
 
 **Response**
 
-```
+```bash
 Junos will not send a response
 
 ```
