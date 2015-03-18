@@ -1,6 +1,8 @@
 Getting Started with Python
 ===========================
 
+What is Python?
+
 Variables
 
 Loops
