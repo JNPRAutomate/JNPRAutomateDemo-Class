@@ -31,3 +31,7 @@ The course is divided into multiple steps.
 9.	[Creating IPS Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/creatingipspolicies.md)
 10.	[Disaster Strikes!](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/disasterstrikes.md)
 11.	[Recovering the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/recoveringthelab.md)
+
+**VM Access Information**
+
+-	[VM Host Passwords](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/vmpasswords.md)
