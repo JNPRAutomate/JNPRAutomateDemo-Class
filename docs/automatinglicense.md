@@ -82,3 +82,11 @@ python licensetool.py  --user root --password Juniper --host 172.16.0.1 --url ht
 
 Automating Package Download and Install
 ---------------------------------------
+
+<rpc><request-idp-security-package-download></request-idp-security-package-download></rpc>
+
+<rpc><request-idp-security-package-download><status/></request-idp-security-package-download></rpc>
+
+<rpc><request-idp-security-package-install></request-idp-security-package-install></rpc>
+
+<rpc><request-idp-security-package-install><status/></request-idp-security-package-install></rpc>

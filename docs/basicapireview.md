@@ -40,7 +40,7 @@ Interacting with NETCONF manually
 
 ### Canonical Data Terminator
 
-The character set "]]>]]>" is used to specify the end of a NETCONF message. This is used to tell the host that the message is completed. While some protocols such as HTTP use content length for this, by defining a specific terminator that is all that an application needs to look for at the end of a message. This is typically done by looking for this set of bytes as "5D 5D 3E 5D 5D 3E". Because XML can contain new lines, tabs, and carriage returns this byte set terminator allows the usage of these typical end elements to be included freely in the XML sent to the user.
+The character set "]]>]]>" is used to specify the end of a NETCONF message. This is used to tell the host that the message is completed. While some protocols such as HTTP use content length for this, by defining a specific terminator that is all that an application needs to look for at the end of a message. This is typically done by looking for this set of bytes as "5D 5D 3E 5D 5D 3E". Because XML can contain new lines, tabs, and carriage returns this byte set terminator allows the usage of these typical end elements to be included freely in the XML sent to the user. You can read more here at the Juniper documentation [NETCONF end of document](http://www.juniper.net/documentation/en_US/junos13.2/topics/reference/tag-summary/netconf-end-of-document-character-sequence.html).
 
 ### Connecting to NETCONF
 
