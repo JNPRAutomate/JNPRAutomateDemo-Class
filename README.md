@@ -41,14 +41,23 @@ The course is divided into multiple steps.
 TODO
 ====
 
-1.	app policies
-2.	fw policies
-3.	disaster strikes
-4.	dynamic routing
-5.	recovering the lab
-6.	installing software @routelastresort
-7.	software overview @routelastresort
-8.	vpnconnectiontoheadend
-9.	using ansible
-10.	using pyezlibrary
-11.	registering your host
+**Docs**
+
+1.	automating licenses
+2.	app policies
+3.	fw policies
+4.	ips policies
+5.	disaster strikes
+6.	dynamic routing
+7.	recovering the lab
+8.	installing software @routelastresort
+9.	software overview @routelastresort
+10.	vpn connection to headend
+11.	using ansible
+12.	using pyezlibrary
+13.	registering your host
+
+**Tools**
+
+1.	DOIT
+2.	Headend VMs
