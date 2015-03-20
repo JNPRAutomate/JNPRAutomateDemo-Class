@@ -62,7 +62,7 @@ licenseURL = args.url
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 client.connect(host,username=username,password=password,look_for_keys=False)
-stdin, stdout, stderr = client.exec_command('/usr/sbin/cli -c  ' + '"request system license add {0}"'.format(licenseURL),timeout=60)
+stdin, stdout, stderr = client.exec_command('/usr/sbin/cli -c "request system license add {0}"'.format(licenseURL),timeout=60)
 
 data = stdout.read()
 print data
