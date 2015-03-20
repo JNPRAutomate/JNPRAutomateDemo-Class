@@ -43,21 +43,21 @@ TODO
 
 **Docs**
 
-1.	automating licenses
-2.	app policies
-3.	fw policies
-4.	ips policies
-5.	disaster strikes
-6.	dynamic routing
-7.	recovering the lab
+1.	automating licenses @robwc
+2.	app policies TBD
+3.	fw policies TBD
+4.	ips policies TBD
+5.	disaster strikes @kwbales @robwc
+6.	dynamic routing TBD
+7.	recovering the lab TBD
 8.	installing software @routelastresort
 9.	software overview @routelastresort
-10.	vpn connection to headend
-11.	using ansible
-12.	using pyezlibrary
-13.	registering your host
+10.	vpn connection to headend @kwbales
+11.	using ansible @robwc
+12.	using pyezlibrary @kwbales @robwc
+13.	registering your host @robwc
 
 **Tools**
 
-1.	DOIT
-2.	Headend VMs
+1.	DOIT @robwc
+2.	Headend VMs @kwbales @robwc
