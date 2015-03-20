@@ -37,3 +37,18 @@ The course is divided into multiple steps.
 **VM Access Information**
 
 -	[VM Host Passwords](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/vmpasswords.md)
+
+TODO
+====
+
+1.	app policies
+2.	fw policies
+3.	disaster strikes
+4.	dynamic routing
+5.	recovering the lab
+6.	installing software @routelastresort
+7.	software overview @routelastresort
+8.	vpnconnectiontoheadend
+9.	using ansible
+10.	using pyezlibrary
+11.	registering your host
