@@ -2,6 +2,7 @@
 
 import argparse
 import time
+import re
 import xml.etree.ElementTree as ET
 
 from jnpr.junos import Device
@@ -16,7 +17,6 @@ host = args.host
 username = args.username
 password = args.password
 
-#now lets connect to the device, load the template, and commit the changes
 #first we instantiate an instance of the device
 junos_dev = Device(host=host, user=username, password=password)
 #now we can connect to the device
@@ -27,22 +27,25 @@ download_result = junos_dev.rpc.request_idp_security_package_download()
 print ET.tostring(download_result,encoding="utf8", method="text")
 
 #loop through status until OK is seen
+matchDone = re.compile('Done;.*',re.MULTILINE)
+
 while True:
     download_status = junos_dev.rpc.request_idp_security_package_download(status=True)
     print ET.tostring(download_status,encoding="utf8", method="text")
-    #look for done
     info = download_status.findtext('secpack-download-status-detail')
-    print info
+    if matchDone.match(info):
+        print "Download completed"
+        break
     time.sleep(2)
 
 install_result = junos_dev.rpc.request_idp_security_package_install()
-#output to a sting
-print install_result
 
 #loop through status until OK is seen
 while True:
     install_status = junos_dev.rpc.request_idp_security_package_install(status=True)
     print ET.tostring(install_status,encoding="utf8", method="text")
-    info = download_status.findtext('secpack-status-detail')
-    print info
+    info = install_status.findtext('secpack-status-detail')
+    if matchDone.match(info):
+        print "Installation completed"
+        break
     time.sleep(2)
