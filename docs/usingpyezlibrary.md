@@ -11,3 +11,5 @@ Classes
 
 Getting Started with PyEZ
 =========================
+
+### Mapping RPCs to Methods - The method to the madness
