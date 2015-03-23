@@ -8,3 +8,7 @@ Inventory
 
 Variables
 ---------
+
+```
+sudo ansible-galaxy install Juniper.junos
+```
