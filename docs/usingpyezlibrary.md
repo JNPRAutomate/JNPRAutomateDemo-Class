@@ -347,14 +347,48 @@ junos_dev.close()
 
 ```
 
-Tables
-------
+Tables and Views
+----------------
+
+//TODO: Redo this!
 
 As discussed programming heavily relies on data structures. The challenge that we have when working with Junos is dealing with the XML response from an RPC call. The call returns a Python ElementTree or XML representation in Python. This consists of all of the nodes, children, parents, and attributes. While XML is an excellent language to use for defining data it can be a big pain in the butt to parse and manage if you are not familiar with how to do this. Luckily in PyEZ we have a capability called tables. This allows us to define the data structure in a YAML format, yet another markup language, and then load the result into it. The benefit here is that you don't have to deal with the XML parsing and get straight to the result that you want.
 
 **Table example**
 
 ```python
+from jnpr.junos import Device
+from jnpr.junos.utils.config import Config
+from jnpr.junos.factory import loadyaml
+from jnpr.junos.factory.factory_loader import FactoryLoader
+
+import yaml
+
+arp_table = '''---
+ArpTable:
+  rpc: get-arp-table-information
+  item: arp-table-entry
+  key: mac-address
+  view: ArpView
+
+ArpView:
+  fields:
+    mac_address: mac-address
+    ip_address: ip-address
+    interface_name: interface-name
+'''
+
+#first we instantiate an instance of the device
+junos_dev = Device(host="172.16.0.1", user="root", password="Juniper")
+#now we can connect to the device
+junos_dev.open()
+
+#Bind a config element to the device
+junos_dev.bind(cu=Config)
+
+tview = FactoryLoader().load(yaml.load(arp_table))
+
+tview["ArpView"](tview["ArpTable"],junos_dev.rpc.get_arp_table_information("no-resolve"))
 
 ```
 

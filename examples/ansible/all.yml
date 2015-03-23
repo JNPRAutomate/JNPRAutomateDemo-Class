@@ -10,4 +10,3 @@
     vpn_edge_list: [ 0:{'tunid':1}, 1, 2]
   roles:
     - VPN_Headend
-

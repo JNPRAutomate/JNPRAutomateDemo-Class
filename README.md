@@ -43,9 +43,9 @@ TODO
 
 **Docs**
 
-1.	app policies TBD
-2.	fw policies TBD
-3.	ips policies TBD
+1.	app policies TBD - via ansible
+2.	fw policies TBD - via ansible
+3.	ips policies TBD - via ansible
 4.	disaster strikes @kwbales @robwc
 5.	dynamic routing TBD
 6.	recovering the lab TBD
@@ -53,7 +53,7 @@ TODO
 8.	software overview @routelastresort
 9.	vpn connection to headend @kwbales
 10.	using ansible @robwc
-11.	using pyezlibrary @kwbales @robwc
+11.	using pyezlibrary @kwbales @robwc - NEED TO FINISH TABLES AND VIEWS
 12.	registering your host @robwc
 
 **Tools**

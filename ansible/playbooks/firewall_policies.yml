@@ -1,0 +1,18 @@
+---
+- name: Configure firewall policies
+  hosts: mysrx
+  connection: local
+  gather_facts: no
+  vars:
+    junos_user: "root"
+    junos_password: "Juniper"
+    build_dir: "/tmp/"
+    fw_policy_info: [ 0:{'name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ip':1,'dst_ip':1,'action':'permit','app':'junos-http'}]
+
+tasks:
+    - name: Build firewall policies config template
+      template: src=fw_policy.conf.js dest={{build_dir}}/fw_policy.conf.{{ item }}.part
+      with_items: fw_policy_info
+
+    - name: Apply Config
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} password={{ junos_password }} file={{ build_dir }}/fw_policy.conf.part overwrite=no logfile=logs/{{ inventory_hostname }}.log
