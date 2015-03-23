@@ -43,9 +43,9 @@ TODO
 
 **Docs**
 
-1.	app policies TBD - via ansible
-2.	fw policies TBD - via ansible
-3.	ips policies TBD - via ansible
+1.	app policies @robwc - via ansible - Templates created
+2.	fw policies @robwc - via ansible - Templates created
+3.	ips policies @robwc - via ansible - Templates created
 4.	disaster strikes @kwbales @robwc
 5.	dynamic routing TBD
 6.	recovering the lab TBD
@@ -58,5 +58,5 @@ TODO
 
 **Tools**
 
-1.	DOIT @robwc
+1.	DOIT @robwc - At Risk!
 2.	Headend VMs @kwbales @robwc

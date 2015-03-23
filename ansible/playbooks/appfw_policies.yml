@@ -1,0 +1,27 @@
+---
+- name: Configure AppFirewall policies
+  hosts: mysrx
+  connection: local
+  gather_facts: no
+  vars:
+    junos_user: "root"
+    junos_password: "Juniper"
+    build_dir: "/tmp/"
+    address_entries: [ {'name':'NetDevOpsVM','prefix':'172.16.0.1/32'} ]
+    appfw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ip':'NetDevOpsVM','dst_ip':'any','action':'permit','app':'junos-http'}]
+
+  tasks:
+    - name: Build address book entries
+      template: src=templates/fw_address_book.set.js dest={{build_dir}}/fw_address_book.set
+      with_items: address_entries
+
+    - name: Apply address book entries
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/fw_address_book.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+
+
+    - name: Build firewall policies config template
+      template: src=templates/appfw_policy.set.js dest={{build_dir}}/appfw_policy.set
+      with_items: appfw_policy_info
+
+    - name: Apply firewall policies
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/appfw_policy.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
