@@ -50,7 +50,35 @@ A list or tuple is a series of data. They can contain any type of data and the t
 
 ### Classes and Objects
 
-A class is a complex data structure. It contains variables or properties as well as methods. A method is a function that can be used as actions on the object. The classic class example is that think of a class as blueprint to create an object. If I had a car it has certain properties such as color or number of wheels. If you wanted to say open a car door that would be a method or action that the object could take. Object oriented programming was invented by [Alan Kay](http://en.wikipedia.org/wiki/Alan_Kay) at [Xerox PARC](http://en.wikipedia.org/wiki/Alan_Kay) in the 1970s as a way of coupling data with methods of operation.
+A class is a complex data structure. It contains variables or properties as well as methods. A method is a function that can be used as actions on the object. The classic class example is that think of a class as blueprint to create an object. If I had a car it has certain properties such as color or number of wheels. If you wanted to say open a car door that would be a method or action that the object could take. Object oriented programming was invented by [Alan Kay](http://en.wikipedia.org/wiki/Alan_Kay) at [Xerox PARC](http://en.wikipedia.org/wiki/Alan_Kay) in the 1970s as a way of coupling data with methods of operation. Classes and object-oriented programming is quite a tall subject we won't go into all the details here.
+
+**Classes and Objects Examples**
+
+```
+Class: Car                               Object: Car
+
++---------------------+                   +---------------------+
+|                     |                   | - Color "Red"       |
+| Properties          |                   | - WheelCount 4      |
+|  - Color            |                   |                     |
+|  - WheelCount       |  Create Instance  | - OpenDoor()        |
+|                     |  +------------->  | - HonkHorn()        |
+| Methods             |                   |                     |
+|  - OpenDoor(doorid) |                   |                     |
+|  - HonkHorn()       |                   |                     |
++---------------------+                   +---------------------+
+
+```
+
+**Object Oriented Programming**
+
+-	[Object Oriented Programming Defined](http://en.wikipedia.org/wiki/Object-oriented_programming)
+-	[List of OOP Languages](http://en.wikipedia.org/wiki/List_of_object-oriented_programming_languages)
+-	[OOP Design Patterns](http://en.wikipedia.org/wiki/Design_Patterns)
+	-	This book is written by the "Gang of Four" and considered the ultimate guide to OOP design patterns
+-	[Multi-paradigm Languages](http://en.wikipedia.org/wiki/Comparison_of_multi-paradigm_programming_languages)
+
+### Examples of variables
 
 ```python
 
@@ -70,14 +98,14 @@ simple_tuples = ("foo", "bar", 1)
 simple_dict = {'foo':{'bar':True},'shoe':1}
 
 # a class is a structure that defines data storage and operations on the data
-class SimpleClass:
+class Calculator:
 	foo = 0
 	bar = 0
 	def __init__(self,foo,bar):
 		foo = foo
 		bar = bar
 
-	def add():
+	def add(self):
 		return foo + bar
 
 simple_object = SimpleClass(1,2)
@@ -91,12 +119,96 @@ print simple_return
 Functions and Methods
 ---------------------
 
+As discussed a function or method is a bit of code that can be repeatedly reused. This is typical for a common set of code that we would use several time. By making this into a function or method it leaves the code in a singular place in which it can be reused but also maintained in a singular place. If you were to say have a function to add numbers, as can be seen below in our example "add_numbers", we can call this function any time we need to return the sum of two numbers. If we want to changes this behavior in the code we can update this single function and then have that change impact the code within the rest of the program.
+
+A method is simply a function that is bound to an object or class. This is usually used to describe the actions or methods of operation over a class. They are written nearly identically. However when defining a method on a class the special object "self" must be the first parameter used. This allows the object to reference itself and change internal elements to its own data structure. This means your changing the instantiated object, rather changing the class all together.
+
+```python
+
+# Function
+def add_numbers(i1, i2):
+	return i1 + i2
+
+# Method is a function bound to an object
+class Calculator:
+	def add(self, i1, i2):
+		return i1 + i2
+```
+
 Conditionals
+------------
+
+A conditional is a basic set of logic in programming. The most common here is the "if" statement.
+
+```python
+
+foo = True
+bar = False
+
+# a simple if statement
+if foo:
+	print "success"
+
+# a simple if else statement
+if foo:
+	print "success"
+else:
+	print "fail"
+
+# a simple if else if and else statement
+if foo != True:
+	print "success foo"
+elif bar != True:
+	print "success bar"
+else:
+	print "fail"
+
+```
 
 Loops
+-----
+
+A loop is the ability to loop over a data structure. This lets you take a structure and act upon each element. This is also known as iteration.
+
+A for loop takes a variable and iterates over it. It provides one value from the list and allows you to utilize it. In the example below we want to take one of each of the items and then print it out. In our example we take a list of four alcoholic drinks and then have it request an order for one.
+
+Also you can use a while loop. A while loop continues to loop until the while condition changes. In this example we are saying "while true" to continue the loop. This loop will run indefinitely unless we choose to break from the loop. In our infinite loop we increment the value of x by one. After 11 iterations, since we start at 0, we detect that x is equal to 10. Once this is detected we print out the current value of x and declare we are complete. Lastly we call the command break to exit the execution of the loop.
+
+```python
+
+# a simple for loop
+items = ["gimlet","greyhound","old fashioned","beer"]
+
+for item in items:
+	print "Order me a {0} please!".format(item)
+
+# Prints
+# Order me a gimlet please!
+# Order me a greyhound please!
+# Order me a old fashioned please!
+# Order me a beer please!
+
+# a simple while loop
+x = 0
+
+while True:
+	if x == 10:
+		print "Value of X is {0}".format(x)
+		print "Complete"
+		break
+	x = x + 1
+
+```
+
+Python Summary
+==============
+
+Learning programming or a specific language is much like playing the game of golf. It is something you can do for years to get better and better at it. Experience in using Python will be your greatest advantage to getting better at it. Find use cases for it in your daily life. You can simply drop into an interactive Python shell, just type "python" at your prompt and go for it, and use it. Use it as a calculator, use it to read in a spreadsheet and itterate over the data, use it to automate your network. What at first seems impossible, becomes complete possible, and eventually it becomes natural. Only by using it and solving new problems will you see growth in your skill sets.
 
 -	[What is Python](http://en.wikipedia.org/wiki/Python_%28programming_language%29)
 -	[Python Site](https://www.python.org/)
+-	[Python for Network Engineers](https://pynet.twb-tech.com/)
+-	[Learn Python the Hard Way](http://learnpythonthehardway.org/)
 
 Getting Started with PyEZ
 =========================
@@ -113,21 +225,223 @@ In Junos there are potentially thousands of different RPC calls that the user ca
 Mapping RPCs to Methods - The method to the madness
 ---------------------------------------------------
 
+As someone familiar with Junos you have a distinct advantage over the average programmer. As you know, or at least know how, to find the RPCs that you are looking to call. There is a mapping between between the RPC calls. If you know the command or can figure it out it is simple to learn the correct RPC call. You can use the format of "show chassis hardware | display xml rpc". This will show you what you need to use to call the command in PyEZ.
+
 **RPC Mapping Examples**
+
+```bash
+
+# Command show chassis hardware
+# RPC - get-chassis-inventory
+# PyEZ - get_chassis_inventory
+
+# Command on the CLI
+root@12.1X47-D20.7> show chassis hardware
+Hardware inventory:
+Item             Version  Part number  Serial number     Description
+Chassis                                c2c8311556a6      FIREFLY-PERIMETER
+Midplane
+System IO
+Routing Engine                                           FIREFLY-PERIMETER RE
+FPC 0                                                    Virtual FPC
+  PIC 0                                                  Virtual GE
+Power Supply 0  
+
+# Show XML output fromt he CLI
+root@12.1X47-D20.7> show chassis hardware | display xml
+<rpc-reply xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos">
+    <chassis-inventory xmlns="http://xml.juniper.net/junos/12.1X47/junos-chassis">
+        <chassis junos:style="inventory">
+            <name>Chassis</name>
+            <serial-number>c2c8311556a6</serial-number>
+            <description>FIREFLY-PERIMETER</description>
+            <chassis-module>
+                <name>Midplane</name>
+            </chassis-module>
+            <chassis-module>
+                <name>System IO</name>
+            </chassis-module>
+            <chassis-module>
+                <name>Routing Engine</name>
+                <description>FIREFLY-PERIMETER RE</description>
+            </chassis-module>
+            <chassis-module>
+                <name>FPC 0</name>
+                <description>Virtual FPC</description>
+                <chassis-sub-module>
+                    <name>PIC 0</name>
+                    <description>Virtual GE</description>
+                </chassis-sub-module>
+            </chassis-module>
+            <chassis-module>
+                <name>Power Supply 0</name>
+            </chassis-module>
+        </chassis>
+    </chassis-inventory>
+    <cli>
+        <banner></banner>
+    </cli>
+</rpc-reply>
+
+#show XML RPC from the command line
+root@12.1X47-D20.7> show chassis hardware | display xml rpc
+<rpc-reply xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos">
+    <rpc>
+        <get-chassis-inventory>
+        </get-chassis-inventory>
+    </rpc>
+    <cli>
+        <banner></banner>
+    </cli>
+</rpc-reply>
+
+root@12.1X47-D20.7>
+
+```
+
+### PyEZ Simple Example
+
+In this example:
+
+-	Initialize device object
+-	Open a connection to the device
+-	Print the facts
+-	Close the connection
 
 ```python
 
-# Command show version
-# RPC - get-version
-# PyEZ - get_version
+from jnpr.junos import Device
+
+dev = Device( user='root', host='172.16.0.1', password='Juniper' )
+
+dev.open()
+
+print dev.facts
+
+dev.close()
+
+```
+
+### PyEZ Example with RPC
+
+-	Initialize device object
+-	Open a connection to the device
+-	Request the chassis inventory
+-	Print the text representation of the XML
+-	Close the connection
+
+```python
+
+from jnpr.junos import Device
+import xml.etree.ElementTree as ET
+
+junos_dev = Device(user='root', host='172.16.0.1', password='Juniper' )
+
+junos_dev.open()
+
+chassis_output = junos_dev.rpc.get_chassis_inventory()
+
+print ET.tostring(chassis_output,encoding="utf8", method="text")
+
+junos_dev.close()
 
 ```
 
 Tables
 ------
 
+As discussed programming heavily relies on data structures. The challenge that we have when working with Junos is dealing with the XML response from an RPC call. The call returns a Python ElementTree or XML representation in Python. This consists of all of the nodes, children, parents, and attributes. While XML is an excellent language to use for defining data it can be a big pain in the butt to parse and manage if you are not familiar with how to do this. Luckily in PyEZ we have a capability called tables. This allows us to define the data structure in a YAML format, yet another markup language, and then load the result into it. The benefit here is that you don't have to deal with the XML parsing and get straight to the result that you want.
+
+**Table example**
+
+```python
+
+```
+
+Templating with Jinja2
+----------------------
+
+In Python the most popular templating language is called [Jinja](http://jinja.pocoo.org/). The original use case for Jinja was to provide developers a simpler method for developing web applications. Today most of the HTML pages that you see are actually created via templating. In the use case of of Junos configurations we most likely do not need all of the features of Jinja.
+
+The complete documentation can be found here [Jinja Dev Documentation](http://jinja.pocoo.org/docs/dev/). However we will highlight the specific language use cases here.
+
+### Utilized Jinja features
+
+Jinja has a huge set of features that can be utilized to accomplish your goals. But the hardest part in getting started is learning where to start. For this demo we will use only a small subset of the Jinja template engine.
+
+### Variable Substitution
+
+The most basic example of Jinja is variable substitution. Think of this as a simple search and replace within a text editor or using the UNIX command *sed*. Their are several benefits to utilizing a Python script to accomplish this task.
+
+-	Repeatability
+	-	The ability to repeatedly call a script with fixed input and specified output
+-	Chaining
+	-	The ability to chain scripts and or actions together
+
+To create a Jinja template it is quite simple. Below is an example of a Jinja substitution variable.
+
+### Hello World Template
+
+```python
+"Hello, {{ world }}!"
+```
+
+In our example you see "Hello, " which is just treated as plain text. When run through the Jinja engine this text will be output as is. What Jinja is interested in is the contents of the double curly braces "{{ world }}". Jinja sees this as a variable named "world". When applying a variable you are simply applying a key and value to the variable. In this case "world" is the variable. In the Python code we would simply apply world="Automation". The message outputted would be "Hello, Automation!" if you applied this simple key and value.
+
+Here is the full example of what we just discussed.
+
+### Full Hello World Template
+
+```python
+# Template
+"Hello, {{ world }}!"
+
+# Key/Value
+world="Automation"
+
+# Final Output
+"Hello, Automation!"
+```
+
+The documentation for this can be found [here](http://jinja.pocoo.org/docs/dev/templates/#variables).
+
+### Using loops
+
+The second step in substitution is utilizing loops. Loops provide true automation advantage to not require the user to repetitively type in commands. We can apply a more complex data structure in Python to a template and iterate over the items. To do this we use the age old "for loop". A for loop is used in many different languages to loop or iterate over items.
+
+##### A Jinja for loop example:
+
+```python
+{% for item in items %}
+	Hello, {{ item }}!
+{% endfor %}
+
+```
+
+In this example we use an array or list called *items*. This contains a list of strings. When run Jinja will take each item out of the list *items*. A list can contain mixed types or different types of information. The same list could contain numbers/integers, strings, or even more complex items such as dictionaries. The loop takes the next item in the list, starting at item 0, and substitutes it in the loop.
+
+##### Full for loop example
+
+```python
+# Template
+{% for item in items %}
+	Hello, {{ item }}!
+{% endfor %}
+
+# Key/Value
+items = ["Automation","Shoe","Socks","Pants"]
+
+# Final Output
+Hello, Automation!
+Hello, Shoe!
+Hello, Socks!
+Hello, Pants!
+```
+
 Best practices in writing tools
--------------------------------
+===============================
+
+While there is a mountain of wisdom that you can use in programming, here are a few best practices in writing tools that are critical to think about.
 
 1.	Keep it simple
 	-	Don't try and cram too many goals into a single tool
