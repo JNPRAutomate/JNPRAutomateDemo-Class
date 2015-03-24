@@ -10,5 +10,3 @@ set security policies from-zone {{ item.src_zone }} to-zone {{ item.dst_zone }} 
     {% endfor %}
 set security policies from-zone {{ item.src_zone }} to-zone {{ item.dst_zone }} policy {{ item.policy_name }} then {{ item.action }}
 {% endfor %}
-
-{'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ips':['NetDevOpsVM'],'dst_ips':['any'],'action':'permit','apps':['junos-http']}
