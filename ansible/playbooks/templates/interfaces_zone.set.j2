@@ -1,0 +1,3 @@
+{% for item in zone_interface %}
+set security zones security-zone {{ item.zone }} interfaces {{ item.interface }}
+{% endfor %}
