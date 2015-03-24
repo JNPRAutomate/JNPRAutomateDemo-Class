@@ -1,0 +1,62 @@
+# needs more work
+
+# create address book entries
+set security zones security-zone vpn address-book address remote-net 172.16.0.0/24
+set security zones security-zone trust address-book address local-net 192.168.10.0/24
+
+# modify interface
+delete security zones security-zone trust interfaces ge-0/0/1
+set security zones security-zone untrust interfaces ge-0/0/1.0
+set security zones security-zone untrust host-inbound-traffic system-services http
+set security zones security-zone untrust host-inbound-traffic system-services https
+set security zones security-zone untrust host-inbound-traffic system-services ssh
+set security zones security-zone untrust host-inbound-traffic system-services telnet
+set security zones security-zone untrust host-inbound-traffic system-services ping
+set security zones security-zone untrust host-inbound-traffic system-services netconf
+
+# create st interface
+set interfaces st0 unit 0 family inet address 10.1.1.2/24
+set security ike gateway ike-gate address 10.255.255.1
+set security ike gateway ike-gate external-interface ge-0/0/1.0
+set routing-options static route 172.16.0.0/24 next-hop st0.0
+set security zones security-zone vpn interfaces st0.0
+
+set security flow tcp-mss ipsec-vpn mss 1350
+
+set security zones security-zone trust host-inbound-traffic system-services all
+set security zones security-zone untrust host-inbound-traffic system-services ike
+
+set security ike policy ike-policy1 mode main
+set security ike policy ike-policy1 proposal-set standard
+set security ike policy ike-policy1 pre-shared-key ascii-text "secretkey"
+set security ike gateway ike-gate ike-policy ike-policy1
+
+set security ipsec policy vpn-policy1 proposal-set standard
+set security ipsec vpn ike-vpn ike gateway ike-gate
+set security ipsec vpn ike-vpn ike ipsec-policy vpn-policy1
+set security ipsec vpn ike-vpn bind-interface st0.0
+
+set security policies from-zone trust to-zone vpn policy vpn-tr-vpn match source-address local-net
+set security policies from-zone trust to-zone vpn policy vpn-tr-vpn match destination-address remote-net
+set security policies from-zone trust to-zone vpn policy vpn-tr-vpn match application any
+set security policies from-zone trust to-zone vpn policy vpn-tr-vpn then permit
+
+set security policies from-zone vpn to-zone trust policy vpn-vpn-tr match source-address remote-net
+set security policies from-zone vpn to-zone trust policy vpn-vpn-tr match destination-address local-net
+set security policies from-zone vpn to-zone trust policy vpn-vpn-tr match application any
+set security policies from-zone vpn to-zone trust policy vpn-vpn-tr then permit
+
+
+############
+
+top
+edit security nat source rule-set nat-out
+set from zone trust
+set to zone untrust
+set rule interface-nat match source-address 192.168.10.0/24
+set rule interface-nat match destination-address 0.0.0.0/0
+set rule interface-nat then source-nat interface
+set policy any-permit match source-address any
+set policy any-permit match destination-address any
+set policy any-permit match application any
+set policy any-permit then permit
