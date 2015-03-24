@@ -8,7 +8,7 @@
     junos_password: "Juniper"
     build_dir: "/tmp/"
     address_entries: [ {'name':'NetDevOpsVM','prefix':'172.16.0.1/32'} ]
-    appfw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ip':'NetDevOpsVM','dst_ip':'any','action':'permit','app':'junos-http'}]
+    appfw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ips':['NetDevOpsVM'],'dst_ips':['any'],'action':'permit','apps':['junos-http']}]
 
   tasks:
     - name: Build address book entries
