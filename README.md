@@ -47,8 +47,8 @@ TODO
 2.	fw policies @robwc - via ansible - Templates created
 3.	ips policies @robwc - via ansible - Templates created
 4.	disaster strikes @kwbales @robwc
-5.	dynamic routing TBD
-6.	recovering the lab TBD
+5.	dynamic routing TBD - via ansible
+6.	recovering the lab TBD - via ansible
 7.	installing software @routelastresort
 8.	software overview @routelastresort
 9.	vpn connection to headend @kwbales
