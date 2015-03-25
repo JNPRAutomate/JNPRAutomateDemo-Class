@@ -42,7 +42,7 @@ Diagram
     Vagrant       |                            |  
     Management    |                            |  
     Interface     |                            |  
-                  |                            |  
+                  |                  lo0.0     |  
                   +--------------+-------------+  
                                  |
                                  |

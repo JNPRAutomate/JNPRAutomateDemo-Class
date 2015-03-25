@@ -1,0 +1,16 @@
+{% for item in idp_policy_info %}
+set security idp idp-policy {{ item.policy_name }}
+    {% for rule in item.rules %}
+        {% for i in item.src_ips %}
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} match from-zone {{ rule.src_zone }} to-zone {{ rule.dst_zone }} source-address {{ i }}
+        {% endfor %}
+        {% for i in item.dst_ips %}
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} match from-zone {{ rule.src_zone }} to-zone {{ rule.dst_zone }} destination-address {{ i }}
+        {% endfor %}
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} match attacks predefined-attack-groups "TELNET-Critical"
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} then action {{ rule.action }}
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} then notification log-attacks alert
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} then severity {{ rule.severity }}
+    {% endfor %}
+set security idp active-policy {{ item.policy_name }}
+{% endfor %}

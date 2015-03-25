@@ -8,7 +8,7 @@
     junos_password: "Juniper"
     build_dir: "/tmp/"
     address_entries: [ {'name':'NetDevOpsVM','prefix':'172.16.0.1/32'} ]
-    ips_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ip':'NetDevOpsVM','dst_ip':'any','action':'permit','app':'junos-http'}]
+    idp_policy_info: [{"policy_name":"ips-policy1","rules":{"name":"rule1","src_zone":"trust","dst_zone":"untrust","src_ips":["any"],"dst_ips":["any"],"apps":["default"],"action":"drop-connection","severity","critical"}]
 
   tasks:
     - name: Build address book entries
@@ -18,10 +18,9 @@
     - name: Apply address book entries
       junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/fw_address_book.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
 
-
-    - name: Build firewall policies config template
-      template: src=templates/ips_policy.set.js dest={{build_dir}}/ips_policy.set
+    - name: Build ips policies config template
+      template: src=templates/idp_policy.set.js dest={{build_dir}}/idp_policy.set
       with_items: ips_policy_info
 
-    - name: Apply firewall policies
-      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/ips_policy.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+    - name: Apply ips policies
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/idp_policy.set overwrite=no logfile=logs/{{ inventory_hostname }}.log

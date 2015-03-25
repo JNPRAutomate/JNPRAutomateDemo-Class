@@ -1,0 +1,3 @@
+{% for item in idp_to_policy_info %}
+set security policies from-zone {{ item.src_zone }} to-zone {{ item.dst_zone }} policy {{ item.policy_name }} then permit application-services idp
+{% endfor %}

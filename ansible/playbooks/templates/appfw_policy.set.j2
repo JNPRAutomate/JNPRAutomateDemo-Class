@@ -1,0 +1,8 @@
+{% for item in appfw_policy_info %}
+    {% for i in item.rules %}
+        {% for app in i.dynapps %}
+set security application-firewall rule-sets {{ item.rule_set }} rule {{ i.name }} match dynamic-application {{ app }}
+        {% endfor %}
+    {% endfor %}
+set security application-firewall rule-sets {{ item.rule_set }} default-rule {{ item.rule_set_default_action }}
+{% endfor %}
