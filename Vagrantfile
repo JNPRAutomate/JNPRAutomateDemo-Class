@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   
   config.vm.define "srx" do |srx|
-    srx.vm.box = "juniper/ffp-12.1X47-D10.4"
+    srx.vm.box = "juniper/ffp-12.1X47-D20.7"
     srx.vm.hostname = "NetDevOps-SRX01"
     srx.vm.provider "virtualbox" do |v|
       #v.gui = true
