@@ -53,7 +53,7 @@ TODO
 7.	software overview @routelastresort
 8.	vpn connection to headend @kwbales
 9.	using ansible @robwc
-10.	using pyezlibrary @kwbales @robwc - NEED TO FINISH TABLES AND VIEWS
+10.	using pyezlibrary @kwbales - NEED TO FINISH TABLES AND VIEWS
 11.	registering your host @robwc
 
 **Tools**

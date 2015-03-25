@@ -1,16 +1,49 @@
 {% for item in idp_policy_info %}
 set security idp idp-policy {{ item.policy_name }}
     {% for rule in item.rules %}
-        {% for i in item.src_ips %}
+        {% for i in rule.src_ips %}
 set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} match from-zone {{ rule.src_zone }} to-zone {{ rule.dst_zone }} source-address {{ i }}
         {% endfor %}
-        {% for i in item.dst_ips %}
+        {% for i in rule.dst_ips %}
 set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} match from-zone {{ rule.src_zone }} to-zone {{ rule.dst_zone }} destination-address {{ i }}
         {% endfor %}
-set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} match attacks predefined-attack-groups "TELNET-Critical"
-set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} then action {{ rule.action }}
+        {% for i in rule.apps %}
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} match from-zone {{ rule.src_zone }} to-zone {{ rule.dst_zone }} application {{ i }}
+        {% endfor %}
+        {% if rule.predef_attacks is defined %}
+            {% for x in rule.predef_attacks %}
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} match attacks predefined-attacks "{{ x }}"
+            {% endfor %}
+        {% endif %}
+        {% if rule.predef_attack_groups is defined %}
+            {% for x in rule.predef_attack_groups %}
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} match attacks predefined-attack-groups "{{ x }}"
+            {% endfor %}
+        {% endif %}
+        {% if rule.custom_attacks is defined %}
+            {% for x in item.custom_attacks %}
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} match attacks custom-attacks "{{ x }}"
+            {% endfor %}
+        {% endif %}
+        {% if rule.custom_attack_groups is defined %}
+            {% for x in item.custom_attack_groups %}
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} match attacks custom-attack-groups "{{ x }}"
+            {% endfor %}
+        {% endif %}
+        {% if rule.dyn_attack_groups is defined %}
+            {% for x in item.custom_attacks %}
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} match attacks custom-attacks "{{ x }}"
+            {% endfor %}
+        {% endif %}
+        {% if rule.notification.log is defined and rule.notification.alert is defined %}
 set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} then notification log-attacks alert
+        {% endif %}
+        {% if rule.notification.log is defined %}
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} then notification log-attacks
+        {% endif %}
+        {% if rule.severity is defined %}
 set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} then severity {{ rule.severity }}
+        {% endif %}
+set security idp idp-policy {{ item.policy_name }} rulebase-ips rule {{ rule.name }} then action {{ rule.action }}
     {% endfor %}
-set security idp active-policy {{ item.policy_name }}
 {% endfor %}
