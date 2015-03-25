@@ -1,0 +1,33 @@
+{% for student in students -%}
+{% for vpn in student.vpns -%}
+
+set security flow tcp-mss ipsec-vpn mss 1350
+
+set interfaces {{ vpn.tunnel_int }} family inet address {{ vpn.vpn_tunnel_ip }}/30
+set security zones security-zone vpn interfaces {{ vpn.tunnel_int }}
+
+set security zones security-zone trust host-inbound-traffic system-services all
+set security zones security-zone untrust host-inbound-traffic system-services ike
+
+set security ike gateway ike-gate address {{ HeadEnd.vpn_ext_ip }}
+set security ike gateway ike-gate external-interface {{ vpn.vpn_ext_interface }}
+set security ike gateway ike-gate ike-policy ike-policy1
+
+set security ike policy ike-policy1 mode main
+set security ike policy ike-policy1 proposal-set standard
+set security ike policy ike-policy1 pre-shared-key ascii-text "{{ vpn.shared_secret }}"
+
+set security ipsec policy vpn-policy1 proposal-set standard
+set security ipsec vpn ike-vpn ike gateway ike-gate
+set security ipsec vpn ike-vpn ike ipsec-policy vpn-policy1
+set security ipsec vpn ike-vpn bind-interface {{ vpn.tunnel_int }}
+
+{% endfor -%}
+{% endfor -%}
+
+set security nat source rule-set vpn_nat_out from zone trust
+set security nat source rule-set vpn_nat_out to zone vpn
+set security nat source rule-set vpn_nat_out rule interface-nat match source-address LocalNet
+set security nat source rule-set vpn_nat_out rule interface-nat match destination-address PrivateNet
+set security nat source rule-set vpn_nat_out rule interface-nat then source-nat interface
+
