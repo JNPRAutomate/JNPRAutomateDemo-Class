@@ -7,20 +7,20 @@
     junos_user: "root"
     junos_password: "Juniper"
     build_dir: "/tmp/"
-    appfw_to_policy_info: [{"src_zone":"trust","dst_zone":"untrust","policy_name":"door","appfw_rule_set":"ruleset1"}] #determine policy name
-    appfw_policy_info: [{"rule_set":"ruleset1","rule_set_default_action":"permit","rules":{"name":"rule1","dynapps":["junos:GOOGLE", "junos:GOOGLE-ACCOUNTS", "junos:GOOGLE-ACCOUNTS-SSL","junos:GOOGLE-ADS", "junos:GOOGLE-ANALYTICS-TRACKING", "junos:GOOGLE-APPENGINE", "junos:GOOGLE-CACHE", "junos:GOOGLE-DESKTOP", "junos:GOOGLE-DOCS", "junos:GOOGLE-DOCS-DRAWING", "junos:GOOGLE-DOCS-FORM", "junos:GOOGLE-DOCS-PRESENTATION", "junos:GOOGLE-DOCS-SPREADSHEET", "junos:GOOGLE-DOCS-WORD-DOCUMENT", "junos:GOOGLE-DRIVE", "junos:GOOGLE-EARTH", "junos:GOOGLE-GROUPS-POST", "junos:GOOGLE-MAPS", "junos:GOOGLE-MOBILE-MAPS-APP", "junos:GOOGLE-PICASA", "junos:GOOGLE-PLUS", "junos:GOOGLE-PLUS-SSL", "junos:GOOGLE-SAFEBROWSE-SUB", "junos:GOOGLE-SAFEBROWSE-UPDATE", "junos:GOOGLE-SKYMAP", "junos:GOOGLE-STATIC", "junos:GOOGLE-SYNDICATION", "junos:GOOGLE-TOOLBAR", "junos:GOOGLE-TRANSLATE", "junos:GOOGLE-UPDATE", "junos:GOOGLE-VIDEOS", "junos:GOOGLE-WEBCHAT", "junos:GOOGLETALK"]}}]
+    appfw_to_policy_info: [{"src_zone":"trust","dst_zone":"untrust","policy_name":"Allow_Policy","appfw_rule_set":"ruleset1"}]
+    appfw_policy_info: [{"rule_set":"ruleset1","rule_set_default_action":"permit","rules":[{"name":"rule1","action":"deny","dynapps":["junos:GOOGLE", "junos:GOOGLE-ACCOUNTS", "junos:GOOGLE-ACCOUNTS-SSL","junos:GOOGLE-ADS", "junos:GOOGLE-ANALYTICS-TRACKING", "junos:GOOGLE-APPENGINE", "junos:GOOGLE-CACHE", "junos:GOOGLE-DESKTOP", "junos:GOOGLE-DOCS", "junos:GOOGLE-DOCS-DRAWING", "junos:GOOGLE-DOCS-FORM", "junos:GOOGLE-DOCS-PRESENTATION", "junos:GOOGLE-DOCS-SPREADSHEET", "junos:GOOGLE-DOCS-WORD-DOCUMENT", "junos:GOOGLE-DRIVE", "junos:GOOGLE-EARTH", "junos:GOOGLE-GROUPS-POST", "junos:GOOGLE-MAPS", "junos:GOOGLE-MOBILE-MAPS-APP", "junos:GOOGLE-PICASA", "junos:GOOGLE-PLUS", "junos:GOOGLE-PLUS-SSL", "junos:GOOGLE-SAFEBROWSE-SUB", "junos:GOOGLE-SAFEBROWSE-UPDATE", "junos:GOOGLE-SKYMAP", "junos:GOOGLE-STATIC", "junos:GOOGLE-SYNDICATION", "junos:GOOGLE-TOOLBAR", "junos:GOOGLE-TRANSLATE", "junos:GOOGLE-UPDATE", "junos:GOOGLE-VIDEOS", "junos:GOOGLE-WEBCHAT", "junos:GOOGLETALK"]}]}]
 
   tasks:
     - name: Build app firewall policies
-      template: src=templates/appfw_policy.set.js dest={{build_dir}}/appfw_policy.set
+      template: src=templates/appfw_policy.set.j2 dest={{build_dir}}/appfw_policy.set
       with_items: appfw_policy_info
 
-    - name: Apply address book entries
+    - name: Apply app firewall policies
       junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/appfw_policy.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
 
     - name: Apply app firewall rules to policy
-      template: src=templates/appfw_to_policy.set.js dest={{build_dir}}/appfw_to_policy.set
-      with_items: appfw_policy_info
+      template: src=templates/appfw_to_policy.set.j2 dest={{build_dir}}/appfw_to_policy.set
+      with_items: appfw_to_policy_info
 
     - name: Apply firewall policies
       junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/appfw_to_policy.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
