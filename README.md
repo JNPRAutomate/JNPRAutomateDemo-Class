@@ -44,18 +44,17 @@ TODO
 
 **Docs**
 
-1.	Fw policies @robwc - needs docs
+1.	Fw and vpn fw policies @robwc - needs docs
 2.	app policies @robwc - needs docs
 3.	ips policies @robwc - needs docs
-4.	disaster strikes @robwc - via ansible
+4.	disaster strikes @robwc - via ansible TBD - completed last
 5.	dynamic routing @kwbales - needs docs
-6.	recovering the lab @robwc - via ansible
+6.	recovering the lab @robwc - via ansible TBD - completed last
 7.	installing software @routelastresort
 8.	software overview @routelastresort
 9.	vpn connection to headend @kwbales
-10.	using ansible @robwc - needs docs
-11.	using pyezlibrary @kwbales - NEED TO FINISH TABLES AND VIEWS
-12.	registering your host @robwc - needs docs and registry
+10.	using pyezlibrary @kwbales - NEED TO FINISH TABLES AND VIEWS
+11.	registering your host @robwc - needs docs and registry
 
 **Tools**
 
