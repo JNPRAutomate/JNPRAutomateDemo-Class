@@ -46,9 +46,9 @@ TODO
 
 1.	app policies @robwc - needs docs
 2.	ips policies @robwc - needs docs
-3.	disaster strikes @kwbales @robwc
-4.	dynamic routing TBD - via ansible
-5.	recovering the lab TBD - via ansible
+3.	disaster strikes @robwc - via ansible
+4.	dynamic routing @kwbales - needs docs
+5.	recovering the lab @robwc - via ansible
 6.	installing software @routelastresort
 7.	software overview @routelastresort
 8.	vpn connection to headend @kwbales
