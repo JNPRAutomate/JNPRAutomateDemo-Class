@@ -1,0 +1,35 @@
+---
+- name: Configure student vpn ospf
+  hosts: mysrx
+  connection: local
+  gather_facts: no
+  vars:
+    junos_user: "root"
+    junos_password: "Juniper"
+    build_dir: "/tmp/"
+    interfaces: [ 
+      {'interface': 'st0', 'unit': '1', 'family': 'inet', 'addr_type': 'address', 'addr': '10.255.1.2/30', 'zone':'vpn', 'hit_protocols': ['ospf', 'bgp'], 'hit_services': ['ping', 'traceroute'],'ospf': {'area': '0'}},
+      {'interface': 'lo0', 'unit': '0', 'family': 'inet', 'addr_type': 'address', 'addr': '10.255.255.10/30', 'zone':'trust', 'ospf': {'area': '0', 'passive': True}}
+    ]
+
+  tasks:
+    - name: Build vpn tunnel interface
+      template: src=templates/interfaces.set.j2 dest={{build_dir}}/interfaces.set
+      with_items: interfaces
+
+    - name: Apply vpn tunnel interface
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/interfaces.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+
+    - name: Build vpn zone 
+      template: src=templates/interfaces_zone.set.j2 dest={{build_dir}}/interfaces_zone.set
+      with_items: interfaces
+
+    - name: Apply vpn zone
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/interfaces_zone.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+
+    - name: Build vpn OSPF
+      template: src=templates/protocol_ospf.set.j2 dest={{build_dir}}/protocol_ospf.set
+      with_items: interfaces
+
+    - name: Apply vpn OSPF
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/protocol_ospf.set overwrite=no logfile=logs/{{ inventory_hostname }}.log

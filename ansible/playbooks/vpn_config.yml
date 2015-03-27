@@ -7,8 +7,6 @@
     junos_user: "root"
     junos_password: "Juniper"
     build_dir: "/tmp/"
-    address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/24'} ]
-    fw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ips':['LocalNet'],'dst_ips':['PrivateNet'],'action':'permit','apps':['any']}]
     mss_entries: [ {'protocol': 'ipsec-vpn', 'mss': '1350'} ]
     interfaces: [ {'interface': 'st0', 'unit': '1', 'family': 'inet', 'addr_type': 'address', 'addr': '10.255.1.2/30', 'zone':'vpn', 'hit_protocols': ['ospf', 'bgp'], 'hit_services': ['ping', 'traceroute']} ]
     ike: [ {'ike_name': 'ike-vpn', 'gateway_ip': '10.10.0.10', 'ext_interface': 'ge-0/0/2.0', 'ike_policy_name': 'ike-policy1', 'ike_policy_mode': 'main', 'ike_policy_proposal': 'standard', 'shared_secret': 'AwesomePassword123'} ]
