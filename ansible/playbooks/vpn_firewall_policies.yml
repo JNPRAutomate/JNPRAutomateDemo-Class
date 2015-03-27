@@ -1,5 +1,5 @@
 ---
-- name: Configure firewall policies
+- name: Configure VPN firewall policies
   hosts: mysrx
   connection: local
   gather_facts: no
