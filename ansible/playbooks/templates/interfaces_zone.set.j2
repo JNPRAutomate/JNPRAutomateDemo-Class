@@ -3,7 +3,16 @@
 set security zones security-zone {{ i.zone }} interfaces {{ i.interface -}}.{{ i.unit -}}
 	{% endif %}
 
-	{% if i.inbound_type %}
-set security zones security-zone {{ i.zone }} interfaces {{ i.interface }}.{{ i.unit }}  host-inbound-traffic {{ i.inbound_type }} {{ i.system_service }}
+	{% if i.hit_protocols %}
+		{% for protocol in i.hit_protocols %}
+set security zones security-zone {{ i.zone }} interfaces {{ i.interface }}.{{ i.unit }}  host-inbound-traffic protocols {{ protocol }}
+		{% endfor %}
 	{% endif %}
+
+	{% if i.hit_services %}
+		{% for service in i.hit_services %}
+set security zones security-zone {{ i.zone }} interfaces {{ i.interface }}.{{ i.unit }}  host-inbound-traffic system-services {{ service }}
+		{% endfor %}
+	{% endif %}
+
 {% endfor %}
