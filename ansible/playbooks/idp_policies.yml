@@ -21,7 +21,7 @@
 
     - name: Build ips policy apply template
       template: src=templates/idp_policy_activate.set.j2 dest={{build_dir}}/idp_policy_activate.set
-      idp_to_policy_info: ips_policy_info
+      with_items: idp_to_policy_info
 
     - name: Activate ips policy
       junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/idp_policy_activate.set overwrite=no logfile=logs/{{ inventory_hostname }}.log

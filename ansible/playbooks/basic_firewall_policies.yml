@@ -8,7 +8,7 @@
     junos_password: "Juniper"
     build_dir: "/tmp/"
     address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/24'} ]
-    fw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ips':['LocalNet'],'dst_ips':['PrivateNet'],'action':'permit','apps':['any']}]
+    fw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ips':['LocalNet'],'dst_ips':['any'],'action':'permit','apps':['any']}]
 
   tasks:
     - name: Build address book entries

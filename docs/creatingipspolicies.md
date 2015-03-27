@@ -49,6 +49,7 @@ First let's take a look at the playbook that is used to accomplish this task.
     junos_password: "Juniper"
     build_dir: "/tmp/"
     idp_policy_name: "ips-policy1"
+    idp_to_policy_info: [{"src_zone":"trust","dst_zone":"untrust","policy_name":"Allow_Policy"}]
     idp_policy_info: [{"policy_name":"ips-policy1","rules":[{"name":"rule1","src_zone":"trust","dst_zone":"untrust","src_ips":["any"],"dst_ips":["any"],"apps":["default"],"predef_attack_groups":['APP - Critical','APP - Major'],"action":"drop-connection","notification":{"log":True, "alert": True"}, "severity":"critical"}]}]
 
   tasks:
@@ -231,7 +232,7 @@ changed: [172.16.0.1]
                 ||     ||
 
 
-ok: [172.16.0.1]
+changed: [172.16.0.1] => (item={'src_zone': 'trust', 'dst_zone': 'untrust', 'policy_name': 'Allow_Policy'})
  ___________________________
 < TASK: Activate ips policy >
  ---------------------------
@@ -253,9 +254,9 @@ changed: [172.16.0.1]
                 ||     ||
 
 
-172.16.0.1                 : ok=4    changed=2    unreachable=0    failed=0
+172.16.0.1                 : ok=4    changed=3    unreachable=0    failed=0
 
-
+vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$
 ```
 
 **Validating the playbook run**
@@ -263,5 +264,95 @@ changed: [172.16.0.1]
 Now connect to your vSRX instance from your NetDevOpsVM and validate the change
 
 ```bash
+--- JUNOS 12.1X47-D20.7 built 2015-03-03 21:53:50 UTC
+root@NetDevOps-SRX01% cli
+root@NetDevOps-SRX01> show security idp status
+State of IDP: Default,  Up since: 2015-03-25 22:39:58 UTC (05:30:12 ago)
 
+Packets/second: 0               Peak: 0 @ 2015-03-26 04:09:11 UTC
+KBits/second  : 0               Peak: 0 @ 2015-03-26 04:09:11 UTC
+Latency (microseconds): [min: 0] [max: 0] [avg: 0]
+
+Packet Statistics:
+ [ICMP: 0] [TCP: 0] [UDP: 0] [Other: 0]
+
+Flow Statistics:
+  ICMP: [Current: 0] [Max: 0 @ 2015-03-26 04:09:11 UTC]
+  TCP: [Current: 0] [Max: 0 @ 2015-03-26 04:09:11 UTC]
+  UDP: [Current: 0] [Max: 0 @ 2015-03-26 04:09:11 UTC]
+  Other: [Current: 0] [Max: 0 @ 2015-03-26 04:09:11 UTC]
+
+Session Statistics:
+ [ICMP: 0] [TCP: 0] [UDP: 0] [Other: 0]
+  Policy Name : ips-policy1
+  Running Detector Version : 12.6.130140822
+
+root@NetDevOps-SRX01> show security idp polic
+                                             ^
+'polic' is ambiguous.
+Possible completions:
+  policies             Show the list of currently installed policies
+  policy-commit-status  Show the status of ongoing policy compilation and load
+  policy-templates-list  Show available policy templates
+root@NetDevOps-SRX01> show security idp policies
+ID    Name                   Sessions    Memory      Detector
+ 3     ips-policy1            0           2720166     12.6.130140822
+
+root@NetDevOps-SRX01> shoe
+                      ^
+unknown command.
+root@NetDevOps-SRX01> show configuration id
+                                         ^
+syntax error.
+root@NetDevOps-SRX01> show configuration security isd
+                                                  ^
+syntax error.
+root@NetDevOps-SRX01> show configuration security idp
+idp-policy ips-policy1 {
+    rulebase-ips {
+        rule rule1 {
+            match {
+                from-zone trust;
+                source-address any;
+                to-zone untrust;
+                destination-address any;
+                application default;
+                attacks {
+                    predefined-attack-groups [ "APP - Critical" "APP - Major" ];
+                }
+            }
+            then {
+                action {
+                    drop-connection;
+                }
+                notification {
+                    log-attacks {
+                        alert;
+                    }
+                }
+                severity critical;
+            }
+        }
+    }
+}
+active-policy ips-policy1;
+
+root@NetDevOps-SRX01> show configuration security policies from-zone trust to-zone untrust policy Allow_Policy
+match {
+    source-address LocalNet;
+    destination-address any;
+    application any;
+}
+then {
+    permit {
+        application-services {
+            idp;
+            application-firewall {
+                rule-set ruleset1;
+            }
+        }
+    }
+}
+
+root@NetDevOps-SRX01>
 ```

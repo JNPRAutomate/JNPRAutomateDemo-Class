@@ -49,7 +49,7 @@ First let's take a look at the playbook that is used to accomplish this task. We
     junos_password: "Juniper"
     build_dir: "/tmp/"
     address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/24'} ]
-    fw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ips':['LocalNet'],'dst_ips':['PrivateNet'],'action':'permit','apps':['any']}]
+    fw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ips':['LocalNet'],'dst_ips':['any'],'action':'permit','apps':['any']}]
 
   tasks:
     - name: Build address book entries
@@ -119,7 +119,7 @@ Once run here are the set commands that will be loaded onto the device. Again if
 
 ```bash
 set security policies from-zone trust to-zone untrust policy Allow_Policy match source-address LocalNet
-set security policies from-zone trust to-zone untrust policy Allow_Policy match destination-address PrivateNet
+set security policies from-zone trust to-zone untrust policy Allow_Policy match destination-address any
 set security policies from-zone trust to-zone untrust policy Allow_Policy match application any
 set security policies from-zone trust to-zone untrust policy Allow_Policy then permit
 ```
@@ -255,17 +255,11 @@ from-zone trust to-zone untrust {
     policy Allow_Policy {
         match {
             source-address LocalNet;
-            destination-address PrivateNet;
+            destination-address any;
             application any;
         }
         then {
-            permit {
-                application-services {  
-                    application-firewall {
-                        rule-set ruleset1;
-                    }
-                }
-            }
+            permit;
         }
     }
 }
