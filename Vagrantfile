@@ -8,29 +8,24 @@ require "vagrant-host-shell"
 require "vagrant-junos"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  #disable filder sharing by default
-  config.vm.synced_folder ".", "/vagrant", disabled: true
-
   config.vm.define "ndo", primary: true do |ndo|
     ndo.vm.box = "juniper/netdevops-ubuntu1404"
     ndo.vm.hostname = "NetDevOps-Student"
     ndo.vm.network "private_network",
-      ip: "172.16.0.10",
-      virtualbox__intnet: "NetDevOps-StudentInternal"
-    config.vm.synced_folder "", "/vagrant", disabled: false
+                   ip: "172.16.0.10",
+                   virtualbox__intnet: "NetDevOps-StudentInternal"
+    config.vm.synced_folder "", "/vagrant"
 
     ndo.vm.provider "virtualbox" do |v|
-    #  v.gui = true
-    #  v.customize ["modifyvm", :id, "--nic1", "hostonly"]
+      #  v.gui = true
+      #  v.customize ["modifyvm", :id, "--nic1", "hostonly"]
     end
 
-    ndo.ssh.shell = 'sh'
-
     ndo.vm.provision "shell" do |s|
-        # TODO: DO THIS STUFF!!!!!
-        # add this to the shell
-        # export ANSIBLE_LIBRARY=/etc/ansible/roles/
-        # set routes for 10.10.0.0/24 and 192.168.10.0/24 to 172.16.0.1
+      # TODO: DO THIS STUFF!!!!!
+      # add this to the shell
+      # export ANSIBLE_LIBRARY=/etc/ansible/roles/
+      # set routes for 10.10.0.0/24 and 192.168.10.0/24 to 172.16.0.1
       s.path = "scripts/ndo-setup.sh"
     end
   end
@@ -39,22 +34,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     srx.vm.box = "juniper/ffp-12.1X47-D20.7"
     srx.vm.hostname = "NetDevOps-SRX01"
     srx.vm.provider "virtualbox" do |v|
-      #v.gui = true
+      # v.gui = true
     end
     srx.vm.network "private_network",
-      ip: "172.16.0.1",
-      virtualbox__intnet: "NetDevOps-StudentInternal",
-      nic_type: 'virtio'
+                   ip: "172.16.0.1",
+                   virtualbox__intnet: "NetDevOps-StudentInternal"
+
     srx.vm.network "private_network",
-      ip: "10.255.255.10",
-      virtualbox__intnet: "NetDevOps-StudentLAN",
-      nic_type: 'virtio'
+                   ip: "10.255.255.10",
+                   virtualbox__intnet: "NetDevOps-StudentLAN"
 
     srx.vm.synced_folder "", "/vagrant", disabled: true
-
-    srx.ssh.username = 'root'
-    srx.ssh.shell = 'sh'
-    srx.ssh.insert_key = false
 
     srx.vm.provision "file", source: "scripts/srx-setup.sh", destination: "/tmp/srx-setup.sh"
     srx.vm.provision :host_shell do |host_shell|
