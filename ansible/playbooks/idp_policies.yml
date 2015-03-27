@@ -8,6 +8,7 @@
     junos_password: "Juniper"
     build_dir: "/tmp/"
     idp_policy_name: "ips-policy1"
+    idp_to_policy_info: [{"src_zone":"trust","dst_zone":"untrust","policy_name":"Allow_Policy"}]
     idp_policy_info: [{"policy_name":"ips-policy1","rules":[{"name":"rule1","src_zone":"trust","dst_zone":"untrust","src_ips":["any"],"dst_ips":["any"],"apps":["default"],"predef_attack_groups":['APP - Critical','APP - Major'],"action":"drop-connection","notification":{"log":True, "alert": True"}, "severity":"critical"}]}]
 
   tasks:
@@ -20,6 +21,7 @@
 
     - name: Build ips policy apply template
       template: src=templates/idp_policy_activate.set.j2 dest={{build_dir}}/idp_policy_activate.set
+      idp_to_policy_info: ips_policy_info
 
     - name: Activate ips policy
       junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/idp_policy_activate.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
