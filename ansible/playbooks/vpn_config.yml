@@ -11,7 +11,7 @@
     fw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ips':['LocalNet'],'dst_ips':['PrivateNet'],'action':'permit','apps':['any']}]
     mss_entries: [ {'protocol': 'ipsec-vpn', 'mss': '1350'} ]
     interfaces: [ {'interface': 'st0', 'unit': '1', 'family': 'inet', 'addr_type': 'address', 'addr': '10.255.1.2/30', 'zone':'vpn', 'inbound_type': 'system-services', 'system_service': 'ping'} ]
-    ike: [ {'ike_name': 'ike-vpn', 'gateway_ip': '10.10.0.10', 'ext_interface': 'ge-0/0/2', 'ike_policy_name': 'ike-policy1', 'ike_policy_mode': 'mode', 'ike_policy_proposal': 'stanard', 'shared_secret': 'AwesomePassword123'} ]
+    ike: [ {'ike_name': 'ike-vpn', 'gateway_ip': '10.10.0.10', 'ext_interface': 'ge-0/0/2.0', 'ike_policy_name': 'ike-policy1', 'ike_policy_mode': 'main', 'ike_policy_proposal': 'standard', 'shared_secret': 'AwesomePassword123'} ]
     ipsec: [ {'ipsec_policy_name': 'vpn-policy1', 'ipsec_policy_mode': 'standard', 'ipsec_vpn_name': 'ipsec-vpn', 'ike_gateway': 'ike-vpn', 'tunnel_int': 'st0.1'} ]
 
 
@@ -27,7 +27,7 @@
       template: src=templates/interfaces.set.j2 dest={{build_dir}}/interfaces.set
       with_items: interfaces
 
-    - name: Apply tunnel interface
+    - name: Apply vpn tunnel interface
       junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/interfaces.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
 
     - name: Build vpn zone 
