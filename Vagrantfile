@@ -50,8 +50,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     srx.vm.synced_folder "", "/vagrant", disabled: true
 
-    srx.ssh.insert_key = false
-
     srx.vm.provision "file", source: "scripts/srx-setup.sh", destination: "/tmp/srx-setup.sh"
     srx.vm.provision :host_shell do |host_shell|
         # set routes for goole services or 0/0
