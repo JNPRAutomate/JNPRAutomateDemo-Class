@@ -9,3 +9,6 @@ packer_cache/
 
 # Ignore OS Junk
 .DS_Store
+
+# Ignore Log files
+*.log
