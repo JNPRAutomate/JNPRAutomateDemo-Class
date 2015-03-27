@@ -107,11 +107,11 @@ host[a:z].example.com   #26 different hosts defined by a range
 172.16.0.1              #A host defined by an IP
 172.16.0.[1:254]        #Hosts defined by an IP range
 
-[webservers]    #A group of hosts
+[webservers]    	#A group of hosts
 foo.example.com
 bar.example.com
 
-[dbservers]         #A second group of hosts
+[dbservers]         	#A second group of hosts
 one.example.com
 two.example.com
 three.example.com
