@@ -10,6 +10,7 @@ require "vagrant-junos"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "ndo", primary: true do |ndo|
     ndo.vm.box = "juniper/netdevops-ubuntu1404"
+    ndo.vm.box_version = ">= 0.2.6"
     ndo.vm.hostname = "NetDevOps-Student"
     ndo.vm.network "private_network",
                    ip: "172.16.0.10",
@@ -32,8 +33,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "srx" do |srx|
     srx.vm.box = "juniper/ffp-12.1X47-D20.7"
+    srx.vm.box_version = ">= 0.5.0"
     srx.vm.hostname = "NetDevOps-SRX01"
     srx.vm.provider "virtualbox" do |v|
+      v.check_guest_additions = false
       # v.gui = true
     end
     srx.vm.network "private_network",
