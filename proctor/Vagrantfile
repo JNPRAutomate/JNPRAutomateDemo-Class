@@ -37,6 +37,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     srx.vm.box_version = ">= 0.5.0"
     srx.vm.hostname = "NetDevOps-SRX01"
     srx.vm.provider "virtualbox" do |v|
+      v.check_guest_additions = false
       # v.gui = true
     end
     srx.vm.network "private_network",
