@@ -13,27 +13,27 @@ The course is divided into multiple steps.
 **Overview**
 
 1.	[Topology Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/topologyoverview.md)
-2.	[vSRX Topology](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/vsrxconfiguration.md)
-3.	[Installing Software](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/installingsoftware.md)
-4.	[Software Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/softwareoverview.md)
-5.	[Using Python and PyEZ Library](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/usingpyezlibrary.md)
-6.	[Using Ansible](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/usingansible.md)
+1.	[vSRX Topology](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/vsrxconfiguration.md)
+1.	[Installing Software](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/installingsoftware.md)
+1.	[Software Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/softwareoverview.md)
+1.	[Using Python and PyEZ Library](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/usingpyezlibrary.md)
+1.	[Using Ansible](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/usingansible.md)
 
 **Automation Hands On**
 
 1.	[Basic API Review](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/basicapireview.md)
-2.	[NETCONF Magic](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/netconfmagic.md)
-3.	[Configuring NAT](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/configuringnat.md)
-4.	[Basic Firewall Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/basicfwpolicies.md)
-5.	[Registering your host](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/registeringyourhost.md)
-6.	[VPN connection to headend](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/vpnconnectiontoheadend.md)
-7.	[Enabling Dynamic Routing](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/enablingdynamicrouting.md)
-8.	[Creating VPN Firewall Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/creatingfwpolicies.md)
-9.	[Automating Licenses](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/automatinglicense.md)
-10.	[Creating Application Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/creatingapppolicies.md)
-11.	[Creating IPS Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/creatingipspolicies.md)
-12.	[Disaster Strikes!](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/disasterstrikes.md)
-13.	[Recovering the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/recoveringthelab.md)
+1.	[NETCONF Magic](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/netconfmagic.md)
+1.	[Configuring NAT](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/configuringnat.md)
+1.	[Basic Firewall Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/basicfwpolicies.md)
+1.	[Registering your host](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/registeringyourhost.md)
+1.	[VPN connection to headend](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/vpnconnectiontoheadend.md)
+1.	[Enabling Dynamic Routing](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/enablingdynamicrouting.md)
+1.	[Creating VPN Firewall Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/creatingfwpolicies.md)
+1.	[Automating Licenses](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/automatinglicense.md)
+1.	[Creating Application Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/creatingapppolicies.md)
+1.	[Creating IPS Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/creatingipspolicies.md)
+1.	[Disaster Strikes!](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/disasterstrikes.md)
+1.	[Recovering the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/recoveringthelab.md)
 
 **VM Access Information**
 
@@ -45,16 +45,14 @@ TODO
 **Docs**
 
 1.	Fw and vpn fw policies @robwc - needs docs
-2.	app policies @robwc - needs docs
-3.	ips policies @robwc - needs docs
-4.	disaster strikes @robwc - via ansible TBD - completed last
-5.	dynamic routing @kwbales - needs docs
-6.	recovering the lab @robwc - via ansible TBD - completed last
-7.	installing software @routelastresort
-8.	software overview @routelastresort
-9.	vpn connection to headend @kwbales
-10.	using pyezlibrary @kwbales - NEED TO FINISH TABLES AND VIEWS
-11.	registering your host @robwc - needs docs and registry
+1.	app policies @robwc - needs docs
+1.	ips policies @robwc - needs docs
+1.	disaster strikes @robwc - via ansible TBD - completed last
+1.	dynamic routing @kwbales - needs docs
+1.	recovering the lab @robwc - via ansible TBD - completed last
+1.	vpn connection to headend @kwbales
+1.	using pyezlibrary @kwbales - NEED TO FINISH TABLES AND VIEWS
+1.	registering your host @robwc - needs docs and registry
 
 **Tools**
 

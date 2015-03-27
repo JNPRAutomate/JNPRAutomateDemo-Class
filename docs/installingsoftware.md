@@ -3,7 +3,7 @@ Software Prerequisites
 
 To run the lab you need a few applications loaded on your laptop.
 
-These tools are Vagrant and Virtual Box. This tool set is very commonly used in a development environment. It makes common tasks such as bringing up a VM, provisioning it, and building multi-box topologies a breeze.
+These tools are Vagrant and VirtualBox. This tool set is very commonly used in a development environment. It makes common tasks such as bringing up a VM, provisioning it, and building multi-box topologies a breeze.
 
 Vagrant
 =======
@@ -25,12 +25,25 @@ Install this executable on your operating system of choice just as you would any
 
 ### Vagrant Plugins
 
-@routelastresort
+Newer versions of the vSRX boxes require two plugins, namely:
 
-Virtual Box
+- [vagrant-junos](https://github.com/JNPRAutomate/vagrant-junos)
+- [vagrant-host-shell](https://github.com/phinze/vagrant-host-shell)
+
+these can be installed with the following commands:
+
+```bash
+vagrant plugin install vagrant-junos
+vagrant plugin install vagrant-host-shell
+```
+
+A simple `vagrant plugin update` will freshen all installed plugins.
+
+
+VirtualBox
 ===========
 
-For the lab we will be using Virtual Box as our virtualization manager. This tool is free to use and most importantly it is free to use with Vagrant. It also offers some support that VMware Workstation or Fusion do not offer. This includes support for the VirtIO driver and the ability to more simply manage virtual networks.
+For the lab we will be using VirtualBox as our virtualization manager. This tool is free to use and most importantly it is free to use with Vagrant. It also offers some support that VMware Workstation or Fusion do not offer. This includes support for the VirtIO driver and the ability to more simply manage virtual networks.
 
 When installing on Windows it typically will install a network driver. It will prompt you to click "Continue" to take this action. Please hit continue to install the driver.
 
@@ -43,18 +56,29 @@ When installing on Windows it typically will install a network driver. It will p
 Installing Boxes
 ================
 
-@routelastresort
+- Vagrant stores boxes in `$HOME/vagrant.d` on Linux & Mac, or `%userprofile%\.vagrant.d\boxes` on Windows
 
-Initializing VMs
-================
 
-@routelastresort
+Before class (install a box that can later be used):
+```bash
+vagrant box add juniper/netdevops-ubuntu1404
+vagrant box add juniper/ffp-12.1X47-D20.7
 
+```
+
+Install and launch both (from the the JNPRAutomateDemo-Student folder):
+(it's recommended that you only do this if you're ready for the boxes to be running)
+```bash
+vagrant up
+```
 
 Validating Install
 ------------------
 
-@routelastresort
+- `vagrant version` should tell you that you're running 1.7.2, aka the latest and greatest
+- `vagrant plugin list` should include:
+ - vagrant-host-shell` 0.0.4 or newer
+ - vagrant-junos` 0.2.0 or newer
 
 
 Vagrant Global Status

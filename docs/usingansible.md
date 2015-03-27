@@ -19,7 +19,7 @@ Ansible is a command-line automation tool that simplifies the large scale manage
 5.	Easy to learn
 6.	Easy to extend with custom modules
 	-	Python is first class language for this
-	-	But any language can be used to run scrips (Bash, Ruby, PERL)
+	-	But any language can be used to run scrips (Bash, Ruby, Perl)
 
 **Drawbacks**
 
