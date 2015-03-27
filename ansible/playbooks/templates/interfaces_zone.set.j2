@@ -1,3 +1,9 @@
-{% for item in zone_interface %}
-set security zones security-zone {{ item.zone }} interfaces {{ item.interface }}
+{% for i in interfaces %}
+	{% if i.zone is defined%}
+set security zones security-zone {{ i.zone }} interfaces {{ i.interface -}}.{{ i.unit -}}
+	{% endif %}
+
+	{% if i.inbound_type %}
+set security zones security-zone {{ i.zone }} interfaces {{ i.interface }}.{{ i.unit }}  host-inbound-traffic {{ i.inbound_type }} {{ i.system_service }}
+	{% endif %}
 {% endfor %}

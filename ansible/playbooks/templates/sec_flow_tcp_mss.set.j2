@@ -1,0 +1,3 @@
+{% for i in mss_entries %}
+set security flow tcp-mss {{i.protocol}} mss {{i.mss}}
+{% endfor %}

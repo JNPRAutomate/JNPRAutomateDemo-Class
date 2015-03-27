@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         # add this to the shell
         # export ANSIBLE_LIBRARY=/etc/ansible/roles/
         # set routes for 10.10.0.0/24 and 192.168.10.0/24 to 172.16.0.1
-      s.path = "scripts/ifbounce.sh"
+      s.path = "scripts/ndo-setup.sh"
     end
   end
 

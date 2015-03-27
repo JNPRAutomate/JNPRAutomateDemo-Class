@@ -1,0 +1,6 @@
+{% for i in ipsec %}
+set security ipsec policy {{ i.ipsec_policy_name }} proposal-set {{ i.ipsec_policy_mode }}
+set security ipsec vpn {{ i.ipsec_vpn_name }} ike gateway {{ i.ike_gateway }}
+set security ipsec vpn {{ i.ipsec_vpn_name }} ike ipsec-policy {{ i.ipsec_policy_name }} 
+set security ipsec vpn {{ i.ipsec_vpn_name }} bind-interface {{ i.tunnel_int }}
+{% endfor %}

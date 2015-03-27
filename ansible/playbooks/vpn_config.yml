@@ -1,0 +1,52 @@
+---
+- name: Configure student vpn to headend
+  hosts: mysrx
+  connection: local
+  gather_facts: no
+  vars:
+    junos_user: "root"
+    junos_password: "Juniper"
+    build_dir: "/tmp/"
+    address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/24'} ]
+    fw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ips':['LocalNet'],'dst_ips':['PrivateNet'],'action':'permit','apps':['any']}]
+    mss_entries: [ {'protocol': 'ipsec-vpn', 'mss': '1350'} ]
+    interfaces: [ {'interface': 'st0', 'unit': '1', 'family': 'inet', 'addr_type': 'address', 'addr': '10.255.1.2/30', 'zone':'vpn', 'inbound_type': 'system-services', 'system_service': 'ping'} ]
+    ike: [ {'ike_name': 'ike-vpn', 'gateway_ip': '10.10.0.10', 'ext_interface': 'ge-0/0/2.0', 'ike_policy_name': 'ike-policy1', 'ike_policy_mode': 'main', 'ike_policy_proposal': 'standard', 'shared_secret': 'AwesomePassword123'} ]
+    ipsec: [ {'ipsec_policy_name': 'vpn-policy1', 'ipsec_policy_mode': 'standard', 'ipsec_vpn_name': 'ipsec-vpn', 'ike_gateway': 'ike-vpn', 'tunnel_int': 'st0.1'} ]
+
+
+  tasks:
+    - name: set flow tcp-mss
+      template: src=templates/sec_flow_tcp_mss.set.j2 dest={{build_dir}}/sec_flow_tcp_mss.set
+      with_items: mss_entries
+
+    - name: Apply flow tcp-mss
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/sec_flow_tcp_mss.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+
+    - name: Build vpn tunnel interface
+      template: src=templates/interfaces.set.j2 dest={{build_dir}}/interfaces.set
+      with_items: interfaces
+
+    - name: Apply vpn tunnel interface
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/interfaces.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+
+    - name: Build vpn zone 
+      template: src=templates/interfaces_zone.set.j2 dest={{build_dir}}/interfaces_zone.set
+      with_items: interfaces
+
+    - name: Apply vpn zone
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/interfaces_zone.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+
+    - name: Build VPN Phase 1 
+      template: src=templates/vpn_ike.set.j2 dest={{build_dir}}/vpn_ike.set
+      with_items: ike
+
+    - name: Apply VPN Phase 1
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/vpn_ike.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+
+    - name: Build VPN Phase 2
+      template: src=templates/vpn_ipsec.set.j2 dest={{build_dir}}/vpn_ipsec.set
+      with_items: ipsec
+
+    - name: Apply VPN Phase 2
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/vpn_ipsec.set overwrite=no logfile=logs/{{ inventory_hostname }}.log

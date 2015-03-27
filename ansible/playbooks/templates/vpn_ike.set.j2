@@ -1,0 +1,11 @@
+{% for i in ike %}
+
+set security ike gateway {{ i.ike_name }} address {{ i.gateway_ip }}
+set security ike gateway {{ i.ike_name }} external-interface {{ i.ext_interface }}
+set security ike gateway {{ i.ike_name }} ike-policy {{ i.ike_policy_name }}
+
+set security ike policy {{ i.ike_policy_name }} mode {{ i.ike_policy_mode }}
+set security ike policy {{ i.ike_policy_name }} proposal-set {{ i.ike_policy_proposal }}
+set security ike policy {{ i.ike_policy_name }} pre-shared-key ascii-text "{{ i.shared_secret }}"
+
+{% endfor %}
