@@ -44,13 +44,12 @@ TODO
 
 **Docs**
 
-1.	ips policies @robwc - needs docs
-2.	disaster strikes @robwc - via ansible TBD - completed last
-3.	dynamic routing @kwbales - needs docs
-4.	recovering the lab @robwc - via ansible TBD - completed last
-5.	vpn connection to headend @kwbales
-6.	using pyezlibrary @kwbales - NEED TO FINISH TABLES AND VIEWS
-7.	registering your host @robwc - needs docs and registry
+1.	disaster strikes @robwc - via ansible TBD - completed last
+2.	dynamic routing @kwbales - needs docs
+3.	recovering the lab @robwc - via ansible TBD - completed last
+4.	vpn connection to headend @kwbales
+5.	using pyezlibrary @kwbales - NEED TO FINISH TABLES AND VIEWS
+6.	registering your host @robwc - needs docs and registry
 
 **Tools**
 
