@@ -27,6 +27,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # add this to the shell
       # export ANSIBLE_LIBRARY=/etc/ansible/roles/
       # set routes for 10.10.0.0/24 and 192.168.10.0/24 to 172.16.0.1
+      # set routes for goole services or 0/0
       s.path = "scripts/ndo-setup.sh"
     end
   end
@@ -51,6 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     srx.vm.provision "file", source: "scripts/srx-setup.sh", destination: "/tmp/srx-setup.sh"
     srx.vm.provision :host_shell do |host_shell|
+        # set routes for goole services or 0/0
       host_shell.inline = 'vagrant ssh srx -c "/usr/sbin/cli -f /tmp/srx-setup.sh"'
     end
   end

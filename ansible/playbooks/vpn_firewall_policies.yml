@@ -1,5 +1,5 @@
 ---
-- name: Configure firewall policies
+- name: Configure VPN firewall policies
   hosts: mysrx
   connection: local
   gather_facts: no
@@ -12,7 +12,7 @@
 
   tasks:
     - name: Build address book entries
-      template: src=templates/fw_address_book.set.j2 dest={{build_dir}}/fw_address_book.set
+      template: src=templates/fw_address_book_global.set.j2 dest={{build_dir}}/fw_address_book_global.set
       with_items: address_entries
 
     - name: Apply address book entries
