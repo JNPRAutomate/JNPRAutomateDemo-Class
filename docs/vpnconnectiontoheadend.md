@@ -1,328 +1,300 @@
 Connecting to the VPN Headend
 =============================
 
-Tools
------
+For this step we will use a simple Jinja2 Template and a pre-built Python script to push a prepared template to the vSRX to configure a VPN tunnel and NAT egress traffic. One of the most common jobs for a network engineer is to make the same set of changes on a regular basis with just a few minor changes such as IP address or VLAN assignments. By using a prepared template, you can drastically reduce the time spent making common network changes.
 
-Using Ansible
-
-VPN st0 SNAT
-------------
-
-#########################################################
-#########################################################
-
-Adding Firewall Policies
-========================
-
-At this point in the lab your vSRX will have access to the rest of the lab. However your NetDevOps appliance will not. To allow this we must first enable firewall policies on your vSRX device.
-
-Using Ansible to enable firewall policies
-=========================================
-
-For this step we will use Ansible to create both our firewall policies and the required address book objects. This is one of the most requested automation elements when dealing with a firewall. Typically once a firewall is deployed and integrated into the network there are few changes that are required on the networking side of things. However the majority of heavy lifting is centered around managing security policies and the associated address book objects. Address book objects are typically quite painful due to the need to create, manage, and have the correct association to zones. Luckily using Ansible makes these tasks a snap.
-
-Reviewing the playbook
+Reviewing the Template
 ----------------------
 
-First let's take a look at the playbook that is used to accomplish this task. We briefly looked at this playbook during the Ansible overview section, but now we will dive deeper into the applied steps.
+First let's take a look at the template of changes we are going to push to this device. The configuration below is almost entirely standard Junos set commands with a view variables sprinkled in.
 
-**Playbook Review**
+**Template Review**
 
-1.	Define the name of the playbook - Configure basic firewall policies
-	-	This will be displayed and logged as you start to run the playbook
-2.	Define the hosts the playbook should be applied to
-	-	In this case we use the group "**mysrx**" to apply to
-		-	The host list is picked up from either the default Ansible host list in "/etc/ansible/hosts"
-		-	Alternatively when the playbook is run you can specify your own custom inventory
-3.	Connection is defined to as local - Typically when Ansible runs it transports an execution environment over to the host and runs it
-	-	Because this will not work on Junos hosts we use connection defined to local to run the execution environment
-4.	Gather facts
-	-	Ansible will gather local facts about the host such as interfaces and hostnames
-	-	Because this isn't possible on Junos we disable this feature
-5.	Vars - These are the variables that we will use to apply to our tasks
-	-	They can be applied at many different locations for our run
-	-	But to keep everything together we have included the variables into the playbook
-	-	address_entires will be used to generate the address book entries
-	-	fw_policy_info will be used to define our policies
-6.	Tasks - These are the tasks that we will use
-	-	The build phase for the playbook generates the Junos config from the templates
-	-	The apply phase will apply the configuration to the device
-	-	This will be run as two separate commits, but in doing so we can simplify the tasks and see which step fails
+1.	The first two lines demonstrate using _loops_ inside a Jijna template
+	-	Here we say "For every VPN defined for each student in the YAML file, perform the follow actions"
+2.  **Line 4** sets the TCP Maximum Segment Size for IPSec traffic to 1350 to take into account the additional overhead of the VPN headers
+3.	**Line 6 and 7** create an st0 interface that will be used by the Route Based VPN and assigns both an IP address and puts the interface into a new "vpn" zone.
+4.	**Line 9** opens up the firewall to accept "ike" traffic to come in via the external interface on the vSRX.
+5.	**Line 11-13** configures the IPSec Phase 1 VPN requirements between the local vSRX and the Headend VPN run by the Proctor
+	- Note that in Line 11 we are referencing a variable from "Headend" and not our previous interfaces. This allows us to seperate Local vs remote device configuration variables as needed.
+6.	**Line 19-22** configures the IPSec Phase 2 VPN requirements between the local vSRX and the Headend VPN run by the Proctor
+7.	**Line 23-24** close out the Jinja loops from Step 1.
+8. 	**Line 26-30** ensure that all traffic leaving over the st0 tunnel inteface between the Student network and the "Private Network behind the HeadEnd will be NAT'd using the interface egress address
 
-**Playbook**
+**Jinja2 Template**
+
+The template used for this example is found located in **"examples/vpn/vpn.j2"**
+
+```jinja2
+
+ {% for student in students -%}
+  {% for vpn in student.vpns -%}
+set security flow tcp-mss ipsec-vpn mss 1350
+
+set interfaces {{ vpn.tunnel_int }} family inet address {{ vpn.vpn_tunnel_ip }}/30
+set security zones security-zone vpn interfaces {{ vpn.tunnel_int }}
+
+set security zones security-zone untrust host-inbound-traffic system-services ike
+
+set security ike gateway ike-gate address {{ HeadEnd.vpn_ext_ip }}
+set security ike gateway ike-gate external-interface {{ vpn.vpn_ext_interface }}
+set security ike gateway ike-gate ike-policy ike-policy1
+
+set security ike policy ike-policy1 mode main
+set security ike policy ike-policy1 proposal-set standard
+set security ike policy ike-policy1 pre-shared-key ascii-text "{{ vpn.shared_secret }}"
+
+set security ipsec policy vpn-policy1 proposal-set standard
+set security ipsec vpn ike-vpn ike gateway ike-gate
+set security ipsec vpn ike-vpn ike ipsec-policy vpn-policy1
+set security ipsec vpn ike-vpn bind-interface {{ vpn.tunnel_int }}
+  {% endfor -%}
+ {% endfor -%}
+
+set security nat source rule-set vpn_nat_out from zone trust
+set security nat source rule-set vpn_nat_out to zone vpn
+set security nat source rule-set vpn_nat_out rule interface-nat match source-address LocalNet
+set security nat source rule-set vpn_nat_out rule interface-nat match destination-address PrivateNet
+set security nat source rule-set vpn_nat_out rule interface-nat then source-nat interface
+  
+```
+
+**YAML Variables file**
+
+Here is a look at the YAMAL structure used by the above example. One of the keys to good templating is to build sensible and scalable variable structures. Note the following elements in this example:
+
+-	We seperate "HeadEnd" and "students" into seperate structures to allow us to refer to each seperately.
+-	Inside each "student" we include a list of "vpns", which could allow us to configure multiple VPNs with this template.
+
+**You should edit the "student" variables below to match those provided during the registration process.**
+
+** DO WE NEED INSTRUCTIONS FOR USING THE EDITOR???**
+
+The template used for this example is found located in **"examples/vpn/vpn.yml"**
 
 ```yaml
 ---
-- name: Configure student vpn to headend
-  hosts: mysrx
-  connection: local
-  gather_facts: no
-  vars:
-    junos_user: "root"
-    junos_password: "Juniper"
-    build_dir: "/tmp/"
-    mss_entries: [ {'protocol': 'ipsec-vpn', 'mss': '1350'} ]
-    interfaces: [ {'interface': 'st0', 'unit': '1', 'family': 'inet', 'addr_type': 'address', 'addr': '10.255.{{pod_id}}.2/30', 'zone':'vpn', 'hit_protocols': ['ospf', 'bgp'], 'hit_services': ['ping', 'traceroute']} ]
-    ike: [ {'ike_name': 'ike-vpn', 'gateway_ip': '10.10.0.10', 'ext_interface': 'ge-0/0/2.0', 'ike_policy_name': 'ike-policy1', 'ike_policy_mode': 'main', 'ike_policy_proposal': 'standard', 'shared_secret': 'AwesomePassword123'} ]
-    ipsec: [ {'ipsec_policy_name': 'vpn-policy1', 'ipsec_policy_mode': 'standard', 'ipsec_vpn_name': 'ipsec-vpn', 'ike_gateway': 'ike-vpn', 'tunnel_int': 'st0.1'} ]
+HeadEnd:
+  subnets:
+    - "10.10.0.0/18"
+    - "10.11.0.0/18"
+  vpn_ext_interface: ge-0/0/1.0
+  vpn_ext_ip: 10.10.0.10
 
-
-  tasks:
-    - name: set flow tcp-mss
-      template: src=templates/sec_flow_tcp_mss.set.j2 dest={{build_dir}}/sec_flow_tcp_mss.set
-      with_items: mss_entries
-
-    - name: Apply flow tcp-mss
-      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/sec_flow_tcp_mss.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
-
-    - name: Build vpn tunnel interface
-      template: src=templates/interfaces.set.j2 dest={{build_dir}}/interfaces.set
-      with_items: interfaces
-
-    - name: Apply vpn tunnel interface
-      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/interfaces.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
-
-    - name: Build vpn zone 
-      template: src=templates/interfaces_zone.set.j2 dest={{build_dir}}/interfaces_zone.set
-      with_items: interfaces
-
-    - name: Apply vpn zone
-      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/interfaces_zone.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
-
-    - name: Build VPN Phase 1 
-      template: src=templates/vpn_ike.set.j2 dest={{build_dir}}/vpn_ike.set
-      with_items: ike
-
-    - name: Apply VPN Phase 1
-      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/vpn_ike.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
-
-    - name: Build VPN Phase 2
-      template: src=templates/vpn_ipsec.set.j2 dest={{build_dir}}/vpn_ipsec.set
-      with_items: ipsec
-
-    - name: Apply VPN Phase 2
-      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/vpn_ipsec.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
-
+students:
+  - pod-1:
+    shortname: "Pod 1"
+    desc: "This is Student Pod 1"
+    active: true
+    vpns:
+      - vpn:
+        active: true
+        tunnel_int: st0.1
+        int_descr: "Customer A Primary Link"
+        active: true
+        vpn_ext_interface: ge-0/0/2.0
+        vpn_local_ip: 10.10.0.100
+        vpn_tunnel_ip: 10.255.1.2
+        vpn_zone: "vpn"
+        shared_secret: "AwesomePassword123"
 ```
 
-**Address book template**
 
--	The address book template loops through the address entries in the variable
--	It generates one "set" configuration line per loop
--	Here we are generating three lines
+Loading the Templates
+---------------------
 
-```jinja2
-{% for i in address_entries %}
-set security address-book global address {{ i.name }} {{ i.prefix }}
-{% endfor %}
-```
+To allow us start immediately applying templates to devices without writing any Python code, we have prepared a small Python script to handle this for you.
 
-**Output after generation**
-
--	This is the generated output from the template being applied with variables
--	These commands are then committed to Junos
--	If one or more of the entries are already created it will recognize this as "OK"
+The script is called "template-load.py" and is found in the **examples** direcory. The output below shows the arguments accepted by this script.
 
 ```bash
-set security address-book global address LocalNet 172.16.0.0/24
-set security address-book global address PrivateNet 192.168.10.0/24
-set security address-book global address PublicNet 10.10.0.0/24
+vagrant@NetDevOps-Student:/vagrant/examples$ python ./template-load.py
+usage: template-load.py [-h] -b BUNDLE [-u USER] [-d DEVICE] [-p PASSWORD]
+                        [-f {text,set,xml}]
+template-load.py: error: argument -b/--bundle is required
+vagrant@NetDevOps-Student:/vagrant/examples$
 ```
-
-**Policy Template**
-
-This template is a bit more complex. We need to loop through source IPs, Destination IPs, and applications. Each loop through these variables will generate a single line of "set" commands. Creating the template this way allows us to reuse it in the future when we have a larger list of addresses and applications to apply.
-
-```jinja2
-{% for item in fw_policy_info %}
-    {% for i in item.src_ips %}
-set security policies from-zone {{ item.src_zone }} to-zone {{ item.dst_zone }} policy {{ item.policy_name }} match source-address {{ i }}
-    {% endfor %}
-    {% for i in item.dst_ips %}
-set security policies from-zone {{ item.src_zone }} to-zone {{ item.dst_zone }} policy {{ item.policy_name }} match destination-address {{ i }}
-    {% endfor %}
-    {% for i in item.apps %}
-set security policies from-zone {{ item.src_zone }} to-zone {{ item.dst_zone }} policy {{ item.policy_name }} match application {{ i }}
-    {% endfor %}
-set security policies from-zone {{ item.src_zone }} to-zone {{ item.dst_zone }} policy {{ item.policy_name }} then {{ item.action }}
-{% endfor %}
-
-```
-
-**Output after generation**
 
 Once run here are the set commands that will be loaded onto the device. Again if additional elements are added they will be generated into individual set commands.
 
 ```bash
-set security policies from-zone trust to-zone untrust policy Allow_Policy match source-address LocalNet
-set security policies from-zone trust to-zone untrust policy Allow_Policy match destination-address PrivateNet
-set security policies from-zone trust to-zone untrust policy Allow_Policy match application any
-set security policies from-zone trust to-zone untrust policy Allow_Policy then permit
+vagrant@NetDevOps-Student:/vagrant/examples$ python ./template-load.py -u netconf -p test123 -d 172.16.0.1 -b vpn/vpn -f set
+################################################################################
+# 2015-03-30 08:39:28 Connecting to Device (172.16.0.1):                       #
+################################################################################
+
+################################################################################
+# 2015-03-30 08:39:29 Loading Template to Candidate Config:                    #
+################################################################################
+
+################################################################################
+# 2015-03-30 08:39:30 Performing Config Diff:                                  #
+################################################################################
+
+
+[edit interfaces]
++   st0 {
++       unit 1 {
++           family inet {
++               address 10.255.1.2/30;
++           }
++       }
++   }
+[edit security]
++   ike {
++       policy ike-policy1 {
++           mode main;
++           proposal-set standard;
++           pre-shared-key ascii-text "$9$7y-dwJGiPfzDi/tu1yrWLx7bYg4ZjkPaZA0IcvMaZUDi.P5Q3/CmP"; ## SECRET-DATA
++       }
++       gateway ike-gate {
++           ike-policy ike-policy1;
++           address 10.10.0.10;
++           external-interface ge-0/0/2.0;
++       }
++   }
++   ipsec {
++       policy vpn-policy1 {
++           proposal-set standard;
++       }
++       vpn ike-vpn {
++           bind-interface st0.1;
++           ike {
++               gateway ike-gate;
++               ipsec-policy vpn-policy1;
++           }
++       }
++   }
++   flow {
++       tcp-mss {
++           ipsec-vpn {
++               mss 1350;
++           }
++       }
++   }
++   nat {
++       source {
++           rule-set vpn_nat_out {
++               from zone trust;
++               to zone vpn;
++               rule interface-nat {
++                   match {
++                       source-address-name LocalNet;
++                       destination-address-name PrivateNet;
++                   }
++                   then {
++                       source-nat {
++                           interface;
++                       }
++                   }
++               }
++           }
++       }
++   }
+[edit security zones security-zone untrust]
++     host-inbound-traffic {
++         system-services {
++             ike;
++         }
++     }
+[edit security zones]
+     security-zone untrust { ... }
++    security-zone vpn {
++        interfaces {
++            st0.1;
++        }
++    }
+
+################################################################################
+# 2015-03-30 08:39:30 Performing Commit Check:                                 #
+################################################################################
+
+True
+Proceed with Commit? [y | N]: y
+################################################################################
+# 2015-03-30 08:39:33 Performing Config Commit:                                #
+################################################################################
+
+################################################################################
+# 2015-03-30 08:39:33 Disconnecting from Device (172.16.0.1):                  #
+################################################################################
+
+vagrant@NetDevOps-Student:/vagrant/examples$
 ```
 
-Running the playbook
-====================
+In the above example you see from the output logs that the script went through the following steps:
 
-To run the playbook you must use the "ansible-playbook" command. We must specify the inventory file and the playbook to apply. The templates will be automatically loaded from the playbook. Since [cowsay](http://en.wikipedia.org/wiki/Cowsay) is installed it will also add the comical cow for our enjoyment. If you dislike our bovine friend then you can simply remove cowsay from your running host.
+-	Establish a NETCONF connection to the vSRX
+-	Load the template
+-	Perform a "show | compare" and print the output to screen
+-	Ensure that the configuration is a valid candidate config
+-	Ask you if you wish to commit the change
+	-	If you say "Y", the configuration is applied
+ 	- If you say "N", the configuration is left as a candidate config
+-	Lastly, close out the NETCONF session to the vSRX and cleanup.
 
-**Playbook Command**
+**Validating the template**
 
-Ensure before running the command you are in the "**ansible**" directory.
+Now connect to your vSRX instance from your NetDevOpsVM and validate the change.
 
-```bash
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ansible-playbook -i inventory.yml playbooks/basic_firewall_policies.yml
-```
-
-**Playbook Run Example**
-
-Once run the output should look like the following
-
-```bash
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ansible-playbook -i inventory.yml playbooks/basic_firewall_policies.yml
- __________________________________________
-< PLAY [Configure basic firewall policies] >
- ------------------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-
-
- __________________________________
-< TASK: Build address book entries >
- ----------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-
-
-changed: [172.16.0.1] => (item={'prefix': '172.16.0.0/24', 'name': 'LocalNet'})
-changed: [172.16.0.1] => (item={'prefix': '192.168.10.0/24', 'name': 'PrivateNet'})
-changed: [172.16.0.1] => (item={'prefix': '10.10.0.0/24', 'name': 'PublicNet'})
- __________________________________
-< TASK: Apply address book entries >
- ----------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-
-
-changed: [172.16.0.1]
- _______________________________________________
-< TASK: Build firewall policies config template >
- -----------------------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-
-
-changed: [172.16.0.1] => (item={'src_zone': 'trust', 'dst_zone': 'untrust', 'src_ips': ['LocalNet'], 'action': 'permit', 'dst_ips': ['PrivateNet'], 'apps': ['any'], 'policy_name': 'Allow_Policy'})
- _______________________________
-< TASK: Apply firewall policies >
- -------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-
-
-changed: [172.16.0.1]
- ____________
-< PLAY RECAP >
- ------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-
-
-172.16.0.1                 : ok=4    changed=4    unreachable=0    failed=0  
-```
-
-**Validating the playbook run**
-
-Now connect to your vSRX instance from your NetDevOpsVM and validate the change
+First, lets verify our Phase 1 configuration:
 
 ```bash
 vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ssh root@172.16.0.1
 Password:
 --- JUNOS 12.1X47-D20.7 built 2015-03-03 21:53:50 UTC
-croot@NetDevOps-SRX01% cli
-root@NetDevOps-SRX01> show configuration security address-book
-global {
-    address LocalNet 172.16.0.0/24;
-    address PrivateNet 192.168.10.0/24;
-    address PublicNet 10.10.0.0/24;
+root@NetDevOps-SRX01% cli
+root@NetDevOps-SRX01> show configuration security ike
+policy ike-policy1 {
+    mode main;
+    proposal-set standard;
+    pre-shared-key ascii-text "$9$7y-dwJGiPfzDi/tu1yrWLx7bYg4ZjkPaZA0IcvMaZUDi.P5Q3/CmP"; ## SECRET-DATA
 }
+gateway ike-gate {
+    ike-policy ike-policy1;
+    address 10.10.0.10;
+    external-interface ge-0/0/2.0;
+}
+```
 
-root@NetDevOps-SRX01> show configuration security policies
-from-zone trust to-zone trust {
-    policy default-permit {
-        match {
-            source-address any;
-            destination-address any;
-            application any;
-        }
-        then {
-            permit;
-        }
+Second, lets verify our Phase 2 configuration:
+
+```bash
+root@NetDevOps-SRX01> show configuration security ipsec
+policy vpn-policy1 {
+    proposal-set standard;
+}
+vpn ike-vpn {
+    bind-interface st0.1;
+    ike {
+        gateway ike-gate;
+        ipsec-policy vpn-policy1;
     }
 }
-from-zone trust to-zone untrust {
-    policy default-permit {
-        match {
-            source-address any;
-            destination-address any;
-            application any;
-        }
-        then {
-            permit;
-        }
-    }
-    policy Allow_Policy {
-        match {
-            source-address LocalNet;
-            destination-address PrivateNet;
-            application any;
-        }
-        then {
-            permit {
-                application-services {  
-                    application-firewall {
-                        rule-set ruleset1;
-                    }
+```
+
+Lastly, lets check that we have the correct NAT configuration:
+
+```bash
+root@NetDevOps-SRX01> show configuration security nat
+source {
+    rule-set vpn_nat_out {
+        from zone trust;
+        to zone vpn;
+        rule interface-nat {
+            match {
+                source-address-name LocalNet;
+                destination-address-name PrivateNet;
+            }
+            then {
+                source-nat {
+                    interface;
                 }
             }
         }
     }
 }
-from-zone untrust to-zone trust {
-    policy default-deny {
-        match {
-            source-address any;
-            destination-address any;
-            application any;
-        }
-        then {
-            deny;
-        }
-    }
-}
 
-root@NetDevOps-SRX01> exit
+root@NetDevOps-SRX01>
 
-root@NetDevOps-SRX01% exit
-logout
-Connection to 172.16.0.1 closed.
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$
 ```
