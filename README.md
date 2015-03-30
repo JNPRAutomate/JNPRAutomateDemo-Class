@@ -53,4 +53,4 @@ TODO
 
 **Tools**
 
-1.	Headend VMs @kwbales @robwc
+1.	Headend VMs ~~@kwbales~~ @robwc
