@@ -110,6 +110,15 @@ Diff:
 [edit security zones security-zone trust interfaces]
       ge-0/0/1.0 { ... }
 +     lo0.0;
+[edit security zones security-zone vpn]
++     host-inbound-traffic {
++         system-services {
++             all;
++         }
++         protocols {
++             ospf;
++         }
++     }
 
 vagrant@NetDevOps-Student:/vagrant/examples$
 ```
