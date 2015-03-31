@@ -4,7 +4,7 @@ HeadEnd:
     - "10.10.0.0/18"
     - "10.11.0.0/18"
   vpn_ext_interface: ge-0/0/1.0
-  vpn_ext_ip: 10.10.0.10
+  vpn_ext_ip: 10.10.0.5
 
 students:
   - pod-1:

@@ -12,7 +12,7 @@
       {'interface': 'st0', 'unit': '1', 'family': 'inet', 'addr_type': 'address', 'addr': '10.255.{{pod_id}}.2/30', 'zone':'vpn', 'hit_protocols': ['ospf', 'bgp'], 'hit_services': ['ping', 'traceroute']},
       {'interface': 'ge-0/0/2', 'unit': '0', 'family': 'inet', 'addr_type': 'dhcp', 'zone':'untrust', 'hit_services': ['ike']}
     ]
-    ike: [ {'ike_name': 'ike-vpn', 'gateway_ip': '10.10.0.10', 'ext_interface': 'ge-0/0/2.0', 'ike_policy_name': 'ike-policy1', 'ike_policy_mode': 'main', 'ike_policy_proposal': 'standard', 'shared_secret': 'AwesomePassword123'} ]
+    ike: [ {'ike_name': 'ike-vpn', 'gateway_ip': '10.10.0.5', 'ext_interface': 'ge-0/0/2.0', 'ike_policy_name': 'ike-policy1', 'ike_policy_mode': 'main', 'ike_policy_proposal': 'standard', 'shared_secret': 'AwesomePassword123'} ]
     ipsec: [ {'ipsec_policy_name': 'vpn-policy1', 'ipsec_policy_mode': 'standard', 'ipsec_vpn_name': 'ipsec-vpn', 'ike_gateway': 'ike-vpn', 'tunnel_int': 'st0.1'} ]
 
 
@@ -31,14 +31,14 @@
     - name: Apply vpn tunnel interface
       junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/interfaces.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
 
-    - name: Build vpn zone 
+    - name: Build vpn zone
       template: src=templates/interfaces_zone.set.j2 dest={{build_dir}}/interfaces_zone.set
       with_items: interfaces
 
     - name: Apply vpn zone
       junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/interfaces_zone.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
 
-    - name: Build VPN Phase 1 
+    - name: Build VPN Phase 1
       template: src=templates/vpn_ike.set.j2 dest={{build_dir}}/vpn_ike.set
       with_items: ike
 
