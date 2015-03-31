@@ -48,9 +48,9 @@ TODO
 2.	~~dynamic routing @kwbales - needs docs~~
 3.	recovering the lab @robwc - via ansible TBD - completed last
 4.	~~vpn connection to headend @kwbales~~
-5.	using pyezlibrary @kwbales - NEED TO FINISH TABLES AND VIEWS
-6.	registering your host @kwbales - needs docs and registry
+5.	~~using pyezlibrary @kwbales - NEED TO FINISH TABLES AND VIEWS~~
+6.	registering your host @robwc - needs docs and registry
 
 **Tools**
 
-1.	Headend VMs @robwc - Created via proctor/Vagrantfile
+1.	Headend VMs ~~@kwbales~~ @robwc

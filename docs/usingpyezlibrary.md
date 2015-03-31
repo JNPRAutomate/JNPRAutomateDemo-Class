@@ -231,71 +231,61 @@ As someone familiar with Junos you have a distinct advantage over the average pr
 
 ```bash
 
-# Command show chassis hardware
-# RPC - get-chassis-inventory
-# PyEZ - get_chassis_inventory
+# Command "show interfaces terse ge-0/0/0"
+# RPC - get-interface-information
+# PyEZ - get_interface_information
 
 # Command on the CLI
-root@12.1X47-D20.7> show chassis hardware
-Hardware inventory:
-Item             Version  Part number  Serial number     Description
-Chassis                                c2c8311556a6      FIREFLY-PERIMETER
-Midplane
-System IO
-Routing Engine                                           FIREFLY-PERIMETER RE
-FPC 0                                                    Virtual FPC
-  PIC 0                                                  Virtual GE
-Power Supply 0  
+root@NetDevOps-SRX01> show interfaces terse ge-0/0/0
+Interface               Admin Link Proto    Local                 Remote
+ge-0/0/0                up    up
+ge-0/0/0.0              up    up   inet     10.0.2.15/24
 
-# Show XML output fromt he CLI
-root@12.1X47-D20.7> show chassis hardware | display xml
+root@NetDevOps-SRX01>
+
+# Show XML output from the CLI
+root@NetDevOps-SRX01> show interfaces terse ge-0/0/0 | display xml
 <rpc-reply xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos">
-    <chassis-inventory xmlns="http://xml.juniper.net/junos/12.1X47/junos-chassis">
-        <chassis junos:style="inventory">
-            <name>Chassis</name>
-            <serial-number>c2c8311556a6</serial-number>
-            <description>FIREFLY-PERIMETER</description>
-            <chassis-module>
-                <name>Midplane</name>
-            </chassis-module>
-            <chassis-module>
-                <name>System IO</name>
-            </chassis-module>
-            <chassis-module>
-                <name>Routing Engine</name>
-                <description>FIREFLY-PERIMETER RE</description>
-            </chassis-module>
-            <chassis-module>
-                <name>FPC 0</name>
-                <description>Virtual FPC</description>
-                <chassis-sub-module>
-                    <name>PIC 0</name>
-                    <description>Virtual GE</description>
-                </chassis-sub-module>
-            </chassis-module>
-            <chassis-module>
-                <name>Power Supply 0</name>
-            </chassis-module>
-        </chassis>
-    </chassis-inventory>
+    <interface-information xmlns="http://xml.juniper.net/junos/12.1X47/junos-interface" junos:style="terse">
+        <physical-interface>
+            <name>ge-0/0/0</name>
+            <admin-status>up</admin-status>
+            <oper-status>up</oper-status>
+            <logical-interface>
+                <name>ge-0/0/0.0</name>
+                <admin-status>up</admin-status>
+                <oper-status>up</oper-status>
+                <filter-information>
+                </filter-information>
+                <address-family>
+                    <address-family-name>inet</address-family-name>
+                    <interface-address>
+                        <ifa-local junos:emit="emit">10.0.2.15/24</ifa-local>
+                    </interface-address>
+                </address-family>
+            </logical-interface>
+        </physical-interface>
+    </interface-information>
     <cli>
         <banner></banner>
     </cli>
 </rpc-reply>
 
 #show XML RPC from the command line
-root@12.1X47-D20.7> show chassis hardware | display xml rpc
+root@NetDevOps-SRX01> show interfaces terse ge-0/0/0 | display xml rpc
 <rpc-reply xmlns:junos="http://xml.juniper.net/junos/12.1X47/junos">
     <rpc>
-        <get-chassis-inventory>
-        </get-chassis-inventory>
+        <get-interface-information>
+                <terse/>
+                <interface-name>ge-0/0/0</interface-name>
+        </get-interface-information>
     </rpc>
     <cli>
         <banner></banner>
     </cli>
 </rpc-reply>
 
-root@12.1X47-D20.7>
+root@NetDevOps-SRX01>
 
 ```
 
@@ -350,47 +340,96 @@ junos_dev.close()
 Tables and Views
 ----------------
 
-//TODO: Redo this!
+As we have seen previously, Junos maintains all output data in an XML structure that allows for easy processing. While we could use standard tools like Regular Expressions, or more likely the very powerful XPath tools, for translating these XML elements into Python variables, we have simplified this process. 
 
-As discussed programming heavily relies on data structures. The challenge that we have when working with Junos is dealing with the XML response from an RPC call. The call returns a Python ElementTree or XML representation in Python. This consists of all of the nodes, children, parents, and attributes. While XML is an excellent language to use for defining data it can be a big pain in the butt to parse and manage if you are not familiar with how to do this. Luckily in PyEZ we have a capability called tables. This allows us to define the data structure in a YAML format, yet another markup language, and then load the result into it. The benefit here is that you don't have to deal with the XML parsing and get straight to the result that you want.
+For the many use cases for collecitng data from a Junos device we follow the same process:
 
-**Table example**
+1.	Send RPC to device
+2.	Receive XML
+3.	Parse XML and loop through data
 
-```python
-from jnpr.junos import Device
-from jnpr.junos.utils.config import Config
-from jnpr.junos.factory import loadyaml
-from jnpr.junos.factory.factory_loader import FactoryLoader
+To parse this data from XML nested information, into useful Python data objects, the Juniper team created two primary components:
 
-import yaml
+-	**Tables:** A table essentially represents all the data collected for a certain RPC request, sorted and keyed on a particular set of values and presented to the user as a collection of native Python data structures. The end user only needs to describe the data sets in YAML format without knowing the Python objects below.
+	-	Think about Tables as defining the data set and the rows of a table
+-	**Views:** A view is applied to a table to create a custom combination of the data in the table. As such, a combination of table and view definitions can be created with just a handful of lines of code yet scale infinitely.
+	-	Think about Views as defining the columns of a table
 
-arp_table = '''---
-ArpTable:
-  rpc: get-arp-table-information
-  item: arp-table-entry
-  key: mac-address
-  view: ArpView
+These two features are very powerful, but are somewhat abstract concepts. To better demonstrate the way tables and views work together it’s best to show you a real world example.
 
-ArpView:
-  fields:
-    mac_address: mac-address
-    ip_address: ip-address
-    interface_name: interface-name
-'''
+In this example, we’re going to build on the XML examples shown previously in the “RPC Mapping Examples” section, and show how we can use PyEZ to programmatically collect details about port states. This might feel like a simplistic use case, but this is actually the script that the author first wrote when starting out with the PyEZ library to solve a real world “on the job” customer problem.
 
-#first we instantiate an instance of the device
-junos_dev = Device(host="172.16.0.1", user="root", password="Juniper")
-#now we can connect to the device
-junos_dev.open()
+The first thing we need to do is map the <rpc> for the “show interface” command to a table structure. A table takes all of the XML output and collects into an ordered fashion. Table and View definitions are written in the YAML  format, which is an easy to read format that is also programming language independent. The PyEZ library stores these definitions in the “lib/jnpr/junos/op/” directory in the folder where the PyEZ library is stored.
 
-#Bind a config element to the device
-junos_dev.bind(cu=Config)
+First, lets have a look at the following table definition that ships with the PyEZ library.
 
-tview = FactoryLoader().load(yaml.load(arp_table))
-
-tview["ArpView"](tview["ArpTable"],junos_dev.rpc.get_arp_table_information("no-resolve"))
-
+**PhyPort Table Definition:**
+```yaml
+PhyPortTable:
+  rpc: get-interface-information
+  args:
+    interface_name: '[fgx]e*'
+  args_key: interface_name
+  item: physical-interface
+  view: PhyPortView
 ```
+
+If you recall from our investigations in the “DMI and the NETCONF Protocol” the RPC command associated with with “show interface” command is <get-interface-information>. The second line of the output above requests that this table definition should map to the XML output from that <rpc-reply>. We then filter down our interface list to just Fast Ethernet, Gigabit Ethernet and 10 Gigabit Ethernet interfaces (“[fge]e*”). The “item” section creates the equivalent of the table row in this data structure. By defining “physical-interface” as the “item” each interface from the XML output will be represented separately in the Table Structure.
+
+The last line in the output above is used to feed this table into a “view”. The view definition below takes each of the XML tags from the <rpc-reply> and maps them to dictionary keys on the left. These keys are the equivalent of columns in this data structure.
+
+**PhyPort View Definition:**
+```yaml
+PhyPortView:
+  fields:
+    oper : oper-status
+    admin : admin-status
+    description: description
+    mtu: { mtu : int }
+    link_mode: link-mode
+    speed: speed
+    macaddr: current-physical-address
+    flapped: interface-flapped
+```
+
+With these Tables and Views defined, we can now write some very simple Python code to connect to our switch, and collect interface statistics uses these definitions. The example file below is a very simple script designed to loop through all the Ethernet interfaces on the switch and print out a “CSV formatted” output of the port statistics on the switch.
+
+**port-report.py:**
+```python
+from jnpr.junos.op.phyport import *
+from jnpr.junos import Device
+ 
+dev = Device( user='netconf-test', host='lab-switch', password='lab123' )
+dev.open()
+ 
+ports = PhyPortTable(dev).get()
+print "Port,Status,Flapped" #Print Header for CSV
+ 
+for port in ports:
+        print("%s,%s,%s" % (port.key, port.oper, port.flapped))
+```
+
+The Python code show here is quite simple, and we have only introduced three new components from our helloEZ.py example. 
+
+-	In the first line we load the library module for the PhyPort table and view. This is required to ensure that our script knows where to find our Table and View definitions.
+-	After “dev.open()” we call our module to with the “PhyPortTable(dev).get()”. We store the result of this function in the variable “ports”. Once assigned, this variable now contains the result of the Table+View combination.
+	-	This is represented in Python as a List structure, where each item is a Python Dictionary (Collection of Key/Value pairs).
+-	Now that we have the data from our switch represented in simple iterable Python objects we can process them using standard Python tools. To present the output to the use, we then loop through our table printing out the key (which happens to be our interface name), the Operational State of the port, and the last time the port changed state.
+
+When we run this script we get the following output:
+
+```bash
+vagrant@NetDevOps-Student:/vagrant/examples$ python ./port-report.py
+Port,Status,Flapped
+ge-0/0/0,up,2015-03-30 21:30:40 UTC (02:05:54 ago)
+ge-0/0/1,up,2015-03-30 21:30:40 UTC (02:05:54 ago)
+ge-0/0/2,up,2015-03-30 21:30:40 UTC (02:05:54 ago)
+vagrant@NetDevOps-Student:/vagrant/examples$
+```
+
+This example output shows that we now have a simple Comma Delimited list containing the port name, current operational status and how long since the port changed status for each port on our switch. If you wanted to earn bonus points with your boss, it is trivial to take the CSV output and put pretty formatting around it in Excel to present management style reports. Extra bonus points if you create the reports using all Python!
+
+This was just a simple example of automating the operational tasks on a Junos platform, but by combining the power of the Junos DMI system with the NETCONF protocol and the Tables and Views structures from the PyEZ library, we can easily automate many of our troubleshooting and data collection tasks.
 
 Templating with Jinja2
 ----------------------
