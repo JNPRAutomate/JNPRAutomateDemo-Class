@@ -1,0 +1,16 @@
+---
+- name: Add vpn ike gateway
+  hosts: mysrx
+  connection: local
+  gather_facts: no
+  vars:
+    junos_user: "root"
+    junos_password: "Juniper"
+    build_dir: "/tmp/"
+
+  tasks:
+    - name: Build gateway templates
+      template: src=templates/add_vpn_gateway.set.j2 dest={{build_dir}}/add_vpn_gateway.set
+
+    - name: Apply address book entries
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/add_vpn_gateway.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
