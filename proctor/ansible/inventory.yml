@@ -1,11 +1,11 @@
-[vpn-headend]
+[vpn_headend]
 10.10.0.5
 
-[public-server]
+[public_server]
 10.10.0.10
 
-[private-server]
+[private_server]
 192.168.10.10
 
-[student-srxs]
+[student_srxs]
 10.10.0.[11:254]

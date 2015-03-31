@@ -1,6 +1,6 @@
 ---
 - name: Add vpn ike gateway
-  hosts: mysrx
+  hosts: vpn_headend
   connection: local
   gather_facts: no
   vars:
