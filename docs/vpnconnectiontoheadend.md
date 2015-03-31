@@ -74,29 +74,31 @@ The template used for this example is found located in **"examples/vpn/vpn.yml"*
 
 ```yaml
 ---
+---
 HeadEnd:
   subnets:
     - "10.10.0.0/18"
     - "10.11.0.0/18"
   vpn_ext_interface: ge-0/0/1.0
-  vpn_ext_ip: 10.10.0.10
+  vpn_ext_ip: 10.10.0.5
 
 students:
   - pod-1:
-    shortname: "Pod 1"
-    desc: "This is Student Pod 1"
+    shortname: "Pod 1"                           # <--- Change this Line to Match your pod number
+    desc: "This is Student Pod 1"                # <--- Change this Line to Match your pod number
     active: true
     vpns:
       - vpn:
         active: true
-        tunnel_int: st0.1
+        tunnel_int: st0.1                        # <--- Change this Line to Match your pod number
         int_descr: "Customer A Primary Link"
         active: true
         vpn_ext_interface: ge-0/0/2.0
         vpn_local_ip: 10.10.0.100
-        vpn_tunnel_ip: 10.255.1.2
+        vpn_tunnel_ip: 10.255.1.2                # <--- Change this Line to Match your pod number
         vpn_zone: "vpn"
         shared_secret: "AwesomePassword123"
+
 ```
 
 
