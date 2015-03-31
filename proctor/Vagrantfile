@@ -12,9 +12,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "ndo_public", primary: true do |ndo|
     ndo.vm.box = "juniper/netdevops-ubuntu1404-headless"
     ndo.vm.box_version = ">= 0.2.6"
-    ndo.vm.hostname = "NetDevOps-Proctor"
+    ndo.vm.hostname = "NetDevOps-Public"
     ndo.vm.network "public_network",
-                   ip: "10.10.0.10" #, bridge: 'en1: Wi-Fi (AirPort)'
+                   ip: "10.10.0.10"
     ndo.vm.network "private_network",
                   ip: "192.168.10.128",
                   virtualbox__intnet: "NetDevOps-Private"
@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "ndo_private", primary: true do |ndo|
     ndo.vm.box = "juniper/netdevops-ubuntu1404-headless"
     ndo.vm.box_version = ">= 0.2.6"
-    ndo.vm.hostname = "NetDevOps-Proctor"
+    ndo.vm.hostname = "NetDevOps-Private"
     ndo.vm.network "private_network",
                    ip: "192.168.10.10",
                    virtualbox__intnet: "NetDevOps-Private"
@@ -54,7 +54,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     srx.vm.network "public_network",
                    ip: "10.10.0.5",
-                   nic_type: 'virtio' #, bridge: 'en1: Wi-Fi (AirPort)'
+                   nic_type: 'virtio'
     srx.vm.network "private_network",
                    ip: "192.168.10.1",
                    virtualbox__intnet: "NetDevOps-Private",
