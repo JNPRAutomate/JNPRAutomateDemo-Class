@@ -1,11 +1,14 @@
 [vpn_headend]
-10.10.0.5
+10.10.0.5 ansible_python_interpreter=python
+
 
 [public_server]
-10.10.0.10
+10.10.0.10 ansible_python_interpreter=python
+
 
 [private_server]
-192.168.10.10
+192.168.10.10 ansible_python_interpreter=python
+
 
 [student_srxs]
-10.10.0.[11:254]
+10.10.0.[11:254] ansible_python_interpreter=python
