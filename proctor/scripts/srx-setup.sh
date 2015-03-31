@@ -32,6 +32,5 @@ set security policies from-zone vpn to-zone trust policy AllowVPN then permit
 set security ike policy ike-policy1 mode main
 set security ike policy ike-policy1 proposal-set standard
 set security ike policy ike-policy1 pre-shared-key ascii-text "AwesomePassword123"
-set security ipsec vpn vpn-policy1 ike ipsec-policy vpn-policy1
 set security ipsec policy vpn-policy1 proposal-set standard
 commit and-quit
