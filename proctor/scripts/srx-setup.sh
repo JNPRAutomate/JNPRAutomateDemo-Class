@@ -1,4 +1,5 @@
 configure
+delete system services web-management
 delete security policies from-zone trust to-zone trust
 delete security policies from-zone untrust to-zone trust
 delete security zones security-zone untrust screen
@@ -10,6 +11,8 @@ delete security zones security-zone untrust
 set security zones security-zone untrust interfaces ge-0/0/1.0
 set security zones security-zone untrust host-inbound-traffic system-services ping
 set security zones security-zone untrust host-inbound-traffic system-services traceroute
+set security zones security-zone untrust host-inbound-traffic system-services ssh
+set security zones security-zone untrust host-inbound-traffic system-services netconf
 set security zones security-zone trust interfaces ge-0/0/2.0
 set security zones security-zone trust host-inbound-traffic system-services ping
 set security zones security-zone trust host-inbound-traffic system-services traceroute
