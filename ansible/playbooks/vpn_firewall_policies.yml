@@ -16,7 +16,7 @@
       with_items: address_entries
 
     - name: Apply address book entries
-      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/fw_address_book.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/fw_address_book_global.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
 
 
     - name: Build firewall policies config template

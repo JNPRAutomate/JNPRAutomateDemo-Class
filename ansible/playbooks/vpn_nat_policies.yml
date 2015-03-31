@@ -1,0 +1,17 @@
+---
+- name: Configure VPN firewall policies
+  hosts: mysrx
+  connection: local
+  gather_facts: no
+  vars:
+    junos_user: "root"
+    junos_password: "Juniper"
+    build_dir: "/tmp/"
+    nat_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'vpn','src_ips':['NetDevOpsVM'],'dst_ips':['PrivateNet'],'action':'permit','apps':['junos-http','junos-ping','junos-ssh','junos-https']}]
+
+    - name: Build NAT policies
+      template: src=templates/nat_policy.set.j2 dest={{build_dir}}/nat_policy.set
+      with_items: nat_policy_info
+
+    - name: Apply NAT policies
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/nat_policy.set overwrite=no logfile=logs/{{ inventory_hostname }}.log

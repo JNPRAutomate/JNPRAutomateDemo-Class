@@ -3,4 +3,7 @@ set system login user netconf class super-user authentication encrypted-password
 set security zones security-zone trust interfaces ge-0/0/1.0
 set security zones security-zone trust host-inbound-traffic system-services all
 set security zones security-zone trust host-inbound-traffic protocols all
+set security zones security-zone untrust interfaces ge-0/0/2.0
+set security zones security-zone untrust host-inbound-traffic system-services all
+set security zones security-zone untrust host-inbound-traffic protocols all
 commit and-quit

@@ -40,16 +40,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     srx.vm.network "private_network",
                    ip: "172.16.0.1",
                    virtualbox__intnet: "NetDevOps-StudentInternal"
-
-    srx.vm.network "private_network",
-                   ip: "10.255.255.10",
-                   virtualbox__intnet: "NetDevOps-StudentLAN"
+    srx.vm.network "public_network",
+                   ip: "10.10.0.240"
 
     srx.vm.synced_folder "", "/vagrant", disabled: true
 
     srx.vm.provision "file", source: "scripts/srx-setup.sh", destination: "/tmp/srx-setup.sh"
     srx.vm.provision :host_shell do |host_shell|
-        # set routes for google services or 0/0
       host_shell.inline = 'vagrant ssh srx -c "/usr/sbin/cli -f /tmp/srx-setup.sh"'
     end
   end
