@@ -225,7 +225,7 @@ In Junos there are potentially thousands of different RPC calls that the user ca
 Mapping RPCs to Methods - The method to the madness
 ---------------------------------------------------
 
-As someone familiar with Junos you have a distinct advantage over the average programmer. As you know, or at least know how, to find the RPCs that you are looking to call. There is a mapping between between the RPC calls. If you know the command or can figure it out it is simple to learn the correct RPC call. You can use the format of "show chassis hardware | display xml rpc". This will show you what you need to use to call the command in PyEZ.
+As someone familiar with Junos you have a distinct advantage over the average programmer. As you know, or at least know how, to find the RPCs that you are looking to call. There is a mapping between between the RPC calls. If you know the command or can figure it out it is simple to learn the correct RPC call. You can use the format of "show interfaces terse ge-0/0/0 | display xml rpc". This will show you what you need to use to call the command in PyEZ.
 
 **RPC Mapping Examples**
 
