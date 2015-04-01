@@ -333,3 +333,10 @@ logout
 Connection to 172.16.0.1 closed.
 vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$
 ```
+
+Testing
+=======
+
+```
+curl http://10.10.0.10:8080 -X GET -H "Host: google.com" 
+```

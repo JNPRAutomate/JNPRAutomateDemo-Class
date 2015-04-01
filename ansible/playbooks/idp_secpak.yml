@@ -10,4 +10,4 @@
 
   tasks:
       - name: Install package
-        script: ../tools/idpsecpack.py --user {{ junos_user }} --password {{ junos_password}} --host {{ inventory_hostname }}
+        script: ../../tools/idpsecpack.py --user {{ junos_user }} --password {{ junos_password}} --host {{ inventory_hostname }}
