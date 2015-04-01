@@ -9,7 +9,7 @@ require "vagrant-junos"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "ndo", primary: true do |ndo|
-    ndo.vm.box = "juniper/netdevops-ubuntu1404"
+    ndo.vm.box = "juniper/netdevops-ubuntu1404-headless"
     ndo.vm.box_version = ">= 0.2.6"
     ndo.vm.hostname = "NetDevOps-Student"
     ndo.vm.network "private_network",
@@ -39,9 +39,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     srx.vm.network "private_network",
                    ip: "172.16.0.1",
+                   nic_type: 'virtio',
                    virtualbox__intnet: "NetDevOps-StudentInternal"
     srx.vm.network "public_network",
-                   ip: "10.10.0.240"
+                   nic_type: 'virtio'
 
     srx.vm.synced_folder "", "/vagrant", disabled: true
 
