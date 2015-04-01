@@ -1,0 +1,18 @@
+---
+- name: Fetch IDP license
+  hosts: mysrx
+  connection: local
+  gather_facts: no
+  vars:
+    junos_user: "root"
+    junos_password: "Juniper"
+    build_dir: "/tmp/"
+    idp_license_url: "http://10.10.0.10/license/"
+    idp_license_files: ['utm.txt','appsecure.txt']
+  tasks:
+      - name: Build fetch commands
+        template: src=templates/idp_license_fetch.set.j2 dest={{build_dir}}/idp_license_fetch.set
+        with_items: idp_license_files
+
+      - name: Fetch licenses
+        junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/idp_license_fetch.set overwrite=no logfile=logs/{{ inventory_hostname }}.log

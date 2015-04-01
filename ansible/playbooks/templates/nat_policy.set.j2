@@ -1,5 +1,0 @@
-set security nat source rule-set vpn_nat_out from zone trust
-set security nat source rule-set vpn_nat_out to zone vpn
-set security nat source rule-set vpn_nat_out rule interface-nat match source-address-name LocalNet
-set security nat source rule-set vpn_nat_out rule interface-nat match destination-address-name PrivateNet
-set security nat source rule-set vpn_nat_out rule interface-nat then source-nat interface

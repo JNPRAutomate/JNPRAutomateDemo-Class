@@ -1,0 +1,20 @@
+---
+- name: Install IDP Security Package
+  hosts: mysrx
+  connection: local
+  gather_facts: no
+  vars:
+    junos_user: "root"
+    junos_password: "Juniper"
+    build_dir: "/tmp/"
+    install_templates: True
+
+  tasks:
+      - name: Build Install Commands
+        template: src=templates/idp_secpack_install.set.j2 dest={{build_dir}}/idp_secpack_install.set
+
+      - name: Install package
+        junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/idp_secpack_install.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+
+      - name: Wait for Install
+        pause: seconds=30

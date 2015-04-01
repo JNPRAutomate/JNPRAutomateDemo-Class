@@ -1,0 +1,20 @@
+---
+- name: Download IDP Templates Package
+  hosts: mysrx
+  connection: local
+  gather_facts: no
+  vars:
+    junos_user: "root"
+    junos_password: "Juniper"
+    build_dir: "/tmp/"
+    download_templates: True
+
+  tasks:
+      - name: Build Templates Commands
+        template: src=templates/idp_secpack_download.set.j2 dest={{build_dir}}/idp_secpack_download.set
+
+      - name: Download Templates package
+        junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/idp_secpack_download.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+
+      - name: Wait for Templates download
+        pause: seconds=30

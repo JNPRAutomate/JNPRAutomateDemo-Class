@@ -1,5 +1,5 @@
 ---
-- name: Configure VPN firewall policies
+- name: Configure VPN NAT policies
   hosts: mysrx
   connection: local
   gather_facts: no
@@ -7,11 +7,20 @@
     junos_user: "root"
     junos_password: "Juniper"
     build_dir: "/tmp/"
-    nat_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'vpn','src_ips':['NetDevOpsVM'],'dst_ips':['PrivateNet'],'action':'permit','apps':['junos-http','junos-ping','junos-ssh','junos-https']}]
+    address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/24'} ]
+    nat_policy_info: [{'rule_set':'rs1', 'src_zone':'trust', 'dst_zone':'vpn', 'rules':[{'name':'rule1','src_ips':['LocalNet'],'dst_ips':['0.0.0.0/0'], 'interface':True}]}]
+
+  tasks:
+    - name: Build address book entries
+      template: src=templates/fw_address_book_global.set.j2 dest={{build_dir}}/fw_address_book_global.set
+      with_items: address_entries
+
+    - name: Apply address book entries
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/fw_address_book_global.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
 
     - name: Build NAT policies
-      template: src=templates/nat_policy.set.j2 dest={{build_dir}}/nat_policy.set
+      template: src=templates/nat_src_policy.set.j2 dest={{build_dir}}/nat_src_policy.set
       with_items: nat_policy_info
 
     - name: Apply NAT policies
-      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/nat_policy.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+      junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/nat_src_policy.set overwrite=no logfile=logs/{{ inventory_hostname }}.log

@@ -1,0 +1,5 @@
+{% if install_templates is defined %}
+request security idp security-package install policy-templates
+{% else %}
+request security idp security-package install
+{% endif %}
