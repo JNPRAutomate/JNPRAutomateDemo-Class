@@ -13,7 +13,7 @@
 - include: vpn_config.yml
 - include: vpn_ospf_config.yml
 - include: vpn_firewall_policies.yml
-- include: idp_license_fetch.yml
+- include: idp_license.yml
 - include: idp_secpak.yml
 - include: appfw_policies.yml
 - include: idp_policies.yml
