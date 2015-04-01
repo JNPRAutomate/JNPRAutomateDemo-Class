@@ -39,4 +39,4 @@ You hear a lot about Puppet, Chef, Ansible, and Salt, but [Ansible](http://www.a
 - easy operation with CLI command suite Swiss army knife tools, `ansible` and `ansible-playbook`
 - easy module installation with `ansible-galaxy`
 
-Did we mention it's easy?  Ansible will make your day-to-day job easier, with immeidately beneficial network automation prowess. After checking out Ansible, you'll be that much more prepared to learn Puppet, Chef, and Salt, and see if they're a better fit for you
+Did we mention it's easy?  Ansible will make your day-to-day job easier, with immediately beneficial network automation prowess. After checking out Ansible, you'll be that much more prepared to learn Puppet, Chef, and Salt and see if they're a better fit for you.

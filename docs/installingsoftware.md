@@ -25,7 +25,7 @@ Install this executable on your operating system of choice just as you would any
 
 ### Vagrant Plugins
 
-Newer versions of the vSRX boxes require two plugins, namely:
+Newer versions of the vSRX boxes require two plugins, namely: TODO explain what file to grab from the link and how to install "better"
 
 - [vagrant-junos](https://github.com/JNPRAutomate/vagrant-junos)
 - [vagrant-host-shell](https://github.com/phinze/vagrant-host-shell)

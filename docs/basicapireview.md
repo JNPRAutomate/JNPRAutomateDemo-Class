@@ -14,9 +14,9 @@ The NETCONF protocol uses a remote procedure call (RPC) paradigm. A client encod
 
 A key aspect of NETCONF is that it allows the functionality of the management protocol to closely mirror the native functionality of the device. This reduces implementation costs and allows timely access to new features. In addition, applications can access both the syntactic and semantic content of the device's native user interface.
 
-NETCONF allows a client to discover the set of protocol extensions supported by a server. These "capabilities" permit the client to adjust its behavior to take advantage of the features exposed by the device. The capability definitions can be easily extended in a noncentralized manner. Standard and non-standard capabilities can be defined with semantic and syntactic rigor. Capabilities are discussed in Section 8.
+NETCONF allows a client to discover the set of protocol extensions supported by a server. These "capabilities" permit the client to adjust its behavior to take advantage of the features exposed by the device. The capability definitions can be easily extended in a noncentralized manner. Standard and non-standard capabilities can be defined with semantic (meaning of expressions, statements, and program units) and syntactic (form of expessions, statements, and program units) rigor. Capabilities are discussed in Section 8.
 
-The NETCONF protocol is a building block in a system of automated configuration. XML is the lingua franca of interchange, providing a flexible but fully specified encoding mechanism for hierarchical content. NETCONF can be used in concert with XML-based transformation technologies, such as XSLT [W3C.REC-xslt-19991116], to provide a system for automated generation of full and partial configurations. The system can query one or more databases for data about networking topologies, links, policies, customers, and services. This data can be transformed using one or more XSLT scripts from a task-oriented, vendor-independent data schema into a form that is specific to the vendor, product, operating system, and software release. The resulting data can be passed to the device using the NETCONF protocol.
+The NETCONF protocol is a building block in a system of automated configuration. XML is the lingua franca of interchange, providing a flexible but fully specified encoding mechanism for hierarchical content. NETCONF can be used in concert with XML-based transformation technologies, such as XSLT TODO : should a link be added? [W3C.REC-xslt-19991116], to provide a system for automated generation of full and partial configurations. The system can query one or more databases for data about networking topologies, links, policies, customers, and services. This data can be transformed using one or more XSLT scripts from a task-oriented, vendor-independent data schema into a form that is specific to the vendor, product, operating system, and software release. The resulting data can be passed to the device using the NETCONF protocol.
 
 What does this all mean?
 ------------------------
@@ -25,11 +25,11 @@ NETCONF was designed to achieve a few specific goals
 
 -	To closely mirror the native functionallity of the device
 
-This keeps the way we interact with the device close to how the device is configured. This simplifies the API usage as the way you interact with it is the same as doing the native configuration
+This keeps the way we interact with the device close to how the device is configured. This simplifies the API usage because the way you interact with it is the same as doing the native configuration
 
 -	To use an extensible interchange language that can be easily manipulated
 
-Computers do a horrible job of interpreting data that does not have context. XML was chosen as the interchange format for NETCONF. It allows for data exchange in a way that makes sense to a computer and it can easily be parsed. XML is highly extensible and does a great job of representing the data so it is manage.
+Computers do a horrible job of interpreting data that does not have context. XML was chosen as the interchange format for NETCONF. It allows for data exchange in a way that makes sense to a computer and it can easily be parsed. XML is highly extensible and does a great job of representing the data so it can be managed.
 
 -	Secure access to the API
 
@@ -46,10 +46,10 @@ The character set "]]>]]>" is used to specify the end of a NETCONF message. This
 
 Connecting to NETCONF host can easily be done from your NetDevOps VM.
 
--	1 Connect into your host with "vagrant ssh ndo"
--	2 Run the command "ssh root@172.16.0.1 -s netconf" to request an SSH session with the device. The "-s netconf" flag is used to specify the NETCONF subsystem.
+-	Connect into your host with "vagrant ssh ndo"
+-	Run the command "ssh root@172.16.0.1 -s netconf" to request an SSH session with the device. The "-s netconf" flag is used to specify the NETCONF subsystem.
 	-	We can also connect to the NETCONF port directly using "ssh root@172.16.0.1 -p 830 -s netconf" by specifying the port of 830
--	3 Use the root password of "Juniper" to connect to the device
+-	Use the root password of "Juniper" to connect to the device
 
 ```bash
 ssh root@172.16.0.1 -s netconf
@@ -84,7 +84,7 @@ The hello response also includes a set of capabilities on the device. These incl
 
 ### Hello RPC
 
-Once connected we need to send back a hello message to the the NETCONF server. On Junos this is not required to be sent. However the best practice is to send this information. Also in the event in the future that we DO enforce it, it is better to be compliant to the specification of the protocol.
+Once connected we need to send back a hello message to the the NETCONF server. On Junos this is not required to be sent. However the best practice is to send this information. Also in the event that we DO enforce it in the future, it is better to be compliant to the specification of the protocol.
 
 **Request**
 
