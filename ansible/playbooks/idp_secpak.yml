@@ -1,0 +1,13 @@
+---
+- name: Install IDP Security Packages
+  hosts: mysrx
+  connection: local
+  gather_facts: no
+  vars:
+    junos_user: "root"
+    junos_password: "Juniper"
+    build_dir: "/tmp/"
+
+  tasks:
+      - name: Install package
+        script: ../tools/idpsecpack.py --user {{ junos_user }} --password {{ junos_password}} --host {{ inventory_hostname }}

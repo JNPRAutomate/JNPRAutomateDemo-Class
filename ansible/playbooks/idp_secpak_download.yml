@@ -10,10 +10,10 @@
 
   tasks:
       - name: Build Install Commands
-        template: src=templates/idp_secpack_download.set.j2 dest={{build_dir}}/idp_secpack_download.set
+        template: src=templates/idp_secpak_download.set.j2 dest={{build_dir}}/idp_secpak_download.set
 
       - name: Install package
-        junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/idp_secpack_download.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+        junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/idp_secpak_download.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
 
       - name: Wait for Download
         pause: seconds=30
