@@ -8,7 +8,7 @@
     junos_password: "Juniper"
     build_dir: "/tmp/"
     address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/24'} ]
-    nat_policy_info: [{'rule_set':'rs1', 'src_zone':'trust', 'dst_zone':'untrust', 'rules':[{'name':'rule1','src_ips':['LocalNet'],'dst_ips':['0.0.0.0/0'], 'interface':True}]}]
+    nat_policy_info: [{'rule_set':'rs1', 'src_zone':'trust', 'dst_zone':'untrust', 'rules':[{'name':'rule1','src_ips':['172.16.0.0/24'],'dst_ips':['0.0.0.0/0'], 'interface':True}]}]
 
   tasks:
     - name: Build address book entries

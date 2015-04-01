@@ -3,10 +3,10 @@ set security nat source rule-set {{ item.rule_set }} from zone {{ item.src_zone 
 set security nat source rule-set {{ item.rule_set }} to zone {{ item.dst_zone }}
     {% for rule in item.rules %}
         {% for src_ip in rule.src_ips %}
-        set security nat source rule-set {{ item.rule_set }} rule {{ rule.name }} match source-address-name {{ src_ip }}
+        set security nat source rule-set {{ item.rule_set }} rule {{ rule.name }} match source-address {{ src_ip }}
         {% endfor %}
         {% for dst_ip in rule.dst_ips %}
-        set security nat source rule-set {{ item.rule_set }} rule {{ rule.name }} match destination-address-name {{ dst_ip }}
+        set security nat source rule-set {{ item.rule_set }} rule {{ rule.name }} match destination-address {{ dst_ip }}
         {% endfor %}
         {% if rule.interface is defined %}
         set security nat source rule-set {{ item.rule_set }} rule {{ rule.name }} then source-nat interface
