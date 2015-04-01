@@ -48,7 +48,7 @@ First let's take a look at the playbook that is used to accomplish this task. We
     junos_user: "root"
     junos_password: "Juniper"
     build_dir: "/tmp/"
-    address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/24'} ]
+    address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/22'} ]
     fw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ips':['LocalNet'],'dst_ips':['any'],'action':'permit','apps':['any']}]
 
   tasks:
@@ -90,7 +90,7 @@ set security address-book global address {{ i.name }} {{ i.prefix }}
 ```bash
 set security address-book global address LocalNet 172.16.0.0/24
 set security address-book global address PrivateNet 192.168.10.0/24
-set security address-book global address PublicNet 10.10.0.0/24
+set security address-book global address PublicNet 10.10.0.0/22
 ```
 
 **Policy Template**
@@ -165,7 +165,7 @@ vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ansible-playbook -
 
 changed: [172.16.0.1] => (item={'prefix': '172.16.0.0/24', 'name': 'LocalNet'})
 changed: [172.16.0.1] => (item={'prefix': '192.168.10.0/24', 'name': 'PrivateNet'})
-changed: [172.16.0.1] => (item={'prefix': '10.10.0.0/24', 'name': 'PublicNet'})
+changed: [172.16.0.1] => (item={'prefix': '10.10.0.0/22', 'name': 'PublicNet'})
  __________________________________
 < TASK: Apply address book entries >
  ----------------------------------
@@ -225,7 +225,7 @@ root@NetDevOps-SRX01> show configuration security address-book
 global {
     address LocalNet 172.16.0.0/24;
     address PrivateNet 192.168.10.0/24;
-    address PublicNet 10.10.0.0/24;
+    address PublicNet 10.10.0.0/22;
 }
 
 root@NetDevOps-SRX01> show configuration security policies

@@ -73,7 +73,7 @@ A playbook consists of a few required elements.
     junos_user: "root"
     junos_password: "Juniper"
     build_dir: "/tmp/"
-    address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/24'} ]
+    address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/22'} ]
     fw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'trust','dst_zone':'untrust','src_ips':['LocalNet'],'dst_ips':['PrivateNet'],'action':'permit','apps':['any']}]
 
   tasks:                                    #set of tasks to run
@@ -137,7 +137,7 @@ Variables are the special sauce that makes Ansible so tasty to use. This allows 
     junos_password: "Juniper"               #password for our Junos devices
     build_dir: "/tmp/"                      #directory for us build templates in
                                             #a complex variable, this is just a python dictionary or dict
-    address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/24'} ]
+    address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/22'} ]
 
 ```
 

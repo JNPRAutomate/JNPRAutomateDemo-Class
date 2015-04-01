@@ -225,7 +225,7 @@ root@NetDevOps-SRX01> show configuration security address-book
 global {
     address LocalNet 172.16.0.0/24;
     address PrivateNet 192.168.10.0/24;
-    address PublicNet 10.10.0.0/24;
+    address PublicNet 10.10.0.0/22;
     address NetDevOpsVM 172.16.0.10/32;
 }
 

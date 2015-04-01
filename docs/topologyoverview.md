@@ -11,7 +11,7 @@ LAB IP Subnets
 --------------
 
 -	Shared LAN
-	-	10.10.0.0/24
+	-	10.10.0.0/22
 -	Student Lab
 	-	172.16.0.0/24
 	-	This will overlap with all other students
@@ -50,7 +50,7 @@ LAB IP Subnets
           |                |                                
           +-----+----------+---+                            
                 |              |                            
-                |  Shared LAN  | 10.10.0.0/24               
+                |  Shared LAN  | 10.10.0.0/22               
                 +------+-------+                            
                        |                                    
 +----------------------------------------------+            
@@ -143,7 +143,7 @@ The shared LAN segment is used to interconnect all of the students and the proct
           |                |                      
           +-----+----------+---+                            
                 |              |                            
-                |  Shared LAN  | 10.10.0.0/24               
+                |  Shared LAN  | 10.10.0.0/22               
                 +------+-------+                            
                        |                       
 ```

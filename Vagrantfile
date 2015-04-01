@@ -9,7 +9,7 @@ require "vagrant-junos"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "ndo", primary: true do |ndo|
-    ndo.vm.box = "juniper/netdevops-ubuntu1404-headless"
+    ndo.vm.box = "juniper/netdevops-ubuntu1404"
     ndo.vm.box_version = ">= 0.2.6"
     ndo.vm.hostname = "NetDevOps-Student"
     ndo.vm.network "private_network",
@@ -18,8 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder "", "/vagrant"
 
     ndo.vm.provider "virtualbox" do |v|
-      #  v.gui = true
-      #  v.customize ["modifyvm", :id, "--nic1", "hostonly"]
+      v.gui = true
     end
 
     ndo.vm.provision "shell" do |s|
