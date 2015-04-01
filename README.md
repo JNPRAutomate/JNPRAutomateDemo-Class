@@ -47,7 +47,8 @@ The course is divided into multiple steps.
 
 TODO
 ====
-
+- Create Proctor Student API client for Ansible
+- 
 **Docs**
 
 1.	disaster strikes @robwc - via ansible TBD - completed last
