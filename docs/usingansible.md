@@ -5,14 +5,14 @@ Ansible is a command-line automation tool that simplifies the large scale manage
 
 **Helpful Links**
 
-1.	[Ansible Best Practices](https://docs.ansible.com/playbooks_best_practices.html)
+-	[Ansible Best Practices](https://docs.ansible.com/playbooks_best_practices.html)
 2.	[Ansible Inventories](https://docs.ansible.com/intro_inventory.html)
 3.	[Ansible Variables](http://docs.ansible.com/playbooks_variables.html)
 4.	[Built-in Modules](https://docs.ansible.com/modules_by_category.html)
 
 **Benefits**
 
-1.	Tasks are run step-by-step easily identifying any issues during a deployment
+-	Tasks are run step-by-step easily identifying any issues during a deployment
 2.	Can manage not only Junos devices but configure servers as well
 3.	Extremely flexible ordering of tasks
 4.	Simple to create playbooks with only YAML templates
@@ -23,7 +23,7 @@ Ansible is a command-line automation tool that simplifies the large scale manage
 
 **Drawbacks**
 
-1.	Unable to manage Windows hosts
+-	Unable to manage Windows hosts
 2.	Managing a large scale of devices requires a strong structure
 	-	SSH Keys at scale
 	-	Large scale variables
@@ -48,11 +48,11 @@ Ansible is a command-line automation tool that simplifies the large scale manage
 Ansible Technologies
 --------------------
 
-Ansible at its core uses [YAML](http://en.wikipedia.org/wiki/YAML) as the syntax for building playbooks. YAML or yet another markup language is a simplified language structure that has become quite popular for use due to its simplicity. In fact it is in use today in the PyEZ libraries for doing tables and views.
+Ansible at its core uses "Yet Another Markup Language" [YAML](http://en.wikipedia.org/wiki/YAML) as the syntax for building playbooks. YAML is a simplified language structure that has become quite popular for use due to its simplicity. In fact it is in use today in the PyEZ libraries for doing tables and views.
 
 A playbook consists of a few required elements.
 
-1.	Name
+-	Name
 	-	The name of the running playbook
 2.	Hosts
 	-	Hosts to apply the tasks to
@@ -173,6 +173,6 @@ Juniper.junos was installed successfully
 Ansible Tower
 -------------
 
-While all of this may seem great to use, how do you scale these scripts to a larger environment. For this Ansile has the tool Ansible Tower. It gives you a GUI that is wrapped around the management of Ansible tasks. This has a free trial version but it is not free to use. This can assist you in the management of a large scale environment
+While all of this may seem great to use, how do you scale these scripts to a larger environment. For this Ansile has the tool Ansible Tower. It gives you a GUI that is wrapped around the management of Ansible tasks. This has a free trial version but it is not free to use. This can assist you in the management of a large scale environment.
 
 [Ansible Tower](http://www.ansible.com/tower)
