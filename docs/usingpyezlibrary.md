@@ -12,7 +12,7 @@ Some of the downsides to Python stem from its need to move forward. Python creat
 Python Language Syntax
 ======================
 
-Programming comes down to two basic concepts: data structures and algorithms. No matter which language you choose to use these are the fundamentals that will be used. A data structure is the format in which you store data. Each language generally has a similar set of data structures that are used such as dictionaries, a key/value type of structure. This is because no matter what language you use you are looking to solve similar problems. Some languages, such as R, have structures that are more friendly to solving its specific problems. In the case of R it has advanced matrices that are used for multidimensional data. The goal of a language is to give the programmer flexibility and yet help them solve problems in an easy manner.
+Programming comes down to two basic concepts: data structures and algorithms. No matter which language you choose to use these are the fundamentals that will be used. A data structure is the format in which you store data. Each language generally has a similar set of data structures that are used such as dictionaries, a key/value type of structure. This is because no matter what language you use you are looking to solve similar problems. Some languages, such as R (http://www.r-project.org/), have structures that are more friendly to solving its specific problems. In the case of R it has advanced matrices that are used for multidimensional data. The goal of a language is to give the programmer flexibility and yet help them solve problems in an easy manner.
 
 Once you have your data or data structures defined then we need to go about using them. Data is read, manipulated, removed, and created throughout a program. An algorithm is defined as a formula or procedure for solving a problem. Or in simpler terms how we interact with the data. When you have a program it usually takes some sort of data into it to solve a specific problem. In the case of automation we take in data structures such as the Junos config and then use that data in various ways. We may manipulate the data or config, provide a report or output the data, or even remove elements and commit the change back to the Junos device.
 
@@ -50,7 +50,7 @@ A list or tuple is a series of data. They can contain any type of data and the t
 
 ### Classes and Objects
 
-A class is a complex data structure. It contains variables or properties as well as methods. A method is a function that can be used as actions on the object. The classic class example is to think of a class as blueprint to create an object. If I had a car it has certain properties such as color or number of wheels. If you wanted to say open a car door that would be a method or action that the object could take. Object oriented programming was invented by [Alan Kay](http://en.wikipedia.org/wiki/Alan_Kay) at [Xerox PARC](http://en.wikipedia.org/wiki/Alan_Kay) in the 1970s as a way of coupling data with methods of operation. Classes and object-oriented programming is quite a tall subject we won't go into all the details here.
+A class is a complex data structure. It contains variables or properties as well as methods. A method is a function that can be used as actions on the object. The classic example for class is to think of it as a blueprint to create an object. A car has certain properties such as color or number of wheels. If you wanted to open a car door that would be a method or action that the object could take. Object oriented programming was invented by [Alan Kay](http://en.wikipedia.org/wiki/Alan_Kay) at [Xerox PARC](http://en.wikipedia.org/wiki/Alan_Kay) in the 1970s as a way of coupling data with methods of operation. Classes and object-oriented programming is quite a tall subject we won't go into all the details here.
 
 **Classes and Objects Examples**
 
@@ -119,9 +119,9 @@ print simple_return
 Functions and Methods
 ---------------------
 
-As discussed a function or method is a bit of code that can be repeatedly reused. This is typical for a common set of code that we would use several time. By making this into a function or method it leaves the code in a singular place in which it can be reused but also maintained in a singular place. If you were to say have a function to add numbers, as can be seen below in our example "add_numbers", we can call this function any time we need to return the sum of two numbers. If we want to changes this behavior in the code we can update this single function and then have that change impact the code within the rest of the program.
+As discussed a function or method is a bit of code that can be repeatedly reused. This is typical for a common set of code that we would use several times. By making this into a function or method it leaves the code in a singular place in which it can be reused but also maintained. If you were to have a function to add numbers, as can be seen below in our example "add_numbers", we can call this function any time we need to return the sum of two numbers. If we want to change this behavior in the code we can update this single function and then have that change impact the code within the rest of the program.
 
-A method is simply a function that is bound to an object or class. This is usually used to describe the actions or methods of operation over a class. They are written nearly identically. However when defining a method on a class the special object "self" must be the first parameter used. This allows the object to reference itself and change internal elements to its own data structure. This means your changing the instantiated object, rather changing the class all together.
+A method is simply a function that is bound to an object or class. This is usually used to describe the actions or methods of operation over a class. They are written nearly identically. However when defining a method on a class the special object "self" must be the first parameter used. This allows the object to reference itself and change internal elements to its own data structure. This means you are changing the instantiated object, rather than changing the class all together.
 
 ```python
 
@@ -170,9 +170,9 @@ Loops
 
 A loop is the ability to loop over a data structure. This lets you take a structure and act upon each element. This is also known as iteration.
 
-A for loop takes a variable and iterates over it. It provides one value from the list and allows you to utilize it. In the example below we want to take one of each of the items and then print it out. In our example we take a list of four alcoholic drinks and then have it request an order for one.
+A "for" loop takes a variable and iterates over it. It provides one value from the list and allows you to utilize it. In the example below we want to take one of each of the items and then print it out. In our example we take a list of four alcoholic drinks and then have it request an order for one.
 
-Also you can use a while loop. A while loop continues to loop until the while condition changes. In this example we are saying "while true" to continue the loop. This loop will run indefinitely unless we choose to break from the loop. In our infinite loop we increment the value of x by one. After 11 iterations, since we start at 0, we detect that x is equal to 10. Once this is detected we print out the current value of x and declare we are complete. Lastly we call the command break to exit the execution of the loop.
+Also you can use a "while" loop. A "while" loop continues to loop until the while condition changes. In this example we are saying "while true" to continue the loop. This loop will run indefinitely unless we choose to break from the loop. In our infinite loop we increment the value of x by one. After 11 iterations, since we start at 0, we detect that x is equal to 10. Once this is detected we print out the current value of x and declare we are complete. Lastly we call the command break to exit the execution of the loop.
 
 ```python
 
@@ -203,7 +203,7 @@ while True:
 Python Summary
 ==============
 
-Learning programming or a specific language is much like playing the game of golf. It is something you can do for years to get better and better at it. Experience in using Python will be your greatest advantage to getting better at it. Find use cases for it in your daily life. You can simply drop into an interactive Python shell, just type "python" at your prompt and go for it, and use it. Use it as a calculator, use it to read in a spreadsheet and itterate over the data, use it to automate your network. What at first seems impossible, becomes complete possible, and eventually it becomes natural. Only by using it and solving new problems will you see growth in your skill sets.
+Learning programming or a specific language is much like playing the game of golf. It is something you can do for years to get better and better at it. Experience in using Python will be your greatest advantage to getting better at it. Find use cases for it in your daily life. You can simply drop into an interactive Python shell, just type "python" at your prompt and go for it, and use it. Use it as a calculator, use it to read in a spreadsheet and iterate over the data, use it to automate your network. What at first seems impossible, becomes completely possible, and eventually it becomes natural. Only by using it and solving new problems will you see growth in your skill sets.
 
 -	[What is Python](http://en.wikipedia.org/wiki/Python_%28programming_language%29)
 -	[Python Site](https://www.python.org/)
@@ -218,14 +218,14 @@ The PyEZ library is a simple way to utilize Python to interact with Junos. It us
 Metaprogramming
 ---------------
 
-[Metaprogramming](http://en.wikipedia.org/wiki/Metaprogramming) is a concept that is applicable in several programming languages. It effectively allows you to call code that does not exist and it utilizes the program as the data. This means that the program can dynamically interpet the code that is called and turn it into other code for you. The feelings around this technuiqe vary, but in the case of PyEZ it is a perfect use case. The downside to consider is that this code is dynamically generated with no specific documentation around the various available methods on the device. Developers tend to spend a lot of time reading documentation and because the code doesn't actually exist this can be a problem. However the target of the PyEZ library is that it is to be used by network engineers who cross the lines between Junos knowledge and Python. This ability to meet in the middle is very powerful in the right hands.
+[Metaprogramming](http://en.wikipedia.org/wiki/Metaprogramming) is a concept that is applicable in several programming languages. It effectively allows you to call code that does not exist and it utilizes the program as the data. This means that the program can dynamically interpet the code that is called and turn it into other code for you. The feelings around this technique vary, but in the case of PyEZ it is a perfect use case. The downside to consider is that this code is dynamically generated with no specific documentation around the various available methods on the device. Developers tend to spend a lot of time reading documentation and because the code doesn't actually exist this can be a problem. However the target of the PyEZ library is that it is to be used by network engineers who cross the lines between Junos knowledge and Python. This ability to meet in the middle is very powerful in the right hands.
 
-In Junos there are potentially thousands of different RPC calls that the user can call. These RPC calls are well documented on the [Juniper website](http://foo). This documentation tells you what the various RPC calls do and the expected responses.
+In Junos there are potentially thousands of different RPC calls that the user can call. These RPC calls are well documented on the [Juniper website]TODO undate link (http://foo). This documentation tells you what the various RPC calls do and the expected responses.
 
 Mapping RPCs to Methods - The method to the madness
 ---------------------------------------------------
 
-As someone familiar with Junos you have a distinct advantage over the average programmer. As you know, or at least know how, to find the RPCs that you are looking to call. There is a mapping between between the RPC calls. If you know the command or can figure it out it is simple to learn the correct RPC call. You can use the format of "show interfaces terse ge-0/0/0 | display xml rpc". This will show you what you need to use to call the command in PyEZ.
+As someone familiar with Junos you have a distinct advantage over the average programmer. As you know, or at least know how, to find the RPCs that you are looking to call. There is a mapping between the RPC calls. If you know the command or can figure it out it is simple to learn the correct RPC call. You can use the format of "show interfaces terse ge-0/0/0 | display xml rpc". This will show you what you need to use to call the command in PyEZ.
 
 **RPC Mapping Examples**
 
@@ -359,7 +359,7 @@ These two features are very powerful, but are somewhat abstract concepts. To bet
 
 In this example, we’re going to build on the XML examples shown previously in the “RPC Mapping Examples” section, and show how we can use PyEZ to programmatically collect details about port states. This might feel like a simplistic use case, but this is actually the script that the author first wrote when starting out with the PyEZ library to solve a real world “on the job” customer problem.
 
-The first thing we need to do is map the <rpc> for the “show interface” command to a table structure. A table takes all of the XML output and collects into an ordered fashion. Table and View definitions are written in the YAML  format, which is an easy to read format that is also programming language independent. The PyEZ library stores these definitions in the “lib/jnpr/junos/op/” directory in the folder where the PyEZ library is stored.
+The first thing we need to do is map the <rpc> for the “show interface” command to a table structure. A table takes all of the XML output and collects into an ordered fashion. Table and view definitions are written in the YAML format, which is an easy to read format that is also programming language independent. The PyEZ library stores these definitions in the “lib/jnpr/junos/op/” directory in the folder where the PyEZ library is stored.
 
 First, lets have a look at the following table definition that ships with the PyEZ library.
 
@@ -374,7 +374,7 @@ PhyPortTable:
   view: PhyPortView
 ```
 
-If you recall from our investigations in the “DMI and the NETCONF Protocol” the RPC command associated with with “show interface” command is <get-interface-information>. The second line of the output above requests that this table definition should map to the XML output from that <rpc-reply>. We then filter down our interface list to just Fast Ethernet, Gigabit Ethernet and 10 Gigabit Ethernet interfaces (“[fge]e*”). The “item” section creates the equivalent of the table row in this data structure. By defining “physical-interface” as the “item” each interface from the XML output will be represented separately in the Table Structure.
+If you recall from our investigations in the “DMI and the NETCONF Protocol” the RPC command associated with “show interface” command is <get-interface-information>. The second line of the output above requests that this table definition should map to the XML output from that <rpc-reply>. We then filter down our interface list to just Fast Ethernet, Gigabit Ethernet and 10 Gigabit Ethernet interfaces (“[fge]e*”). The “item” section creates the equivalent of the table row in this data structure. By defining “physical-interface” as the “item” each interface from the XML output will be represented separately in the Table Structure.
 
 The last line in the output above is used to feed this table into a “view”. The view definition below takes each of the XML tags from the <rpc-reply> and maps them to dictionary keys on the left. These keys are the equivalent of columns in this data structure.
 
@@ -392,7 +392,7 @@ PhyPortView:
     flapped: interface-flapped
 ```
 
-With these Tables and Views defined, we can now write some very simple Python code to connect to our switch, and collect interface statistics uses these definitions. The example file below is a very simple script designed to loop through all the Ethernet interfaces on the switch and print out a “CSV formatted” output of the port statistics on the switch.
+With these Tables and Views defined, we can now write some very simple Python code to connect to our switch and collect interface statistics using these definitions. The example file below is a very simple script designed to loop through all the Ethernet interfaces on the switch and print out a “CSV formatted” output of the port statistics on the switch.
 
 **port-report.py:**
 ```python
@@ -444,7 +444,7 @@ Jinja has a huge set of features that can be utilized to accomplish your goals. 
 
 ### Variable Substitution
 
-The most basic example of Jinja is variable substitution. Think of this as a simple search and replace within a text editor or using the UNIX command *sed*. Their are several benefits to utilizing a Python script to accomplish this task.
+The most basic example of Jinja is variable substitution. Think of this as a simple search and replace within a text editor or using the UNIX command *sed*. There are several benefits to utilizing a Python script to accomplish this task.
 
 -	Repeatability
 	-	The ability to repeatedly call a script with fixed input and specified output
@@ -480,7 +480,7 @@ The documentation for this can be found [here](http://jinja.pocoo.org/docs/dev/t
 
 ### Using loops
 
-The second step in substitution is utilizing loops. Loops provide true automation advantage to not require the user to repetitively type in commands. We can apply a more complex data structure in Python to a template and iterate over the items. To do this we use the age old "for loop". A for loop is used in many different languages to loop or iterate over items.
+The second step in substitution is utilizing loops. Loops provide true automation advantage to not require the user to repetitively type in commands. We can apply a more complex data structure in Python to a template and iterate over the items. To do this we use the age old "for loop". A "for" loop is used in many different languages to loop or iterate over items.
 
 ##### A Jinja for loop example:
 
@@ -521,7 +521,7 @@ While there is a mountain of wisdom that you can use in programming, here are a 
 2.	Keep tools to a singular workflow
 	-	The best automation is a set of loosely coupled tools that are strung together
 	-	This simplifies the debugging and maintenance of the tools
-	-	Chaining multiple workflows together is called called orchestration
+	-	Chaining multiple workflows together is called orchestration
 	-	Use an orchestration tool to chain the tools together
 3.	Think about the consumer of the tool
 	-	Can they use it easily
