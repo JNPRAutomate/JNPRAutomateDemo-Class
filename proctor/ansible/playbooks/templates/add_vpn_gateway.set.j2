@@ -1,2 +1,4 @@
-delete security ike gateway {{ ike_name }} address
-set security ike gateway {{ ike_name }} address {{ ike_gateway_ip }}
+{% for item in pods %}
+delete security ike gateway vpngw-id{{ item.pod_number }} address
+set security ike gateway vpngw-id{{ item.pod_number }} address {{ item.addr_wan }}
+{% endfor %}

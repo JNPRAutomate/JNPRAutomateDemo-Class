@@ -63,6 +63,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                    nic_type: 'virtio'
     srx.vm.synced_folder "", "/vagrant", disabled: true
 
+    srx.vm.provider "virtualbox" do |v|
+      v.customize ["modifyvm", :id, "--memory", "3072"]
+    end
+
     srx.vm.provision "file", source: "scripts/srx-setup.sh", destination: "/tmp/srx-setup.sh"
     srx.vm.provision "file", source: "scripts/srx-vpnstints.sh", destination: "/tmp/srx-vpnstints.sh"
     srx.vm.provision :host_shell do |host_shell|
