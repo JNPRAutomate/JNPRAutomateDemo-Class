@@ -54,6 +54,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     srx.vm.network "public_network",
                    ip: "10.10.0.5",
+                   netmask: "255.255.252.0",
                    nic_type: 'virtio'
     srx.vm.network "private_network",
                    ip: "192.168.10.1",
