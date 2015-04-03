@@ -202,3 +202,4 @@ PING 10.10.0.10 (10.10.0.10) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.480/0.507/0.548/0.036 ms
 vagrant@NetDevOps-Student:~$
 ```
+If the ping request is not working? Then why?
