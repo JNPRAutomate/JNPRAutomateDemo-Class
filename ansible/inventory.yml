@@ -2,4 +2,4 @@
 172.16.0.1 ansible_python_interpreter=python
 
 [mysrx:vars]
-pod_id='9'
+pod_id='1'

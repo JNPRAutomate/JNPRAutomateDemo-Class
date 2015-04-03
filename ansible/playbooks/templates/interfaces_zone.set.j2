@@ -1,18 +1,15 @@
 {% for i in interfaces %}
-	{% if i.zone is defined%}
+{% if i.zone is defined%}
 set security zones security-zone {{ i.zone }} interfaces {{ i.interface -}}.{{ i.unit -}}
-	{% endif %}
-
-	{% if i.hit_protocols is defined %}
-		{% for protocol in i.hit_protocols %}
+{% endif %}
+{% if i.hit_protocols is defined %}
+{% for protocol in i.hit_protocols %}
 set security zones security-zone {{ i.zone }} interfaces {{ i.interface }}.{{ i.unit }}  host-inbound-traffic protocols {{ protocol }}
-		{% endfor %}
-	{% endif %}
-
-	{% if i.hit_services is defined  %}
-		{% for service in i.hit_services %}
+{% endfor %}
+{% endif %}
+{% if i.hit_services is defined  %}
+{% for service in i.hit_services %}
 set security zones security-zone {{ i.zone }} interfaces {{ i.interface }}.{{ i.unit }}  host-inbound-traffic system-services {{ service }}
-		{% endfor %}
-	{% endif %}
-
+{% endfor %}
+{% endif %}
 {% endfor %}

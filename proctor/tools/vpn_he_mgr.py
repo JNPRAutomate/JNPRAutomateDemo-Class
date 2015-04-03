@@ -19,28 +19,7 @@ res = urllib2.urlopen(req)
 data = res.read()
 
 test_json = '''
-{
-  "pods": [
-    {
-      "addr_lo0": "10.255.255.1/32",
-      "addr_st0": "10.255.1.2/30",
-      "addr_wan": "10.0.2.2",
-      "id": 1,
-      "pod_number": 1,
-      "url": "http://127.0.0.1:18500/student/1",
-      "username": "Kurt"
-    },
-    {
-      "addr_lo0": "10.255.255.2/32",
-      "addr_st0": "10.255.2.2/30",
-      "addr_wan": "10.0.2.3",
-      "id": 2,
-      "pod_number": 2,
-      "url": "http://127.0.0.1:18500/student/2",
-      "username": "Rob"
-    }
-  ]
-}
+{"pods": [ { "addr_lo0": "10.255.255.1/32","addr_st0": "10.255.1.2/30","addr_wan": "10.10.0.29","id": 1,"pod_number": 1,"url": "http://127.0.0.1:18500/student/1","username": "Rob"}]}
 '''
 
 try:

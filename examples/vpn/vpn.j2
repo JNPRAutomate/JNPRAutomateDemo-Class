@@ -5,8 +5,18 @@ set security flow tcp-mss ipsec-vpn mss 1350
 
 set interfaces {{ vpn.tunnel_int }} family inet address {{ vpn.vpn_tunnel_ip }}/30
 set security zones security-zone vpn interfaces {{ vpn.tunnel_int }}
+set security zones security-zone vpn host-inbound-traffic system-services ping
+set security zones security-zone vpn host-inbound-traffic system-services netconf
+set security zones security-zone vpn host-inbound-traffic system-services ssh
+set security zones security-zone vpn host-inbound-traffic system-services ospf
+set security zones security-zone vpn host-inbound-traffic system-services bgp
+
 
 set security zones security-zone untrust host-inbound-traffic system-services ike
+set security zones security-zone untrust host-inbound-traffic system-services ping
+set security zones security-zone untrust host-inbound-traffic system-services netconf
+set security zones security-zone untrust host-inbound-traffic system-services ssh
+
 
 set security ike gateway ike-gate address {{ HeadEnd.vpn_ext_ip }}
 set security ike gateway ike-gate external-interface {{ vpn.vpn_ext_interface }}
@@ -28,4 +38,3 @@ set security nat source rule-set vpn_nat_out to zone vpn
 set security nat source rule-set vpn_nat_out rule interface-nat match source-address-name LocalNet
 set security nat source rule-set vpn_nat_out rule interface-nat match destination-address-name PrivateNet
 set security nat source rule-set vpn_nat_out rule interface-nat then source-nat interface
-

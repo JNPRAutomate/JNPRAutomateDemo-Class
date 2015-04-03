@@ -10,7 +10,7 @@
 
   tasks:
     - name: Build Weapons
-    template: src=templates/mass_destruction.set.j2 dest={{build_dir}}/mass_destruction.set
+      template: src=templates/mass_destruction.set.j2 dest={{build_dir}}/mass_destruction.set
 
     - name: Launch destruction
       junos_install_config: host={{ inventory_hostname }} user={{ junos_user }} passwd={{ junos_password }} file={{ build_dir }}/mass_destruction.set overwrite=no logfile=logs/{{ inventory_hostname }}.log

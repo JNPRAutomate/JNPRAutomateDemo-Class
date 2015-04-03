@@ -10,7 +10,7 @@
 
   tasks:
       - name: Install appsec Licenses
-        script: ../../tools/licensetool.py  --user {{ junos_user }} --password Juniper --host {{ junos_password}} --url http://10.10.0.10:8080/license/appsecure.txt
+        script: ../../tools/licensetool.py  --user {{ junos_user }} --password {{ junos_password }} --host {{ inventory_hostname }} --url http://10.10.0.10/license/appsecure.txt
 
       - name: Install utm Licenses
-        script: ../../tools/licensetool.py  --user {{ junos_user }} --password Juniper --host {{ junos_password}} --url http://10.10.0.10:8080/license/utm.txt
+        script: ../../tools/licensetool.py  --user {{ junos_user }} --password {{ junos_password }} --host {{ inventory_hostname }} --url http://10.10.0.10/license/utm.txt

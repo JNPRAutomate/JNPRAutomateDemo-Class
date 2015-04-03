@@ -9,8 +9,8 @@
     build_dir: "/tmp/"
     mss_entries: [ {'protocol': 'ipsec-vpn', 'mss': '1350'} ]
     interfaces: [
-      {'interface': 'st0', 'unit': '1', 'family': 'inet', 'addr_type': 'address', 'addr': '10.255.{{pod_id}}.2/30', 'zone':'vpn', 'hit_protocols': ['ospf', 'bgp'], 'hit_services': ['ping', 'traceroute']},
-      {'interface': 'ge-0/0/2', 'unit': '0', 'family': 'inet', 'addr_type': 'dhcp', 'zone':'untrust', 'hit_services': ['ike']}
+      {'interface': 'st0', 'unit': '1', 'family': 'inet', 'addr_type': 'address', 'addr': '10.255.{{pod_id}}.2/30', 'zone':'vpn', 'hit_protocols': ['ping','ospf', 'bgp'], 'hit_services': ['ping', 'traceroute']},
+      {'interface': 'ge-0/0/2', 'unit': '0', 'family': 'inet', 'addr_type': 'dhcp', 'zone':'untrust', 'hit_services': ['ike','ping','ssh','netconf']}
     ]
     ike: [ {'ike_name': 'ike-vpn', 'gateway_ip': '10.10.0.5', 'ext_interface': 'ge-0/0/2.0', 'ike_policy_name': 'ike-policy1', 'ike_policy_mode': 'main', 'ike_policy_proposal': 'standard', 'shared_secret': 'AwesomePassword123'} ]
     ipsec: [ {'ipsec_policy_name': 'vpn-policy1', 'ipsec_policy_mode': 'standard', 'ipsec_vpn_name': 'ipsec-vpn', 'ike_gateway': 'ike-vpn', 'tunnel_int': 'st0.1'} ]

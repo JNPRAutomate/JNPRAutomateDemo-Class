@@ -11,4 +11,6 @@
 
 
 [student_srxs]
-10.10.3.[11:254] ansible_python_interpreter=python
+10.10.0.[11:254] ansible_python_interpreter=python
+10.10.[1:2].[0:255] ansible_python_interpreter=python
+10.10.3.[0:254] ansible_python_interpreter=python
