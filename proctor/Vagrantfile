@@ -14,6 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ndo.vm.box_version = ">= 0.2.6"
     ndo.vm.hostname = "NetDevOps-Public"
     ndo.vm.network "public_network",
+                   netmask: "255.255.252.0",
                    ip: "10.10.0.10"
     ndo.vm.network "private_network",
                   ip: "192.168.10.128",
