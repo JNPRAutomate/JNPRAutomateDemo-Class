@@ -21,7 +21,7 @@ Vagrant is a virtual machine management tool. It manages the downloading, provis
 
 **Installation Instructions**
 
-Install this executable on your operating system of choice just as you would any software for that platform.
+Install this executable on your operating system of choice just as you would any software for that platform.  On Windows, you will need to reboot, but you can wait until after VirtualBox is installed.
 
 ### Vagrant Plugins
 
@@ -52,6 +52,8 @@ When installing on Windows it typically will install a network driver. It will p
 -	[Linux 64-bit DEB](http://download.virtualbox.org/virtualbox/4.3.26/virtualbox-4.3_4.3.26-98988~Ubuntu~raring_amd64.deb)
 -	[Linux 32-bit DEB](http://download.virtualbox.org/virtualbox/4.3.26/virtualbox-4.3_4.3.26-98988~Ubuntu~raring_i386.deb)
 -	[Other Linux](https://www.virtualbox.org/wiki/Linux_Downloads)
+
+Windows users: you will need to reboot your laptop before Vagrant and VirtualBox will both work.
 
 Installing Boxes
 ================
