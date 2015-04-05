@@ -1,5 +1,3 @@
-Initial Student Topology for NetDevOps lessons
-
 Network and Security Automation Workshop
 ========================================
 
