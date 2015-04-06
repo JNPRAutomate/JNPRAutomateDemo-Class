@@ -1,0 +1,41 @@
+---
+- name: Deploy Reggie Registration Portal
+  hosts: public_server
+  connection: local
+  gather_facts: no
+  vars:
+#    reggie_repo_url:   "https://github.com/JNPRAutomate/reggie/archive/master.zip"
+    reggie_repo_url:   "https://github.com/JNPRAutomate/reggie.git"
+    reggie_zip:   "reggie.zip"
+    reggie_app_root:   "/reggie"
+    reggie_user:  "vagrant"
+    reggie_group:   "vagrant"
+
+  tasks:
+    - name: creates reggie root directory
+      sudo: yes
+      file:
+        path="{{ reggie_app_root }}"
+        state=directory
+        owner="{{ reggie_user }}"
+        group="{{ reggie_group }}"
+        mode=0775
+
+    - name: Download reggie repo (GitHub)
+      git:
+        repo="{{ reggie_repo_url }}"
+        dest="{{ reggie_app_root }}"
+
+#    - name: create pyenv environment
+#      pyenv_path: "/home/{{ reggie_user }}/.pyenv"
+#      pyenv_owner: "{{ reggie_user }}"
+#      pyenv_python_versions:
+#        - "3.4.1"
+#        - "2.7.8"
+#      pyenv_virtualenvs:
+#        - venv_name: "reggie_env"
+#          py_version: "2.7.8"
+
+    - name: install reggie pip requirements
+      pip: 
+        requirements="{{ reggie_app_root }}/requirements.txt"
