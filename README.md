@@ -51,6 +51,8 @@ TODO
 -	disaster strikes @robwc - docs
 -	recovering the lab @robwc - docs
 -	registering your host @kwbales - needs docs and registry
+-	"Hey, now you have a git repo... #Future"
+-	Send LPTHW links to goto SEs
 
 **Tools**
 
