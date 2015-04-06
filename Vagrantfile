@@ -22,8 +22,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     ndo.vm.provision "shell" do |s|
-      # TODO: DO THIS STUFF!!!!!
-      # set routes for goole services or 0/0
       s.path = "scripts/ndo-setup.sh"
     end
   end
@@ -34,7 +32,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     srx.vm.hostname = "NetDevOps-SRX01"
     srx.vm.provider "virtualbox" do |v|
       v.check_guest_additions = false
-      # v.gui = true
     end
     srx.vm.network "private_network",
                    ip: "172.16.0.1",
@@ -46,6 +43,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     srx.vm.synced_folder "", "/vagrant", disabled: true
 
     srx.vm.provider "virtualbox" do |v|
+      # increase RAM to support AppFW and IPS
+      # comment out to make it run at 2GB
       v.customize ["modifyvm", :id, "--memory", "3072"]
     end
 
