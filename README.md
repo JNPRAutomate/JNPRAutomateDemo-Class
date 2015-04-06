@@ -34,6 +34,7 @@ The course is divided into multiple steps.
 11.	[Creating IPS Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/creatingipspolicies.md)
 12.	[Disaster Strikes!](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/disasterstrikes.md)
 13.	[Recovering the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/recoveringthelab.md)
+14.	[Reviewing the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/reviewingthelab.md)
 
 **VM Access Information**
 
@@ -48,8 +49,6 @@ TODO
 
 **Docs**
 
--	disaster strikes @robwc - docs
--	recovering the lab @robwc - docs
 -	registering your host @kwbales - needs docs and registry
 -	"Hey, now you have a git repo... #Future"
 -	Send LPTHW links to goto SEs
