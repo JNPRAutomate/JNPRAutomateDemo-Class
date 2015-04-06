@@ -3,6 +3,8 @@ The Lab in Review
 
 Today in the lab we covered many different steps and technologies. Let us take a brief review of what we learned and what we can take away from it.
 
+![If it has an API](https://github.com/JNPRAutomate/AutomationMemes/blob/master/api_milk_it.jpg)
+
 :+1: Topics Covered :+1:
 ------------------------
 
