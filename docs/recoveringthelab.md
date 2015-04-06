@@ -265,3 +265,5 @@ vagrant@NetDevOps-Student:/vagrant/ansible$
 ```
 
 Your device should now have the complete configuration on it.
+
+![Success Wyatt](https://github.com/JNPRAutomate/AutomationMemes/blob/master/success_wyatt.gif)

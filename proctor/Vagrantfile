@@ -16,9 +16,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ndo.vm.network "public_network",
                    netmask: "255.255.252.0",
                    ip: "10.10.0.10"
-    ndo.vm.network "private_network",
-                  ip: "192.168.10.128",
-                  virtualbox__intnet: "NetDevOps-Private"
     ndo.vm.synced_folder "../", "/vagrant", disabled: false
 
     ndo.vm.provider "virtualbox" do |v|
