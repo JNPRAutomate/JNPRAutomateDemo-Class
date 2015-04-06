@@ -1,6 +1,6 @@
 {% for i in interfaces %}
 {% if i.zone is defined%}
-set security zones security-zone {{ i.zone }} interfaces {{ i.interface -}}.{{ i.unit -}}
+set security zones security-zone {{ i.zone }} interfaces {{ i.interface }}.{{ i.unit }}
 {% endif %}
 {% if i.hit_protocols is defined %}
 {% for protocol in i.hit_protocols %}
