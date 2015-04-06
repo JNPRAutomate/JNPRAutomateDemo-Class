@@ -45,13 +45,12 @@ The course is divided into multiple steps.
 
 TODO
 ====
-- Create Proctor Student API client for Ansible
-- 
+
 **Docs**
 
-1.	disaster strikes @robwc - via ansible TBD - completed last
-2.	recovering the lab @robwc - via ansible TBD - completed last
-3.	registering your host @kwbales - needs docs and registry
+-	disaster strikes @robwc - docs
+-	recovering the lab @robwc - docs
+-	registering your host @kwbales - needs docs and registry
 
 **Tools**
 
