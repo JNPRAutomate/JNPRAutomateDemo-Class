@@ -12,6 +12,14 @@
     reggie_group:   "vagrant"
 
   tasks:
+    - name: Install NGINX
+      sudo: yes
+      apt: name=nginx state=latest update_cache=yes
+
+    - name: Install PIP
+      sudo: yes
+      apt: name=python-pip state=latest update_cache=yes
+
     - name: creates reggie root directory
       sudo: yes
       file:
@@ -26,6 +34,9 @@
         repo="{{ reggie_repo_url }}"
         dest="{{ reggie_app_root }}"
 
+    - name: Configure Python
+      shell: echo “system” > {{ reggie_app_root }}/.python-version
+
 #    - name: create pyenv environment
 #      pyenv_path: "/home/{{ reggie_user }}/.pyenv"
 #      pyenv_owner: "{{ reggie_user }}"
@@ -37,5 +48,5 @@
 #          py_version: "2.7.8"
 
     - name: install reggie pip requirements
-      pip: 
+      pip:
         requirements="{{ reggie_app_root }}/requirements.txt"
