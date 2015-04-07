@@ -8,7 +8,7 @@
     junos_password: "Juniper"
     build_dir: "/tmp/"
     interfaces: [
-      {'interface': 'st0', 'unit': '1', 'family': 'inet', 'addr_type': 'address', 'addr': '10.255.{{pod_id}}.2/30', 'zone':'vpn', 'hit_protocols': ['ospf', 'bgp'], 'hit_services': ['ping', 'traceroute'],'ospf': {'area': '0'}},
+      {'interface': 'st0', 'unit': '{{pod_id}}', 'family': 'inet', 'addr_type': 'address', 'addr': '10.255.{{pod_id}}.2/30', 'zone':'vpn', 'hit_protocols': ['ospf', 'bgp'], 'hit_services': ['ping', 'traceroute'],'ospf': {'area': '0'}},
       {'interface': 'lo0', 'unit': '0', 'family': 'inet', 'addr_type': 'address', 'addr': '10.255.255.{{pod_id}}/32', 'zone':'trust', 'ospf': {'area': '0', 'passive': True}}
     ]
 
