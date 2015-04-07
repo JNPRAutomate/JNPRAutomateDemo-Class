@@ -3,7 +3,7 @@
 
 
 [public_server]
-10.10.0.10 ansible_python_interpreter=python
+10.10.0.10
 
 
 [private_server]
