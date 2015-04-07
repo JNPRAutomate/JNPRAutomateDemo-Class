@@ -17,7 +17,7 @@ There are three virtual machines contained within the proctor vagrant file. Plea
 	-	[Reggie](https://github.com/JNPRAutomate/reggie)
 	-	Hosts license files
 		-	You need to provide the license files as do to restrictions they are not in the lab
-		-	vSRX licenses can be used accross multiple hosts
+		-	vSRX licenses can be used across multiple hosts
 
 -	NetDevOps Private
 
@@ -31,5 +31,5 @@ There are three virtual machines contained within the proctor vagrant file. Plea
 	-	Uses bridged interface for 10.10.0.5
 	-	Uses private network interface for 192.168.10.1
 	-	If your network does not provide a DHCP server this host can provide DHCP services
-		-	This must be configured seperately
+		-	This must be configured separately
 

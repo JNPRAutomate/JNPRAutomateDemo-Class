@@ -16,12 +16,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                    ip: "172.16.0.10",
                    virtualbox__intnet: "NetDevOps-StudentInternal"
     config.vm.synced_folder "", "/vagrant"
+    config.ssh.password = "vagrant"
 
     ndo.vm.provider "virtualbox" do |v|
+      # comment out to disable gui from starting
       v.gui = true
+      # comment out below lines if you disable gui
+      v.customize ["modifyvm", :id, "--vram", "128"]
+      v.customize ["modifyvm", :id, "--accelerate3d", "on"]
     end
 
     ndo.vm.provision "shell" do |s|
+      # this script provisions the ndo box for you
       s.path = "scripts/ndo-setup.sh"
     end
   end
