@@ -14,8 +14,8 @@ The course is divided into multiple steps.
 
 	1.	[Topology Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/topologyoverview.md)
 	2.	[vSRX Topology](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/vsrxconfiguration.md)
-	3.	[Installing Software](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/installingsoftware.md)
-	4.	[Software Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/softwareoverview.md)
+	3.	[Software Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/softwareoverview.md)
+	4.	[Installing Software](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/installingsoftware.md)
 	5.	[Using Python and PyEZ Library](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/usingpyezlibrary.md)
 	6.	[Using Ansible](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/usingansible.md)
 	7.	[Basic API Review](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/basicapireview.md)
