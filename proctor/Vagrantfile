@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                    netmask: "255.255.252.0",
                    ip: "10.10.0.10"
     ndo.vm.synced_folder "../", "/vagrant", disabled: false
-    config.ssh.password = "vagrant"
+    ndo.ssh.password = "vagrant"
 
     ndo.vm.provider "virtualbox" do |v|
     end
