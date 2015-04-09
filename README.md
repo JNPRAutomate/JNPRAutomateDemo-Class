@@ -43,15 +43,3 @@ The course is divided into multiple steps.
 **Proctor Instructions**
 
 -	[Proctor Instructions](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/proctorconfiguration.md)
-
-TODO
-====
-
-**Docs**
-
--	registering your host @kwbales - needs docs and registry
--	Send LPTHW links to goto SEs
-
-**Tools**
-
-1.	Headend VMs @robwc
