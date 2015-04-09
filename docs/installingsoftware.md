@@ -23,25 +23,28 @@ Vagrant is a virtual machine management tool. It manages the downloading, provis
 
 A copy of Vagrant is available for installation on your USB thumb drive, located at `windows_software\vagrant_1.7.2.msi`, or `mac_software/vagrant_1.7.2.dmg`.
 
-Install this executable on your operating system of choice just as you would any software for that platform.  On Windows, you will need to reboot, but you can wait until after VirtualBox is installed.
+Install this executable on your operating system of choice just as you would any software for that platform. On Windows, you will need to reboot, but you can wait until after VirtualBox is installed.
 
 ### Vagrant Plugins
 
 The vSRX boxes require two plugins, namely:
 
-- [vagrant-junos](https://github.com/JNPRAutomate/vagrant-junos)
-- [vagrant-host-shell](https://github.com/phinze/vagrant-host-shell)
+-	[vagrant-junos](https://github.com/JNPRAutomate/vagrant-junos)
+-	[vagrant-host-shell](https://github.com/phinze/vagrant-host-shell)
 
 These can be installed with the following commands (launch a command prompt on Windows (`cmd`), or a Terminal session on Mac (located in your Applications/Utilities folder):
 
 #### Windows
+
 (where `E:` is the drive where the SECSUMMIT USB thumb drive can be found)
+
 ```
 vagrant plugin install E:\vagrant_plugins\vagrant-junos-0.2.0.gem
 vagrant plugin install E:\vagrant_plugins\vagrant-host-shell-0.0.4.gem
 ```
 
 #### Mac
+
 ```
 vagrant plugin install /Volumes/SECSUMMIT/vagrant_plugins/vagrant-junos-0.2.0.gem
 vagrant plugin install /Volumes/SECSUMMIT/vagrant_plugins/vagrant-host-shell-0.0.4.gem
@@ -49,9 +52,8 @@ vagrant plugin install /Volumes/SECSUMMIT/vagrant_plugins/vagrant-host-shell-0.0
 
 To check for updates in the future, a simple `vagrant plugin update` will ensure everything is up-to-date.
 
-
 VirtualBox
-===========
+==========
 
 For the lab we will be using VirtualBox as our virtualization manager. This tool is free to use and most importantly it is free to use with Vagrant. It also offers some support that VMware Workstation or Fusion do not offer. This includes support for the VirtIO driver and the ability to more simply manage virtual networks.
 
@@ -63,7 +65,6 @@ When installing on Windows it will typically install a network driver. It will p
 -	[Linux 32-bit DEB](http://download.virtualbox.org/virtualbox/4.3.26/virtualbox-4.3_4.3.26-98988~Ubuntu~raring_i386.deb)
 -	[Other Linux](https://www.virtualbox.org/wiki/Linux_Downloads)
 
-
 **Installation Instructions**
 
 A copy of VirtualBox is available for installation on your USB thumb drive, located at `windows_software\VirtualBox-4.3.26-98988-Win.exe`, or `mac_software/VirtualBox-4.3.26-98988-OSX.dmg`.
@@ -73,8 +74,8 @@ A copy of VirtualBox is available for installation on your USB thumb drive, loca
 Installing Boxes
 ================
 
-> Normally, Vagrant boxes are added with `vagrant box add vendor/name` from the web, but for the size of this class, we need to install them locally.  You will still be able to type `vagrant box outdated` to get new versions of these boxes in the future.
-
+> Normally, Vagrant boxes are added with `vagrant box add vendor/name` from the web, but for the size of this class, we need to install them locally. You will still be able to type `vagrant box outdated` to get new versions of these boxes in the future.
+>
 > NOTE: Vagrant stores boxes in `$HOME/vagrant.d` on Linux & Mac, or `%userprofile%\.vagrant.d\boxes` on Windows
 
 Vagrant boxes can be installed with the following commands (launch a command prompt on Windows (`cmd`), or a Terminal session on Mac (located in your Applications/Utilities folder):
@@ -82,24 +83,26 @@ Vagrant boxes can be installed with the following commands (launch a command pro
 **Installation Instructions**
 
 #### Windows:
+
 (where `E:` is the drive where the SECSUMMIT USB thumb drive can be found)
+
 ```
 cp E:\vagrant_boxes\*.box C:\
-vagrant box add juniper/netdevops-ubuntu1404 C:\netdevops-0.5.0_ubuntu-14.04_virtualbox.box
-vagrant box add juniper/ffp-12.1X47-D20.7 C:\junos-vsrx-X47-D20.7-virtualbox.box
+vagrant box add juniper/netdevops-ubuntu1404 C:\vagrant_boxes\netdevops-0.5.0_ubuntu-14.04_virtualbox.box
+vagrant box add juniper/ffp-12.1X47-D20.7 C:\vagrant_boxes\junos-vsrx-X47-D20.7-virtualbox.box
 ```
+
 You can now delete the box files in `C:\`.
 
 #### Mac:
+
 ```
-vagrant box add juniper/netdevops-ubuntu1404 /Volumes/SECSUMMIT/netdevops-0.5.0_ubuntu-14.04_virtualbox.box
-vagrant box add juniper/ffp-12.1X47-D20.7 /Volumes/SECSUMMIT/junos-vsrx-X47-D20.7-virtualbox.box
+vagrant box add juniper/netdevops-ubuntu1404 /Volumes/SECSUMMIT/vagrant_boxes/netdevops-0.5.0_ubuntu-14.04_virtualbox.box
+vagrant box add juniper/ffp-12.1X47-D20.7 /Volumes/SECSUMMIT/vagrant_boxes/junos-vsrx-X47-D20.7-virtualbox.box
 ```
 
+Install and launch both (from the the JNPRAutomateDemo-Student folder): (it's recommended that you only do this if you're ready for the boxes to be running)
 
-
-Install and launch both (from the the JNPRAutomateDemo-Student folder):
-(it's recommended that you only do this if you're ready for the boxes to be running)
 ```bash
 vagrant up
 ```
@@ -107,11 +110,10 @@ vagrant up
 Validating Install
 ------------------
 
-- `vagrant version` should tell you that you're running 1.7.2, aka the latest and greatest
-- `vagrant plugin list` should include:
- - `vagrant-host-shell` 0.0.4 or newer
- - `vagrant-junos` 0.2.0 or newer
-
+-	`vagrant version` should tell you that you're running 1.7.2, aka the latest and greatest
+-	`vagrant plugin list` should include:
+	-	`vagrant-host-shell` 0.0.4 or newer
+	-	`vagrant-junos` 0.2.0 or newer
 
 Vagrant Global Status
 ---------------------

@@ -43,3 +43,12 @@ The course is divided into multiple steps.
 **Proctor Instructions**
 
 -	[Proctor Instructions](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/proctorconfiguration.md)
+
+TODO
+====
+
+1.	Make standalone
+2.	Remove NAT NETCONF section
+3.	Remove remote license requirements
+4.	Remove server requirements
+5.	Dont do with 100+ people
