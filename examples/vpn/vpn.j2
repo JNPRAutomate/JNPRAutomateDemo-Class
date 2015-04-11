@@ -8,8 +8,8 @@ set security zones security-zone vpn interfaces {{ vpn.tunnel_int }}
 set security zones security-zone vpn host-inbound-traffic system-services ping
 set security zones security-zone vpn host-inbound-traffic system-services netconf
 set security zones security-zone vpn host-inbound-traffic system-services ssh
-set security zones security-zone vpn host-inbound-traffic system-services ospf
-set security zones security-zone vpn host-inbound-traffic system-services bgp
+set security zones security-zone vpn host-inbound-traffic protocols ospf
+set security zones security-zone vpn host-inbound-traffic protocols bgp
 
 
 set security zones security-zone untrust host-inbound-traffic system-services ike
