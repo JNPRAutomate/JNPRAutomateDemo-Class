@@ -24,8 +24,8 @@ The course is divided into multiple steps.
 2.	Hands On Lab
 
 	1.	Configuring NAT
-	  	1.	[Configuring NAT with NETCONF](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/configuringnat.md)
-		2. [Configuring NAT with Ansible](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student)
+		1.	[Configuring NAT with NETCONF](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/configuringnat.md)
+		2.	[Configuring NAT with Ansible](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/configuringnatwansible.md)
 	2.	[Basic Firewall Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/basicfwpolicies.md)
 	3.	[Registering your host](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/registeringyourhost.md)
 	4.	[VPN connection to headend](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/vpnconnectiontoheadend.md)
@@ -50,7 +50,5 @@ TODO
 ====
 
 1.	Make standalone
-2.	Remove NAT NETCONF section
-3.	Remove remote license requirements
-4.	Remove server requirements
-5.	Dont do with 100+ people
+2.	Remove remote license requirements
+3.	Remove server requirements
