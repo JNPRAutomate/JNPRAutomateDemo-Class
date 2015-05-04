@@ -6,7 +6,7 @@ Now it is time to start using some of the more advanced firewall capabilities. T
 Creating Application Policies with Ansible
 ==========================================
 
-Before we created basic firewall policies using Ansible. Now we will create application firewall policies. While the concept os the same there is an additional challenge. In a basic firewall policy you can add what amounts top just ports now you have to manage the applications that go over those ports. Typically you will want to apply many more specific applications that you want to block. You can also add other elements such as application groups. Because of this managing AppFW policies can be quite tedious. But as we will see
+Before we created basic firewall policies using Ansible. Now we will create application firewall policies. While the concept is the same there is an additional challenge. In a basic firewall policy you can add what amounts to just ports now you have to manage the applications that go over those ports. Typically you will want to apply many more specific applications that you want to block. You can also add other elements such as application groups. Because of this managing AppFW policies can be quite tedious. But as we will see there are a variety of methods and tools we can employ to simplify the process.
 
 Reviewing the playbook
 ----------------------
