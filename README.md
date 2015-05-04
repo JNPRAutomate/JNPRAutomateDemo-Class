@@ -45,10 +45,11 @@ The course is divided into multiple steps.
 **Proctor Instructions**
 
 -	[Proctor Instructions](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/proctorconfiguration.md)
+- [Classrom Handout](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/tree/master/handouts)
+
 
 TODO
 ====
 
 1.	Make standalone
 2.	Remove remote license requirements
-3.	Remove server requirements
