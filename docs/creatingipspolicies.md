@@ -181,7 +181,7 @@ To run the playbook you must use the "ansible-playbook" command. We must specify
 Ensure before running the command you are in the "**ansible**" directory.
 
 ```bash
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ansible-playbook -i inventory.yml playbooks/idp_policies.yml
+vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Class/ansible$ ansible-playbook -i inventory.yml playbooks/idp_policies.yml
 ```
 
 **Playbook Run Example**
@@ -189,7 +189,7 @@ vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ansible-playbook -
 Once run the output should look like the following
 
 ```bash
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ansible-playbook -i inventory.yml playbooks/idp_policies.yml
+vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Class/ansible$ ansible-playbook -i inventory.yml playbooks/idp_policies.yml
  _______________________________
 < PLAY [Configure IPS policies] >
  -------------------------------
@@ -256,7 +256,7 @@ changed: [172.16.0.1]
 
 172.16.0.1                 : ok=4    changed=3    unreachable=0    failed=0
 
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$
+vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Class/ansible$
 ```
 
 **Validating the playbook run**

@@ -101,7 +101,7 @@ vagrant box add juniper/netdevops-ubuntu1404 /Volumes/SECSUMMIT/vagrant_boxes/ne
 vagrant box add juniper/ffp-12.1X47-D20.7 /Volumes/SECSUMMIT/vagrant_boxes/junos-vsrx-X47-D20.7-virtualbox.box
 ```
 
-Install and launch both (from the the JNPRAutomateDemo-Student folder): (it's recommended that you only do this if you're ready for the boxes to be running)
+Install and launch both (from the the JNPRAutomateDemo-Class folder): (it's recommended that you only do this if you're ready for the boxes to be running)
 
 ```bash
 vagrant up
@@ -121,7 +121,7 @@ Vagrant Global Status
 With the workflow of vagrant it is possible to have many virtual machines running without you being aware of this happening. The only indication of this being a problem is your laptop will begin to run very slowly. To see if you have vagrant hosts running you can use the command "vagrant global-status"
 
 ```
-[rcameron:~/code/JNPRAutomateDemo-Student] master(+31/-0) ± vagrant global-status
+[rcameron:~/code/JNPRAutomateDemo-Class] master(+31/-0) ± vagrant global-status
 id       name       provider      state       directory
 --------------------------------------------------------------------------------------------
 86a431a  default    vmware_fusion not running /Users/rcameron/vagrant/ffp-12.1X46-D20.5
@@ -129,8 +129,8 @@ id       name       provider      state       directory
 55b10f6  default    virtualbox    saved       /Users/rcameron/vagrant/happyvm
 7879af8  default    virtualbox    saved       /Users/rcameron/vagrant/precise
 b67e217  default    virtualbox    saved       /Users/rcameron/vagrant/ffppm
-2c59020  ndo        virtualbox    running     /Users/rcameron/code/JNPRAutomateDemo-Student
-ec8e606  srx        virtualbox    running     /Users/rcameron/code/JNPRAutomateDemo-Student
+2c59020  ndo        virtualbox    running     /Users/rcameron/code/JNPRAutomateDemo-Class
+ec8e606  srx        virtualbox    running     /Users/rcameron/code/JNPRAutomateDemo-Class
 
 The above shows information about all known Vagrant environments
 on this machine. This data is cached and may not be completely
@@ -138,7 +138,7 @@ up-to-date. To interact with any of the machines, you can go to
 that directory and run Vagrant, or you can use the ID directly
 with Vagrant commands from any directory. For example:
 "vagrant destroy 1a2b3c4d"
-[rcameron:~/code/JNPRAutomateDemo-Student] master(+31/-0) ±
+[rcameron:~/code/JNPRAutomateDemo-Class] master(+31/-0) ±
 ```
 
 **Run command to stop running machines**
@@ -148,5 +148,5 @@ You must get the ID of the running VM. This is the hex code in the first column.
 ```
 vagrant suspend ec8e606
 ==> srx: Saving VM state and suspending execution...
-[rcameron:~/code/JNPRAutomateDemo-Student] master(+52/-0) 7s ±
+[rcameron:~/code/JNPRAutomateDemo-Class] master(+52/-0) 7s ±
 ```

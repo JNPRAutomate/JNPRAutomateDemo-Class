@@ -8,7 +8,7 @@ Proctor VMs
 
 The proctor VMs are all run via Vagrant with VirtualBox. The vagrant file is located in the proctor directory at the root of the repository.
 
-There are three virtual machines contained within the proctor vagrant file. Please review the [topology](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/topologyoverview.md) as needed. The NetDevOps public and vSRX headend use fixed IP addresses. This simplifies the configuration within various modules of the lab. It is suggested to run the headend on a host within 16GB of RAM and a quad-core processor. It is possible to run a student VM set and the proctor VM set on the same host. However as you bring up more and more client hosts it may tax the headend SRX.
+There are three virtual machines contained within the proctor vagrant file. Please review the [topology](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/topologyoverview.md) as needed. The NetDevOps public and vSRX headend use fixed IP addresses. This simplifies the configuration within various modules of the lab. It is suggested to run the headend on a host within 16GB of RAM and a quad-core processor. It is possible to run a student VM set and the proctor VM set on the same host. However as you bring up more and more client hosts it may tax the headend SRX.
 
 -	NetDevOps Public
 

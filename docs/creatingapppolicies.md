@@ -162,7 +162,7 @@ To run the playbook you must use the "ansible-playbook" command. We must specify
 Ensure before running the command you are in the "**ansible**" directory.
 
 ```bash
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ansible-playbook -i inventory.yml playbooks/appfw_policies.yml
+vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Class/ansible$ ansible-playbook -i inventory.yml playbooks/appfw_policies.yml
 ```
 
 **Playbook Run Example**
@@ -170,7 +170,7 @@ vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ansible-playbook -
 Once run the output should look like the following
 
 ```bash
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ansible-playbook -i inventory.yml playbooks/appfw_policies.yml
+vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Class/ansible$ ansible-playbook -i inventory.yml playbooks/appfw_policies.yml
  _______________________________________
 < PLAY [Configure AppFirewall policies] >
  ---------------------------------------
@@ -243,7 +243,7 @@ ok: [172.16.0.1]
 Now connect to your vSRX instance from your NetDevOpsVM and validate the change
 
 ```bash
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ssh root@172.16.0.1
+vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Class/ansible$ ssh root@172.16.0.1
 Password:
 --- JUNOS 12.1X47-D20.7 built 2015-03-03 21:53:50 UTC
 root@NetDevOps-SRX01% cli
@@ -331,7 +331,7 @@ root@NetDevOps-SRX01> exit
 root@NetDevOps-SRX01% exit
 logout
 Connection to 172.16.0.1 closed.
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$
+vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Class/ansible$
 ```
 
 Testing

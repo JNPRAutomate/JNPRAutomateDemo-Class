@@ -116,7 +116,7 @@ To run the playbook you must use the "ansible-playbook" command.
 Ensure before running the command you are in the "**ansible**" directory.
 
 ```bash
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ansible-playbook -i inventory.yml playbooks/basic_nat_policies.yml
+vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Class/ansible$ ansible-playbook -i inventory.yml playbooks/basic_nat_policies.yml
 ```
 
 **Playbook Run Example**

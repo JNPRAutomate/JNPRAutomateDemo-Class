@@ -4,7 +4,7 @@ Network and Security Automation Workshop : PROCTOR MODE :
 
 This directory outlines the proctor side of the vSRX based automation lab.  There are number of proctor only steps to setup and manage on this side.
 
-Refere to the [Topology Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Student/blob/master/docs/topologyoverview.md) as needed for the view into the proctor setup.
+Refere to the [Topology Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/topologyoverview.md) as needed for the view into the proctor setup.
 
 Setup prior to beginning lab:
 1. Headend vSRX vm.
@@ -17,7 +17,7 @@ Setup prior to beginning lab:
 cd into the 'proctor' directory - your path should be similar to this:
 
     sjunkin-mbp:proctor sjunkin$ pwd
-    /Users/sjunkin/sandbox/JNPRAutomateDemo-Student/proctor
+    /Users/sjunkin/sandbox/JNPRAutomateDemo-Class/proctor
 
 run the following command:
 
@@ -32,7 +32,7 @@ For reggie setup:-
 On your hosting systems, inside the proctor directroy:
 
     sjunkin-mbp:proctor sjunkin$ pwd
-    /Users/sjunkin/sandbox/JNPRAutomateDemo-Student/proctor
+    /Users/sjunkin/sandbox/JNPRAutomateDemo-Class/proctor
 
     vagrant ssh ndo_public
     cd /vagrant/proctor/ansible

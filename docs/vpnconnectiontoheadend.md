@@ -242,7 +242,7 @@ Now connect to your vSRX instance from your NetDevOpsVM and validate the change.
 First, lets verify our Phase 1 configuration:
 
 ```bash
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Student/ansible$ ssh root@172.16.0.1
+vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Class/ansible$ ssh root@172.16.0.1
 Password:
 --- JUNOS 12.1X47-D20.7 built 2015-03-03 21:53:50 UTC
 root@NetDevOps-SRX01% cli
