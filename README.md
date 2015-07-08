@@ -3,8 +3,7 @@ Network and Security Automation Workshop
 
 This repository contains an entire class on creating network automation. It utilizes vSRX and the NetDevOps VM (an Ubuntu development environment). In the course of the lab you will build a multi-node vSRX topology connecting to a single headend.
 
-Course Steps
-------------
+# Course Steps
 
 The course is divided into multiple steps.
 
@@ -52,5 +51,4 @@ TODO
 	-   Headend SRX - 2GB RAM, 2 vCPU
 	-	Student SRX - 3GB RAM, 2 vCPU
 	-   Student Automation Host - 512MB RAM
-2.	Make standalone
 3.	Remove remote license requirements

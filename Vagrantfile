@@ -8,8 +8,10 @@ require "vagrant-host-shell"
 require "vagrant-junos"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  #STUDENT VM
   config.vm.define "ndo", primary: true do |ndo|
-    ndo.vm.box = "juniper/netdevops-ubuntu1404"
+    ndo.vm.box = "juniper/netdevops-ubuntu1404-headless"
     ndo.vm.hostname = "NetDevOps-Student"
     ndo.vm.network "private_network",
                    ip: "172.16.0.10",
@@ -19,10 +21,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     ndo.vm.provider "virtualbox" do |v|
       # comment out to disable gui from starting
-      v.gui = true
-      # comment out below lines if you disable gui
-      v.customize ["modifyvm", :id, "--vram", "128"]
-      v.customize ["modifyvm", :id, "--accelerate3d", "on"]
+      v.gui = false
+      v.customize ["modifyvm", :id, "--memory", "512"]
     end
 
     ndo.vm.provision "shell" do |s|
@@ -33,13 +33,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "srx" do |srx|
     srx.vm.box = "juniper/ffp-12.1X47-D20.7"
-    srx.vm.hostname = "NetDevOps-SRX01"
+    srx.vm.hostname = "Student-SRX01"
     srx.vm.network "private_network",
                    ip: "172.16.0.1",
                    nic_type: 'virtio',
                    virtualbox__intnet: "NetDevOps-StudentInternal"
-    srx.vm.network "public_network",
-                   nic_type: 'virtio'
+    srx.vm.network "private_network",
+                   ip: "10.10.0.10",
+                   netmask: "255.255.252.0",
+                   nic_type: 'virtio',
+                   virtualbox__intnet: "NetDevOps-Public"
 
     srx.vm.synced_folder "", "/vagrant", disabled: true
 
@@ -50,7 +53,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       v.check_guest_additions = false
     end
 
-    srx.vm.provision "file", source: "scripts/srx-setup.sh", destination: "/tmp/srx-setup.sh"
+    srx.vm.provision "file", source: "scripts/student-srx-setup.sh", destination: "/tmp/srx-setup.sh"
     srx.vm.provision :host_shell do |host_shell|
       # provides the inital configuration
       host_shell.inline = 'vagrant ssh srx -c "/usr/sbin/cli -f /tmp/srx-setup.sh"'
