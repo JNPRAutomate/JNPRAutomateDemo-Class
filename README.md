@@ -50,6 +50,6 @@ TODO
 	-	Backend Host - 512MB RAM, 1 vCPU
 	-   Headend SRX - 2GB RAM, 2 vCPU
 	-	Student SRX - 3GB RAM, 2 vCPU
-	-   Student Automation Host - 512MB RAM
-2.  Support VMware Desktop
+	-   Student Automation Host - 512MB RAM, 1 vCPU
+2.  Support VMware Workstation, Fusion, and Virtual Box
 3.	Remove remote license requirements

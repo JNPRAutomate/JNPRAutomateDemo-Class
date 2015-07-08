@@ -88,4 +88,56 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       host_shell.inline = 'vagrant ssh srx -c "/usr/sbin/cli -f /tmp/srx-setup.sh"'
     end
   end
+
+  #VM 3
+  #Headend SRX
+  config.vm.define "srx_headend" do |srx|
+    srx.vm.box = "juniper/ffp-12.1X47-D20.7"
+    srx.vm.box_version = ">= 0.5.0"
+    srx.vm.hostname = "Headend-SRX02"
+    srx.vm.provider "virtualbox" do |v|
+      v.check_guest_additions = false
+    end
+    srx.vm.network "private_network",
+                   ip: "10.10.0.5",
+                   netmask: "255.255.252.0",
+                   nic_type: 'virtio',
+                   virtualbox__intnet: "NetDevOps-Public"
+    srx.vm.network "private_network",
+                   ip: "192.168.10.1",
+                   nic_type: 'virtio',
+                   virtualbox__intnet: "NetDevOps-Private"
+    srx.vm.synced_folder "", "/vagrant", disabled: true
+
+    #Virtualbox
+    srx.vm.provider "virtualbox" do |v|
+      v.customize ["modifyvm", :id, "--memory", "2048"]
+      v.check_guest_additions = false
+    end
+
+    #VMware configuration
+    #vmnet0 for Internal Network
+    #vmnet1 for External Network
+    ndo.vm.provider "vmware_fusion" do |v|
+      v.vmx["memsize"] = "2048"
+      v.vmx["ethernet1.generatedAddress"] = nil
+      v.vmx["ethernet1.connectionType"] = "custom"
+      v.vmx["ethernet1.present"] = "TRUE"
+      v.vmx["ethernet1.vnet"] = "vmnet2"
+      v.vmx["ethernet2.generatedAddress"] = nil
+      v.vmx["ethernet2.connectionType"] = "custom"
+      v.vmx["ethernet2.present"] = "TRUE"
+      v.vmx["ethernet2.vnet"] = "vmnet1"
+    end
+
+    srx.vm.provision "file", source: "scripts/headend-srx-setup.sh", destination: "/tmp/srx-setup.sh"
+    srx.vm.provision "file", source: "scripts/headend-srx-vpnstints.sh", destination: "/tmp/srx-vpnstints.sh"
+    srx.vm.provision :host_shell do |host_shell|
+      host_shell.inline = 'vagrant ssh vsrx_headend -c "/usr/sbin/cli -f /tmp/srx-setup.sh"'
+    end
+
+    srx.vm.provision :host_shell do |host_shell|
+        host_shell.inline = 'vagrant ssh vsrx_headend -c "/usr/sbin/cli -f /tmp/srx-vpnstints.sh"'
+    end
+  end
 end
