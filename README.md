@@ -1,8 +1,6 @@
 Network and Security Automation Workshop
 ========================================
 
-[![Join the chat at https://gitter.im/JNPRAutomate/JNPRAutomateDemo-Class](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/JNPRAutomate/JNPRAutomateDemo-Class?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 This repository contains an entire class on creating network automation. It utilizes vSRX and the NetDevOps VM (an Ubuntu development environment). In the course of the lab you will build a multi-node vSRX topology connecting to a single headend.
 
 Course Steps
