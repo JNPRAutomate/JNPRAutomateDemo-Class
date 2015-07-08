@@ -56,7 +56,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                    netmask: "255.255.252.0",
                    nic_type: 'virtio',
                    virtualbox__intnet: "NetDevOps-Public"
-
     srx.vm.synced_folder "", "/vagrant", disabled: true
 
     #Virtualbox
@@ -68,8 +67,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     #VMware configuration
+    #vmnet0 for Internal Network
+    #vmnet1 for External Network
     ndo.vm.provider "vmware_fusion" do |v|
       v.vmx["memsize"] = "3072"
+      v.vmx["ethernet1.generatedAddress"] = nil
+      v.vmx["ethernet1.connectionType"] = "custom"
+      v.vmx["ethernet1.present"] = "TRUE"
+      v.vmx["ethernet1.vnet"] = "vmnet0"
+      v.vmx["ethernet2.generatedAddress"] = nil
+      v.vmx["ethernet2.connectionType"] = "custom"
+      v.vmx["ethernet2.present"] = "TRUE"
+      v.vmx["ethernet2.vnet"] = "vmnet1"
     end
 
     #Provisioning
