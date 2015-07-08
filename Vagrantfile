@@ -9,7 +9,8 @@ require "vagrant-junos"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  #STUDENT VM
+  #VM1
+  #Student VM
   config.vm.define "ndo", primary: true do |ndo|
     ndo.vm.box = "juniper/netdevops-ubuntu1404-headless"
     ndo.vm.hostname = "NetDevOps-Student"
@@ -19,18 +20,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ndo.vm.synced_folder "", "/vagrant"
     ndo.ssh.password = "vagrant"
 
+    #Virtualbox
     ndo.vm.provider "virtualbox" do |v|
-      # comment out to disable gui from starting
       v.gui = false
       v.customize ["modifyvm", :id, "--memory", "512"]
     end
 
+    #VMware configuration
+    ndo.vm.provider "vmware_fusion" do |v|
+      v.vmx["memsize"] = "512"
+      v.vmx["ethernet1.generatedAddress"] = nil
+      v.vmx["ethernet1.connectionType"] = "custom"
+      v.vmx["ethernet1.present"] = "TRUE"
+      v.vmx["ethernet1.vnet"] = "vmnet0"
+    end
+
+    #Provisioning
     ndo.vm.provision "shell" do |s|
       # this script provisions the ndo box for you
       s.path = "scripts/ndo-setup.sh"
     end
   end
 
+  #VM2
+  #Student SRX
   config.vm.define "srx" do |srx|
     srx.vm.box = "juniper/ffp-12.1X47-D20.7"
     srx.vm.hostname = "Student-SRX01"
@@ -46,6 +59,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     srx.vm.synced_folder "", "/vagrant", disabled: true
 
+    #Virtualbox
     srx.vm.provider "virtualbox" do |v|
       # increase RAM to support AppFW and IPS
       # comment out to make it run at 2GB
@@ -53,6 +67,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       v.check_guest_additions = false
     end
 
+    #VMware configuration
+    ndo.vm.provider "vmware_fusion" do |v|
+      v.vmx["memsize"] = "3072"
+    end
+
+    #Provisioning
     srx.vm.provision "file", source: "scripts/student-srx-setup.sh", destination: "/tmp/srx-setup.sh"
     srx.vm.provision :host_shell do |host_shell|
       # provides the inital configuration
