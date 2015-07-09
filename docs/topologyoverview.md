@@ -1,15 +1,23 @@
+# Lab Hardware requirements
+
+-	Computer running Windows, Mac or Linux
+-	8GB Ram and 12GB Disk Space
+- 	Dual or quad core CPU
+-	[Vagrant](http://www.vagrantup.com/downloads.html)
+-	[VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+-	Student Vagrant VMs
+-	vSRX Host
+-	[NetDevOps Ubuntu 14.04](https://atlas.hashicorp.com/juniper/boxes/netdevops-ubuntu1404)
+
+For RAM and CPU more is always better!
+
 Topology
 ========
 
-There can be anywhere from one to ~200 students operating on this topology at once. The two limitations are the Headend vSRX performance and the subnet size of the shared LAN.
-
-This is the network topology required to successfully create the lab. The components section defines what is required to run the lab. Your choices in hardware can vary. This is based upon a working configuration for the lab.
-
-The IP Address ranges are broken out for each section of the lab to be visually different than any other part. The benefit here is that it is very clear to you what part of the lab that you are using. After staring at IP addresses for a while they tend to blend together and this can cause confusion.
+The lab IP Address ranges are broken out for each section of the lab to be visually different than any other part. The benefit here is that it is very clear to you what part of the lab that you are using. After staring at IP addresses for a while they tend to blend together and this can cause confusion.
 
 LAB IP Subnets
 --------------
-
 -	Shared LAN
 	-	10.10.0.0/22
 -	Student Lab
@@ -23,74 +31,52 @@ LAB IP Subnets
 	-	This ensures that you know you have correctly configured your device if you can access this part of the network
 
 ```
-
-  +--------------------------------------------+
-  |  Proctor Host                              |            
-  |                        +------------+      |            
-  |                        |            |      |            
-  |                        | NetDevOps  |      |            
-  |                        | Private    |      |            
-  |                        | Server     |      |            
-  |                        |            |      |            
-  |                        +--+---------+      |            
-  |                           |192.168.10.10   |            
-  |                           |                |            
-  |                           |192.168.10.0/24 |            
-  |                           |                |            
-  |                           |192.168.10.1    |            
-  |     +------------+     +--+---------+      |            
-  |     |            |     |            |      |            
-  |     | NetDevOps  |     |            |      |            
-  |     | Public     |     |   vSRX     |      |            
-  |     | Server     |     |  Headend   |      |            
-  |     |            |     |            |      |            
-  |     +-+----------+     +------------+      |            
-  |       | 10.10.0.10     |    10.10.0.5      |            
-  +--------------------------------------------+            
-          |                |                                
-          +-----+----------+---+                            
-                |              |                            
-                |  Shared LAN  | 10.10.0.0/22               
-                +------+-------+                            
-                       |                                    
-+----------------------------------------------+            
-|                      |                       |            
-|                      |  DHCP Interface       |            
-|                +-----+------+                |            
-|                |            |                |            
-|                |            |                |            
-|                |   vSRX     |                |            
-|                |            |                |            
-|                |            |                |            
-|                +-----+------+                |            
-|                      |172.16.0.1             |            
-|                      |                       |            
-|        172.16.0.0/24 |                       |            
-|                      |                       |            
-|                      |DHCP Interface         |            
-|                +-----+------+                |            
-|                |            |                |            
-|                |NetDevOps VM|                |            
-|                |            |                |            
-|                |            |                |            
-|                |            |                |            
-|                +------------+                |            
-|                                              |            
-|Student System                                |            
-+----------------------------------------------+                                                                    
+                   +------------+                  
+                   |            |                  
+                   | NetDevOps  |                  
+                   | Private    |                  
+                   | Server     |                  
+                   |            |                  
+                   +--+---------+                  
+                      | 192.168.10.10               
+                      |                            
+                      | 192.168.10.0/24             
+                      |                            
+                      | 192.168.10.1                
+                   +--+---------+                  
+                   |            |                  
+                   |            |                  
+                   |   vSRX     |                  
+                   |  Headend   |                  
+                   |            |                  
+                   +--+---------+                  
+                      | 10.10.0.5                  
+                      |                                
+                      | 10.10.0.0/22               
+                      |                                   
+                      | 10.10.0.10                   
+                +-----+------+                            
+                |            |                            
+                |            |                            
+                |   vSRX     |                          
+                |            |                          
+                |            |                          
+                +-----+------+                          
+                      | 172.16.0.1                       
+                      |                                 
+                      | 172.16.0.0/24                                
+                      |                                 
+                      | 172.16.0.10                  
+                +-----+------+                          
+                |            |                          
+                |NetDevOps VM|                          
+                |            |                          
+                |            |                          
+                |            |                          
+                +------------+                                                                                      
 ```
-
 Student Side
 ------------
-
--	Student
-	-	Laptop running Windows, Mac or Linux
-	-	4GB Ram and 8GB Disk Space
-	-	[Vagrant](http://www.vagrantup.com/downloads.html)
-	-	[VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-	-	Student Vagrant VMs
-	-	vSRX Host
-	-	[NetDevOps Ubuntu 14.04](https://atlas.hashicorp.com/juniper/boxes/netdevops-ubuntu1404)
 
 Each student is expected to have their own laptop to run the lab on. The tools used are supported on Windows, Mac OS X, and Linux.
 
@@ -109,7 +95,7 @@ The vSRX VM is based upon Junos version 12.1X47-D20. This version gives you a wi
 ```
 +----------------------------------------------+            
 |                      |                       |            
-|                      |  DHCP Interface       |            
+|                      |  10.10.0.10           |            
 |                +-----+------+                |            
 |                |            |                |            
 |                |            |                |            
@@ -117,11 +103,11 @@ The vSRX VM is based upon Junos version 12.1X47-D20. This version gives you a wi
 |                |            |                |            
 |                |            |                |            
 |                +-----+------+                |            
-|                      |172.16.0.1             |            
+|                      | 172.16.0.1            |            
 |                      |                       |            
 |        172.16.0.0/24 |                       |            
 |                      |                       |            
-|                      |DHCP Interface         |            
+|                      | 172.16.0.10           |            
 |                +-----+------+                |            
 |                |            |                |            
 |                |NetDevOps VM|                |            
@@ -133,56 +119,26 @@ The vSRX VM is based upon Junos version 12.1X47-D20. This version gives you a wi
 |Student System                                |            
 +----------------------------------------------+   
 ```
-
-Shared LAN
-----------
-
-The shared LAN segment is used to interconnect all of the students and the proctors lab. Optionally you can have a default gateway providing Internet access to the lab.
-
-```
-          |                |                      
-          +-----+----------+---+                            
-                |              |                            
-                |  Shared LAN  | 10.10.0.0/22               
-                +------+-------+                            
-                       |                       
-```
-
-Proctor Side
+Headend
 ------------
 
--	Proctor Host
-	-	A NetDevOps hardware host or equivalent
-		-	16GB RAM, 80GB Disk, and a VT-x Intel CPU
-	-	vSRX Headend
-	-	[NetDevOps Ubuntu 14.04](https://atlas.hashicorp.com/juniper/boxes/netdevops-ubuntu1404)
-		-	Public Server
-		-	Private Server
-
-The proctor side of the lab runs on either a laptop or another device. Due to the amount of activity on these hosts it is recommended to run it on a stand-alone device.
+The headend runs on the same host as the student side of the VM. The topology is
+simplified so this can be run on one single host.
 
 -	vSRX Headend
 	-	This device will act as the headend for all IPsec terminations
 	-	It will also secure access to the private server lab
--	NetDevOps Public Server
-	-	This provides services for the students to use
-	-	Services
-		-	Web Server
-		-	Code repository
-		-	Registration server
-		-	DNS Server
-		-	Central Ansible Host
 -	NetDevOps Private Server
 	-	This server provides services that are only accessible over NAT or a VPN connection behind the vSRX headend
 	-	This server should only be accessible if the student has correctly configured steps of their labs
 	-	Services
 		-	Web Server
 		-	DNS Server
-
+		
 ```
 
   +--------------------------------------------+
-  |  Proctor Host                              |            
+  |  Headend                                   |            
   |                        +------------+      |            
   |                        |            |      |            
   |                        | NetDevOps  |      |            
@@ -195,13 +151,13 @@ The proctor side of the lab runs on either a laptop or another device. Due to th
   |                           |192.168.10.0/24 |            
   |                           |                |            
   |                           |192.168.10.1    |            
-  |     +------------+     +--+---------+      |            
-  |     |            |     |            |      |            
-  |     | NetDevOps  |     |            |      |            
-  |     | Public     |     |   vSRX     |      |            
-  |     | Server     |     |  Headend   |      |            
-  |     |            |     |            |      |            
-  |     +-+----------+     +------------+      |            
-  |       | 10.10.0.10     |    10.10.0.5      |            
+  |                        +--+---------+      |            
+  |                        |            |      |            
+  |                        |            |      |            
+  |                        |   vSRX     |      |            
+  |                        |  Headend   |      |            
+  |                        |            |      |            
+  |                        +------------+      |            
+  |                        |    10.10.0.5      |            
   +--------------------------------------------+  
 ```

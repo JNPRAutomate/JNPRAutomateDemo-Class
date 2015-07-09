@@ -69,7 +69,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #VMware configuration
     #vmnet0 for Internal Network
     #vmnet1 for External Network
-    ndo.vm.provider "vmware_fusion" do |v|
+    srx.vm.provider "vmware_fusion" do |v|
       v.vmx["memsize"] = "3072"
       v.vmx["ethernet1.generatedAddress"] = nil
       v.vmx["ethernet1.connectionType"] = "custom"
@@ -95,9 +95,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     srx.vm.box = "juniper/ffp-12.1X47-D20.7"
     srx.vm.box_version = ">= 0.5.0"
     srx.vm.hostname = "Headend-SRX02"
-    srx.vm.provider "virtualbox" do |v|
-      v.check_guest_additions = false
-    end
     srx.vm.network "private_network",
                    ip: "10.10.0.5",
                    netmask: "255.255.252.0",
@@ -118,7 +115,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #VMware configuration
     #vmnet0 for Internal Network
     #vmnet1 for External Network
-    ndo.vm.provider "vmware_fusion" do |v|
+    srx.vm.provider "vmware_fusion" do |v|
       v.vmx["memsize"] = "2048"
       v.vmx["ethernet1.generatedAddress"] = nil
       v.vmx["ethernet1.connectionType"] = "custom"
