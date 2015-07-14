@@ -112,7 +112,6 @@ simplified so this can be run on one single host.
 		-	DNS Server
 
 ```
-
   +--------------------------------------------+
   |  Headend                                   |            
   |                        +------------+      |            

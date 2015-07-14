@@ -12,20 +12,22 @@ Vagrant is a virtual machine management tool. It manages the downloading, provis
 
 **Download Locations**
 
--	[Mac OS X](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.dmg)
--	[Windows](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.msi)
--	[Linux 64-bit DEB](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb)
--	[Linux 32-bit DEB](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_i686.deb)
--	[Linux 64-bit RPM](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.rpm)
--	[Linux 32-bit RPM](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_i686.rpm)
+-	[Mac OS X](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3.dmg)
+-	[Windows](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3.msi)
+-	[Linux 64-bit DEB](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3_x86_64.deb)
+-	[Linux 32-bit DEB](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3_i686.deb)
+-	[Linux 64-bit RPM](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3_x86_64.rpm)
+-	[Linux 32-bit RPM](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3_i686.rpm)
 
 **Installation Instructions**
 
-A copy of Vagrant is available for installation on your USB thumb drive, located at `windows_software\vagrant_1.7.2.msi`, or `mac_software/vagrant_1.7.2.dmg`.
+Please download and install the correct versions
 
 Install this executable on your operating system of choice just as you would any software for that platform. On Windows, you will need to reboot, but you can wait until after VirtualBox is installed.
 
 ### Vagrant Plugins
+
+To provide additional features into Vagrant we must first install a few additional plugins for Vagrant. The first plugin "vagrant-junos" is a driver to help configure and control Junos. The second plugin, "vagrant-host-shell", is used to assist in the configuration of Junos.
 
 The vSRX boxes require two plugins, namely:
 
@@ -34,20 +36,13 @@ The vSRX boxes require two plugins, namely:
 
 These can be installed with the following commands (launch a command prompt on Windows (`cmd`), or a Terminal session on Mac (located in your Applications/Utilities folder):
 
-#### Windows
+**Installation Instructions**
 
-(where `E:` is the drive where the SECSUMMIT USB thumb drive can be found)
-
-```
-vagrant plugin install E:\vagrant_plugins\vagrant-junos-0.2.0.gem
-vagrant plugin install E:\vagrant_plugins\vagrant-host-shell-0.0.4.gem
-```
-
-#### Mac
+This will fetch the latest version of the vagrant plugins from the Internet. Both plugins are less than 1MB in size so the installation should be simple.
 
 ```
-vagrant plugin install /Volumes/SECSUMMIT/vagrant_plugins/vagrant-junos-0.2.0.gem
-vagrant plugin install /Volumes/SECSUMMIT/vagrant_plugins/vagrant-host-shell-0.0.4.gem
+vagrant plugin install vagrant-junos
+vagrant plugin install vagrant-host-shell
 ```
 
 To check for updates in the future, a simple `vagrant plugin update` will ensure everything is up-to-date.
@@ -59,17 +54,21 @@ For the lab we will be using VirtualBox as our virtualization manager. This tool
 
 When installing on Windows it will typically install a network driver. It will prompt you to click "Continue" to take this action. Please hit continue to install the driver.
 
--	[Mac OS X](http://download.virtualbox.org/virtualbox/4.3.26/VirtualBox-4.3.26-98988-OSX.dmg)
--	[Windows](http://download.virtualbox.org/virtualbox/4.3.26/VirtualBox-4.3.26-98988-Win.exe)
--	[Linux 64-bit DEB](http://download.virtualbox.org/virtualbox/4.3.26/virtualbox-4.3_4.3.26-98988~Ubuntu~raring_amd64.deb)
--	[Linux 32-bit DEB](http://download.virtualbox.org/virtualbox/4.3.26/virtualbox-4.3_4.3.26-98988~Ubuntu~raring_i386.deb)
+-	[Mac OS X](http://download.virtualbox.org/virtualbox/5.0.0/VirtualBox-5.0.0-101573-OSX.dmg)
+-	[Windows](http://download.virtualbox.org/virtualbox/5.0.0/VirtualBox-5.0.0-101573-Win.exe)
+-	[Linux 64-bit DEB](http://download.virtualbox.org/virtualbox/5.0.0/virtualbox-5.0_5.0.0-101573~Ubuntu~trusty_amd64.deb)
+-	[Linux 32-bit DEB](http://download.virtualbox.org/virtualbox/5.0.0/virtualbox-5.0_5.0.0-101573~Ubuntu~trusty_i386.deb)
 -	[Other Linux](https://www.virtualbox.org/wiki/Linux_Downloads)
 
 **Installation Instructions**
 
-A copy of VirtualBox is available for installation on your USB thumb drive, located at `windows_software\VirtualBox-4.3.26-98988-Win.exe`, or `mac_software/VirtualBox-4.3.26-98988-OSX.dmg`.
+Please download and install Virtual Box before continuing.
 
 > Windows users: you will need to reboot your laptop before Vagrant and VirtualBox will both work.
+
+## VMware
+
+TODO
 
 Installing Boxes
 ================
@@ -110,7 +109,7 @@ vagrant up
 Validating Install
 ------------------
 
--	`vagrant version` should tell you that you're running 1.7.2, aka the latest and greatest
+-	`vagrant version` should tell you that you're running 1.7.3, aka the latest and greatest
 -	`vagrant plugin list` should include:
 	-	`vagrant-host-shell` 0.0.4 or newer
 	-	`vagrant-junos` 0.2.0 or newer

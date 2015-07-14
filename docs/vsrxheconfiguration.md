@@ -9,13 +9,11 @@ The vSRX used in the lab has three physical interfaces in the topology.
 	-	The interface is configured in a management zone and is not for transit
 	-	Uses DHCP for IP address allocation
 -	ge-0/0/1.0
-	-	Connected to the NetDevOps VM
-	-	Has a static IP address of 172.16.0.1/24
-	-	When needed to connect to the vSRX from the NetDevOps VM this is the interface and IP to use
+	-	Connected to the Private server
+	-	Has a static IP address of 192.168.10.1/24
 -	ge-0/0/2.0
-	-	This interface connects to the headend vSRX
-	-   Has a static IP address of 10.10.0.10/22
-
+	-	This interface connects to the student vSRX
+	-   Has a static IP address of 10.10.0.5/22
 
 Diagram
 -------
@@ -24,8 +22,8 @@ Diagram
                                  +
                                  |
                                  |
-                   vSRX Headend  |   ge-0/0/2.0
-                                 |   10.10.0.10/22
+                   Lab Interface |   ge-0/0/2.0
+                   Student vSRX  |   10.10.0.5/22
                                  |
                                  |
                                  |
