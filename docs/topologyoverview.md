@@ -7,7 +7,7 @@
 -	[VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 -	Student Vagrant VMs
 -	vSRX Host
--	[NetDevOps Ubuntu 14.04](https://atlas.hashicorp.com/juniper/boxes/netdevops-ubuntu1404)
+-	[NetDevOps Ubuntu 14.04](https://atlas.hashicorp.com/juniper/boxes/netdevops-ubuntu1404-headless)
 
 For RAM and CPU more is always better!
 
@@ -31,49 +31,25 @@ LAB IP Subnets
 	-	This ensures that you know you have correctly configured your device if you can access this part of the network
 
 ```
-                   +------------+                  
-                   |            |                  
-                   | NetDevOps  |                  
-                   | Private    |                  
-                   | Server     |                  
-                   |            |                  
-                   +--+---------+                  
-                      | 192.168.10.10               
-                      |                            
-                      | 192.168.10.0/24             
-                      |                            
-                      | 192.168.10.1                
-                   +--+---------+                  
-                   |            |                  
-                   |            |                  
-                   |   vSRX     |                  
-                   |  Headend   |                  
-                   |            |                  
-                   +--+---------+                  
-                      | 10.10.0.5                  
-                      |                                
-                      | 10.10.0.0/22               
-                      |                                   
-                      | 10.10.0.10                   
-                +-----+------+                            
-                |            |                            
-                |            |                            
-                |   vSRX     |                          
-                |            |                          
-                |            |                          
-                +-----+------+                          
-                      | 172.16.0.1                       
-                      |                                 
-                      | 172.16.0.0/24                                
-                      |                                 
-                      | 172.16.0.10                  
-                +-----+------+                          
-                |            |                          
-                |NetDevOps VM|                          
-                |            |                          
-                |            |                          
-                |            |                          
-                +------------+                                                                                      
++------------+                   +------------+
+|            | 192.168.10.1      |            |
+|  vSRX      |                   | Pri^ate    |
+|  Headend   +--192.168.10.0/24--+ Server     |
+|            |                   |            |
+|            |     192.168.10.10 |            |
++-----+------+                   +------------+
+      | 10.10.0.5
+      |
+      | 10.10.0.0/22
+      |
+      | 10.10.0.10
++-----+------+                   +------------+
+|            | 172.16.0.1        |            |
+|            |                   | NetDevOps  |
+|   vSRX     +---172.16.0.0/24---+ VM         |
+|            |                   |            |
+|            |     172.16.0.10   |            |
++------------+                   +------------+                                                                                    
 ```
 Student Side
 ------------
@@ -127,14 +103,14 @@ simplified so this can be run on one single host.
 
 -	vSRX Headend
 	-	This device will act as the headend for all IPsec terminations
-	-	It will also secure access to the private server lab
+	-	It will also secure access to the private server
 -	NetDevOps Private Server
 	-	This server provides services that are only accessible over NAT or a VPN connection behind the vSRX headend
 	-	This server should only be accessible if the student has correctly configured steps of their labs
 	-	Services
 		-	Web Server
 		-	DNS Server
-		
+
 ```
 
   +--------------------------------------------+

@@ -132,9 +132,29 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     srx.vm.provision :host_shell do |host_shell|
       host_shell.inline = 'vagrant ssh vsrx_headend -c "/usr/sbin/cli -f /tmp/srx-setup.sh"'
     end
-
     srx.vm.provision :host_shell do |host_shell|
         host_shell.inline = 'vagrant ssh vsrx_headend -c "/usr/sbin/cli -f /tmp/srx-vpnstints.sh"'
     end
   end
+
+  #VM 4
+  config.vm.define "private_server", primary: true do |ndo|
+    ndo.vm.box = "juniper/netdevops-ubuntu1404-headless"
+    ndo.vm.box_version = ">= 0.2.6"
+    ndo.vm.hostname = "NetDevOps-Private"
+    ndo.vm.network "private_network",
+                   ip: "192.168.10.10",
+                   virtualbox__intnet: "NetDevOps-Private"
+    ndo.vm.synced_folder "../", "/vagrant", disabled: false
+
+    ndo.vm.provider "virtualbox" do |v|
+        v.gui = false
+        v.customize ["modifyvm", :id, "--memory", "512"]
+    end
+
+    ndo.vm.provision "shell" do |s|
+      s.path = "scripts/ndopri-setup.sh"
+    end
+  end
+
 end
