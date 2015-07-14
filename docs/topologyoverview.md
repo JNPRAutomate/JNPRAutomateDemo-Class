@@ -20,11 +20,10 @@ LAB IP Subnets
 --------------
 -	Shared LAN
 	-	10.10.0.0/22
+	-   This is the network used between the vSRX and the vSRX headend
 -	Student Lab
 	-	172.16.0.0/24
-	-	This will overlap with all other students
-	-	NAT will be used when communicating outside of the lab
-	-	This will make all examples apply to all users
+	-	NAT will be used when communicating outside of student vSRX
 -	Private Server
 	-	192.168.10.0/24
 	-	This portion of the lab will only be accessible via a VPN or NAT

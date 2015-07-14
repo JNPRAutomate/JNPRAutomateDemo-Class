@@ -1,4 +1,4 @@
-Student vSRX Interface Topology
+Headend vSRX Interface Topology
 =======================
 
 The vSRX used in the lab has three physical interfaces in the topology.
