@@ -152,6 +152,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         v.customize ["modifyvm", :id, "--memory", "512"]
     end
 
+    #VMware configuration
+    #vmnet0 for Private Network
+    ndo.vm.provider "vmware_fusion" do |v|
+      v.vmx["memsize"] = "512"
+      v.vmx["ethernet1.generatedAddress"] = nil
+      v.vmx["ethernet1.connectionType"] = "custom"
+      v.vmx["ethernet1.present"] = "TRUE"
+      v.vmx["ethernet1.vnet"] = "vmnet2"
+    end
+
     ndo.vm.provision "shell" do |s|
       s.path = "scripts/ndopri-setup.sh"
     end

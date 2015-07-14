@@ -8,8 +8,10 @@ This repository contains an entire class on creating network automation. It util
 The course is divided into multiple steps.
 
 ## Overview
-1.	[Topology Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/topologyoverview.md) <- Change topology
-2.	[vSRX Topology](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/vsrxconfiguration.md) <- Change topology
+1. [Getting a copy of the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/installinglab.md)
+1.	[Topology Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/topologyoverview.md)
+2.	[vSRX Topology](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/vsrxconfiguration.md)
+2.	[vSRX Headend Topology](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/vsrxheconfiguration.md)
 3.	[Software Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/softwareoverview.md)
 4.	[Installing Software](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/installingsoftware.md)
 5.	[Using Python and PyEZ Library](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/usingpyezlibrary.md)
@@ -52,4 +54,5 @@ TODO
 	-	Student SRX - 3GB RAM, 2 vCPU
 	-   Student Automation Host - 512MB RAM, 1 vCPU
 2.  Support VMware Workstation, Fusion, and Virtual Box
+	- Add in VMware instructions
 3.	Remove remote license requirements

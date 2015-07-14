@@ -81,29 +81,11 @@ Vagrant boxes can be installed with the following commands (launch a command pro
 
 **Installation Instructions**
 
-#### Windows:
-
-(where `E:` is the drive where the SECSUMMIT USB thumb drive can be found)
+When you attempt to bring up the virtual machines for the first time Vagrant will automatically download the correct boxes for you. However you may want to run the class on an airplane or a location with unreliable Internet access. If that is the case then you can also pre download the machines using the vagrant command.
 
 ```
-cp E:\vagrant_boxes\*.box C:\
-vagrant box add juniper/netdevops-ubuntu1404 C:\vagrant_boxes\netdevops-0.5.0_ubuntu-14.04_virtualbox.box
-vagrant box add juniper/ffp-12.1X47-D20.7 C:\vagrant_boxes\junos-vsrx-X47-D20.7-virtualbox.box
-```
-
-You can now delete the box files in `C:\`.
-
-#### Mac:
-
-```
-vagrant box add juniper/netdevops-ubuntu1404 /Volumes/SECSUMMIT/vagrant_boxes/netdevops-0.5.0_ubuntu-14.04_virtualbox.box
-vagrant box add juniper/ffp-12.1X47-D20.7 /Volumes/SECSUMMIT/vagrant_boxes/junos-vsrx-X47-D20.7-virtualbox.box
-```
-
-Install and launch both (from the the JNPRAutomateDemo-Class folder): (it's recommended that you only do this if you're ready for the boxes to be running)
-
-```bash
-vagrant up
+vagrant box add juniper/netdevops-ubuntu1404-headless
+vagrant box add juniper/ffp-12.1X47-D20.7
 ```
 
 Validating Install
