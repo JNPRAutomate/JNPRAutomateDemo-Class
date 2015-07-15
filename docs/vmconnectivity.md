@@ -9,3 +9,17 @@ When each VM is booted Vagrant attempts to connect to it via SSH. Once booted Va
 On Windows there is a challenge when it comes to working with Vagrant. Vagrant ideally needs access to an ssh client. Windows does not come with an SSH client. However if you install the Git package with the default settings you will be able to use ssh via its built in BASH shell. Installing this will be the easiest method to get all of the value out of Vagrant.
 
 - [Installing Git + SSH](https://git-scm.com/download/win)
+
+![Windows Install Step 1](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/Images/1_git_install.png)
+
+![Windows Install Step 2](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/api_milk_it.jpg)
+
+![Windows Install Step 3](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/api_milk_it.jpg)
+
+![Windows Install Step 4](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/api_milk_it.jpg)
+
+![Windows Install Step 5](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/api_milk_it.jpg)
+
+![Windows Install Step 6](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/api_milk_it.jpg)
+
+![Windows Install Step 7](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/api_milk_it.jpg)
