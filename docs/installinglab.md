@@ -15,6 +15,12 @@ However if you wish to install the git tool suite
 
 - [Install Full Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
+**Windows Install**
+
+On Windows there is a challenge when it comes to working with Vagrant. Vagrant ideally needs access to an ssh client. Windows does not come with an SSH client. However if you install the Git package with the default settings you will be able to use ssh via its built in BASH shell. Installing this will be the easiest method to get all of the value out of Vagrant.
+
+- [Installing Git + SSH](https://git-scm.com/download/win)
+
 # Cloning the Repository
 
 Ideally you want to use [git](https://en.wikipedia.org/wiki/Git_(software)) to download the the repository. This provides a few key benefits over downloading it as a zip file.
@@ -50,4 +56,4 @@ Git is an amazing piece of software. There is so much to learn how git works and
 
 # Entering the repository
 
-Once you have cloned or downloaded the repository you will have the minimum requirements to get started. All of the required information to run the lab is contained within the repository. Any commands referenced within the lab such as using vagrant are done within the repository. 
+Once you have cloned or downloaded the repository you will have the minimum requirements to get started. All of the required information to run the lab is contained within the repository. Any commands referenced within the lab such as using vagrant are done within the repository.

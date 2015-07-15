@@ -8,16 +8,17 @@ This repository contains an entire class on creating network automation. It util
 The course is divided into multiple steps.
 
 ## Overview
-1. [Getting a copy of the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/installinglab.md)
+1.  [Getting a copy of the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/installinglab.md)
 2.	[Topology Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/topologyoverview.md)
 3.	[vSRX Topology](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/vsrxconfiguration.md)
 4.	[vSRX Headend Topology](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/vsrxheconfiguration.md)
-5.	[Software Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/softwareoverview.md)
-6.	[Installing Software](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/installingsoftware.md)
-7.	[Using Python and PyEZ Library](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/usingpyezlibrary.md)
-8.	[Using Ansible](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/usingansible.md)
-9.	[Basic API Review](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/basicapireview.md)
-10.	[NETCONF Magic](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/netconfmagic.md)
+5.  [Connecting to your VMs](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/vmconnectivity.md)
+6.	[Software Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/softwareoverview.md)
+7.	[Installing Software](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/installingsoftware.md)
+8.	[Using Python and PyEZ Library](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/usingpyezlibrary.md)
+9.	[Using Ansible](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/usingansible.md)
+10.	[Basic API Review](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/basicapireview.md)
+11.	[NETCONF Magic](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/netconfmagic.md)
 
 ##	Hands On Lab
 1.	Configuring NAT
