@@ -12,14 +12,14 @@ On Windows there is a challenge when it comes to working with Vagrant. Vagrant i
 
 ![Windows Install Step 1](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/Images/1_git_install.png)
 
-![Windows Install Step 2](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/api_milk_it.jpg)
+![Windows Install Step 2](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/Images/2_git_install.png)
 
-![Windows Install Step 3](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/api_milk_it.jpg)
+![Windows Install Step 3](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/Images/3_git_install.png)
 
-![Windows Install Step 4](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/api_milk_it.jpg)
+![Windows Install Step 4](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/Images/4_git_install.png)
 
-![Windows Install Step 5](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/api_milk_it.jpg)
+![Windows Install Step 5](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/Images/5_git_install.png)
 
-![Windows Install Step 6](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/api_milk_it.jpg)
+![Windows Install Step 6](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/Images/6_git_install.png)
 
-![Windows Install Step 7](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/api_milk_it.jpg)
+![Windows Install Step 7](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/Images/7_git_install.png)
