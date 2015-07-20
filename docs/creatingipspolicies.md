@@ -287,26 +287,10 @@ Session Statistics:
   Policy Name : ips-policy1
   Running Detector Version : 12.6.130140822
 
-root@NetDevOps-SRX01> show security idp polic
-                                             ^
-'polic' is ambiguous.
-Possible completions:
-  policies             Show the list of currently installed policies
-  policy-commit-status  Show the status of ongoing policy compilation and load
-  policy-templates-list  Show available policy templates
 root@NetDevOps-SRX01> show security idp policies
 ID    Name                   Sessions    Memory      Detector
  3     ips-policy1            0           2720166     12.6.130140822
 
-root@NetDevOps-SRX01> shoe
-                      ^
-unknown command.
-root@NetDevOps-SRX01> show configuration id
-                                         ^
-syntax error.
-root@NetDevOps-SRX01> show configuration security isd
-                                                  ^
-syntax error.
 root@NetDevOps-SRX01> show configuration security idp
 idp-policy ips-policy1 {
     rulebase-ips {
