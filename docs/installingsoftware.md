@@ -131,3 +131,15 @@ vagrant suspend ec8e606
 ==> srx: Saving VM state and suspending execution...
 [rcameron:~/code/JNPRAutomateDemo-Class] master(+52/-0) 7s ±
 ```
+
+# Optional Text Editor
+
+During the class we are going to be editing or reviewing a set of files during the lab. You are welcome to use any text editor that your are familiar with. However if you do not have an editor in mind then please use the Atom editor from Github. It is a high-end and open source editor that can be completely customized for your needs.
+
+[![Atom Overview](http://img.youtube.com/vi/Y7aEiVwBAdk/0.jpg)](https://youtu.be/Y7aEiVwBAdk)
+
+Atom Downloads
+- [Windows](https://github.com/atom/atom/releases/download/v1.0.2/AtomSetup.exe)
+- [Mac](https://github.com/atom/atom/releases/download/v1.0.2/atom-mac.zip)
+- [Ubuntu Linux](https://github.com/atom/atom/releases/download/v1.0.2/atom-amd64.deb)
+- [Redhat/Centos Linux](https://github.com/atom/atom/releases/download/v1.0.2/atom.x86_64.rpm)

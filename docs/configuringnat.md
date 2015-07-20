@@ -187,17 +187,17 @@ Now the NAT configuration should be correctly applied to your vSRX instance.
 
 ### Validate connectivity
 
-To validate the connectity you can issue a ping command from your NetDevOps VM. If everything is working correctly you should see a response fromt he host.
+To validate the connectivity you can issue a ping command from your NetDevOps VM. If everything is working correctly you should see a response from the host.
 
 ```bash
-vagrant@NetDevOps-Student:~$ ping 10.10.0.10
-PING 10.10.0.10 (10.10.0.10) 56(84) bytes of data.
-64 bytes from 10.10.0.10: icmp_seq=1 ttl=64 time=0.482 ms
-64 bytes from 10.10.0.10: icmp_seq=2 ttl=64 time=0.480 ms
-64 bytes from 10.10.0.10: icmp_seq=3 ttl=64 time=0.520 ms
-64 bytes from 10.10.0.10: icmp_seq=4 ttl=64 time=0.548 ms
+vagrant@NetDevOps-Student:~$ ping 10.10.0.5
+PING 10.10.0.10 (10.10.0.5) 56(84) bytes of data.
+64 bytes from 10.10.0.5: icmp_seq=1 ttl=64 time=0.482 ms
+64 bytes from 10.10.0.5: icmp_seq=2 ttl=64 time=0.480 ms
+64 bytes from 10.10.0.5: icmp_seq=3 ttl=64 time=0.520 ms
+64 bytes from 10.10.0.5: icmp_seq=4 ttl=64 time=0.548 ms
 
---- 10.10.0.10 ping statistics ---
+--- 10.10.0.5 ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 2999ms
 rtt min/avg/max/mdev = 0.480/0.507/0.548/0.036 ms
 vagrant@NetDevOps-Student:~$

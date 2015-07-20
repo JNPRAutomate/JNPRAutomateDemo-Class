@@ -24,7 +24,7 @@ The course is divided into multiple steps.
 1.	Configuring NAT
 	1.	[Configuring NAT with NETCONF](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/configuringnat.md)
 	2.	[Configuring NAT with Ansible](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/configuringnatwansible.md)
-2.	[Basic Firewall Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/basicfwpolicies.md)
+2.	[Basic Firewall Policies](https://github.com/JNPRAutomate/JNPRAutosmateDemo-Class/blob/master/docs/basicfwpolicies.md)
 3.	[Registering your host](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/registeringyourhost.md)
 4.	[VPN connection to headend](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/vpnconnectiontoheadend.md)
 5.	[Enabling Dynamic Routing](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/enablingdynamicrouting.md)
@@ -42,7 +42,6 @@ The course is divided into multiple steps.
 
 **Proctor Instructions**
 
--	[Proctor Instructions](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/proctorconfiguration.md)
 - 	[Classroom Handout](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/tree/master/handouts)
 
 
