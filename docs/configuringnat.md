@@ -1,6 +1,8 @@
 Configuring NAT
 ===============
 
+This is an example of how to configure NAT via the NETCONF interface directly. It CAN be run to configure NAT and it will work correctly. However doing so is not for the feint of heart. Be careful if you are copy and pasting XML as there can be issues in incorrectly inserting characters into the NETCONF commands.
+
 Network Address Translation or NAT is a key feature on the SRX. This technology is used to swap IP addresses out in packets to hide internal IP addressing or to use a single IP address that can hide thousands behind it.
 
 In this section of the lab we will be using the manual NETCONF protocol to configure NAT. The goal here is to let you learn how to use NETCONF manually to configure NAT for your lab.
