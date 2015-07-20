@@ -56,7 +56,7 @@ set security nat source rule-set vpn_nat_out to zone vpn
 set security nat source rule-set vpn_nat_out rule interface-nat match source-address LocalNet
 set security nat source rule-set vpn_nat_out rule interface-nat match destination-address PrivateNet
 set security nat source rule-set vpn_nat_out rule interface-nat then source-nat interface
-  
+
 ```
 
 **YAML Variables file**
