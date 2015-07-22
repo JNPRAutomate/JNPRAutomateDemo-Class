@@ -130,10 +130,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     srx.vm.provision "file", source: "scripts/headend-srx-setup.sh", destination: "/tmp/srx-setup.sh"
     srx.vm.provision "file", source: "scripts/headend-srx-vpnstints.sh", destination: "/tmp/srx-vpnstints.sh"
     srx.vm.provision :host_shell do |host_shell|
-      host_shell.inline = 'vagrant ssh vsrx_headend -c "/usr/sbin/cli -f /tmp/srx-setup.sh"'
+      host_shell.inline = 'vagrant ssh srx_headend -c "/usr/sbin/cli -f /tmp/srx-setup.sh"'
     end
     srx.vm.provision :host_shell do |host_shell|
-        host_shell.inline = 'vagrant ssh vsrx_headend -c "/usr/sbin/cli -f /tmp/srx-vpnstints.sh"'
+        host_shell.inline = 'vagrant ssh srx_headend -c "/usr/sbin/cli -f /tmp/srx-vpnstints.sh"'
     end
   end
 

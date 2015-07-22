@@ -8,7 +8,7 @@
     junos_password: "Juniper"
     build_dir: "/tmp/"
     appfw_to_policy_info: [{"src_zone":"trust","dst_zone":"untrust","policy_name":"Allow_Policy","appfw_rule_set":"ruleset1"}]
-    appfw_policy_info: [{"rule_set":"ruleset1","rule_set_default_action":"permit","rules":[{"name":"rule1","action":"deny","dynapps":["junos:GOOGLE", "junos:GOOGLE-ACCOUNTS", "junos:GOOGLE-ACCOUNTS-SSL","junos:GOOGLE-ADS", "junos:GOOGLE-ANALYTICS-TRACKING", "junos:GOOGLE-APPENGINE", "junos:GOOGLE-CACHE", "junos:GOOGLE-DESKTOP", "junos:GOOGLE-DOCS", "junos:GOOGLE-DOCS-DRAWING", "junos:GOOGLE-DOCS-FORM", "junos:GOOGLE-DOCS-PRESENTATION", "junos:GOOGLE-DOCS-SPREADSHEET", "junos:GOOGLE-DOCS-WORD-DOCUMENT", "junos:GOOGLE-DRIVE", "junos:GOOGLE-EARTH", "junos:GOOGLE-GROUPS-POST", "junos:GOOGLE-MAPS", "junos:GOOGLE-MOBILE-MAPS-APP", "junos:GOOGLE-PICASA", "junos:GOOGLE-PLUS", "junos:GOOGLE-PLUS-SSL", "junos:GOOGLE-SAFEBROWSE-SUB", "junos:GOOGLE-SAFEBROWSE-UPDATE", "junos:GOOGLE-SKYMAP", "junos:GOOGLE-STATIC", "junos:GOOGLE-SYNDICATION", "junos:GOOGLE-TOOLBAR", "junos:GOOGLE-TRANSLATE", "junos:GOOGLE-UPDATE", "junos:GOOGLE-VIDEOS", "junos:GOOGLE-WEBCHAT", "junos:GOOGLETALK"]}]}]
+    appfw_policy_info: [{"rule_set":"ruleset1","rule_set_default_action":"permit","rules":[{"name":"rule1","action":"deny","dynapps":["junos:GOOGLE","junos:GOOGLE-UPDATE","junos:GOOGLE-EARTH"]}]}]
 
   tasks:
     - name: Build app firewall policies

@@ -1,3 +1,6 @@
+[vpn_headend]
+10.10.0.5 ansible_python_interpreter=python
+
 [mysrx]
 172.16.0.1 ansible_python_interpreter=python
 
