@@ -7,8 +7,9 @@
     junos_user: "root"
     junos_password: "Juniper"
     build_dir: "/tmp/"
-    idp_license_url: "http://10.10.0.10/license/"
+    idp_license_url: "http://172.16.0.10:8888/licenses"
     idp_license_files: ['utm.txt','appsecure.txt']
+
   tasks:
       - name: Build fetch commands
         template: src=templates/idp_license_fetch.set.j2 dest={{build_dir}}/idp_license_fetch.set

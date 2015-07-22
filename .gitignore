@@ -12,3 +12,6 @@ packer_cache/
 
 # Ignore Log files
 *.log
+
+#Ignore license files
+licenses/*.txt

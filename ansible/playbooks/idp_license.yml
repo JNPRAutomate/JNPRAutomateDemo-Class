@@ -7,10 +7,10 @@
     junos_user: "root"
     junos_password: "Juniper"
     build_dir: "/tmp/"
+    idp_license_url: "http://172.16.0.10:8888/licenses"
+    idp_license_files: ['utm.txt','appsecure.txt']
 
   tasks:
-      - name: Install appsec Licenses
-        script: ../../tools/licensetool.py  --user {{ junos_user }} --password {{ junos_password }} --host {{ inventory_hostname }} --url http://10.10.0.10/license/appsecure.txt
-
-      - name: Install utm Licenses
-        script: ../../tools/licensetool.py  --user {{ junos_user }} --password {{ junos_password }} --host {{ inventory_hostname }} --url http://10.10.0.10/license/utm.txt
+      - name: Install Licenses
+        script: ../../tools/licensetool.py  --user {{ junos_user }} --password {{ junos_password }} --host {{ inventory_hostname }} --url {{ idp_license_url }}/{{ item }}
+        with_items: idp_license_files

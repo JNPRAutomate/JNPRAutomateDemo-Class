@@ -1,6 +1,9 @@
 Automating License and IDP Package Installation
 ===============================================
 
+//TODO: Place license files in "licenses" directory in root of the project
+//TODO: Run basic web server on ndo box
+
 When deploying IPS there are a few steps you must take on a device before it is ready to utilize an IPS policy.
 
 First a license is required to installed on the vSRX. This gives the device the ability to run IPS, AppID, and UTM. Once installed these features are enabled and ready to be used. The IPS and UTM licenses are required to be installed separately.
