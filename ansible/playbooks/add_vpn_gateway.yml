@@ -7,7 +7,7 @@
     junos_user: "root"
     junos_password: "Juniper"
     build_dir: "/tmp/"
-    pods: [ { "addr_lo0": "10.255.255.1/32","addr_st0": "10.255.1.2/30","addr_wan": "10.10.0.29","id": 1,"pod_number": 1}]
+    pods: [ { "addr_lo0": "10.255.255.1/32","addr_st0": "10.255.1.2/30","addr_wan": "10.10.0.10","id": 1,"pod_number": 1}]
 
   tasks:
     - name: Build gateway templates
