@@ -1,4 +1,4 @@
-Configuring NAT
+Configuring NAT via NETCONF 
 ===============
 
 This is an example of how to configure NAT via the NETCONF interface directly. It CAN be run to configure NAT and it will work correctly. However doing so is not for the feint of heart. Be careful if you are copy and pasting XML as there can be issues in incorrectly inserting characters into the NETCONF commands.
