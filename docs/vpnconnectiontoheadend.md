@@ -68,8 +68,6 @@ Here is a look at the YAMAL structure used by the above example. One of the keys
 
 **You should edit the "student" variables below to match those provided during the registration process.**
 
-** DO WE NEED INSTRUCTIONS FOR USING THE EDITOR???**
-
 The template used for this example is found located in **"examples/vpn/vpn.yml"**
 
 ```yaml
