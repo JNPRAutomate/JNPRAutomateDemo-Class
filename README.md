@@ -29,12 +29,12 @@ The course is divided into multiple steps.
 	- Headend VPN connection
 4.	[Enabling Dynamic Routing](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/enablingdynamicrouting.md)
 5.	[Creating VPN Firewall Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/creatingfwpolicies.md)
-6.	[Automating Licenses](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/automatinglicense.md)
-7.	[Creating Application Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/creatingapppolicies.md)
-8.	[Creating IPS Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/creatingipspolicies.md)
+6.	[Automating Licenses](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/automatinglicense.md) (skip if you dont have licenses)
+7.	[Creating Application Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/creatingapppolicies.md) (skip if you dont have licenses)
+8.	[Creating IPS Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/creatingipspolicies.md) (skip if you dont have licenses)
 9.	[Disaster Strikes!](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/disasterstrikes.md)
 10.	[Recovering the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/recoveringthelab.md)
-11.	[Reviewing the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/reviewingthelab.md)
+11.	[Reviewing the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/reviewingthelab.md) 
 
 **VM Access Information**
 
@@ -47,12 +47,6 @@ The course is divided into multiple steps.
 
 TODO
 ====
-
-1. Change topology to be self contained
-	-	Backend Host - 512MB RAM, 1 vCPU
-	-   Headend SRX - 2GB RAM, 2 vCPU
-	-	Student SRX - 3GB RAM, 2 vCPU
-	-   Student Automation Host - 512MB RAM, 1 vCPU
-2.  Support VMware Workstation, Fusion, and Virtual Box
+1.  Support VMware Workstation, Fusion, and Virtual Box
 	- Add in VMware instructions
-3.	Remove remote license requirements
+2.	Remove remote license requirements
