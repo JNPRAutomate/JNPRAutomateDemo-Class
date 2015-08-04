@@ -12,12 +12,12 @@ Vagrant is a virtual machine management tool. It manages the downloading, provis
 
 **Download Locations**
 
--	[Mac OS X](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3.dmg)
--	[Windows](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3.msi)
--	[Linux 64-bit DEB](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3_x86_64.deb)
--	[Linux 32-bit DEB](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3_i686.deb)
--	[Linux 64-bit RPM](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3_x86_64.rpm)
--	[Linux 32-bit RPM](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3_i686.rpm)
+-	[Mac OS X](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4.dmg)
+-	[Windows](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4.msi)
+-	[Linux 64-bit DEB](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb)
+-	[Linux 32-bit DEB](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_i686.deb)
+-	[Linux 64-bit RPM](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.rpm)
+-	[Linux 32-bit RPM](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_i686.rpm)
 
 **Installation Instructions**
 
