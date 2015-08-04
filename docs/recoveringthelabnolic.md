@@ -14,7 +14,7 @@ As we went through each step of the lab we used many different automation method
 
 **The ALL playbook**
 
-**ONLY RUN THIS IF YOU HAVE LICENSES AVAILABLE**
+**ONLY RUN THIS IF YOU DO NOT HAVE LICENSES AVAILABLE**
 
 In this playbook we run all of the steps of the lab. We did not have to rewrite all of the existing play books, we simply included them into a single task list. This way all existing automation can be reused without a substantial rewrite of our existing code. Ansible will loop through each included play book running each of the tasks within the included playbook. This was also used by the authors to do rapid testing of the lab, without needing to follow each of the steps.
 
@@ -35,12 +35,14 @@ Almost all of the tasks are done using the Ansible playbook methodology of gener
 - include: basic_firewall_policies.yml
 - include: vpn_config.yml
 - include: vpn_ospf_config.yml
-- include: vpn_firewall_policies.yml
+- include: vpn_firewall_policies.ymla
 - include: vpn_nat_policies.yml
-- include: idp_license.yml
-- include: idp_secpak.yml
-- include: appfw_policies.yml
-- include: idp_policies.yml
+- include: add_vpn_gateway.yml
+#Since no licenses are avialable these tasjs are disabled
+#- include: idp_license.yml
+#- include: idp_secpak.yml
+#- include: appfw_policies.yml
+#- include: idp_policies.yml
 ```
 
 **Calling a script from a playbook**
@@ -90,13 +92,13 @@ This play book follows the same idea, however it is used to download the securit
 **Running the all Playbook**
 
 ```bash
-vagrant@NetDevOps-Student:/vagrant/ansible$ ansible-playbook -i inventory.yml playbooks/all.yml
+vagrant@NetDevOps-Student:/vagrant/ansible$ ansible-playbook -i inventory.yml playbooks/all-nolic.yml
 ```
 
 **Run Output**
 
 ```bash
-vagrant@NetDevOps-Student:/vagrant/ansible$ ansible-playbook -i inventory.yml playbooks/all.yml
+vagrant@NetDevOps-Student:/vagrant/ansible$ ansible-playbook -i inventory.yml playbooks/all-nolic.yml
 
 PLAY [Run all tasks] **********************************************************
 
@@ -219,49 +221,8 @@ changed: [172.16.0.1] => (item={'rules': [{'interface': True, 'dst_ips': ['0.0.0
 TASK: [Apply NAT policies] ****************************************************
 changed: [172.16.0.1]
 
-PLAY [Install IDP Licenses] ***************************************************
-
-TASK: [Install appsec Licenses] ***********************************************
-changed: [172.16.0.1]
-
-TASK: [Install utm Licenses] **************************************************
-changed: [172.16.0.1]
-
-PLAY [Install IDP Security Packages] ******************************************
-
-TASK: [Install package] *******************************************************
-changed: [172.16.0.1]
-
-PLAY [Configure AppFirewall policies] *****************************************
-
-TASK: [Build app firewall policies] *******************************************
-changed: [172.16.0.1] => (item={'rules': [{'action': 'deny', 'dynapps': ['junos:GOOGLE', 'junos:GOOGLE-ACCOUNTS', 'junos:GOOGLE-ACCOUNTS-SSL', 'junos:GOOGLE-ADS', 'junos:GOOGLE-ANALYTICS-TRACKING', 'junos:GOOGLE-APPENGINE', 'junos:GOOGLE-CACHE', 'junos:GOOGLE-DESKTOP', 'junos:GOOGLE-DOCS', 'junos:GOOGLE-DOCS-DRAWING', 'junos:GOOGLE-DOCS-FORM', 'junos:GOOGLE-DOCS-PRESENTATION', 'junos:GOOGLE-DOCS-SPREADSHEET', 'junos:GOOGLE-DOCS-WORD-DOCUMENT', 'junos:GOOGLE-DRIVE', 'junos:GOOGLE-EARTH', 'junos:GOOGLE-GROUPS-POST', 'junos:GOOGLE-MAPS', 'junos:GOOGLE-MOBILE-MAPS-APP', 'junos:GOOGLE-PICASA', 'junos:GOOGLE-PLUS', 'junos:GOOGLE-PLUS-SSL', 'junos:GOOGLE-SAFEBROWSE-SUB', 'junos:GOOGLE-SAFEBROWSE-UPDATE', 'junos:GOOGLE-SKYMAP', 'junos:GOOGLE-STATIC', 'junos:GOOGLE-SYNDICATION', 'junos:GOOGLE-TOOLBAR', 'junos:GOOGLE-TRANSLATE', 'junos:GOOGLE-UPDATE', 'junos:GOOGLE-VIDEOS', 'junos:GOOGLE-WEBCHAT', 'junos:GOOGLETALK'], 'name': 'rule1'}], 'rule_set_default_action': 'permit', 'rule_set': 'ruleset1'})
-
-TASK: [Apply app firewall policies] *******************************************
-changed: [172.16.0.1]
-
-TASK: [Apply app firewall rules to policy] ************************************
-changed: [172.16.0.1] => (item={'appfw_rule_set': 'ruleset1', 'src_zone': 'trust', 'dst_zone': 'untrust', 'policy_name': 'Allow_Policy'})
-
-TASK: [Apply firewall policies] ***********************************************
-changed: [172.16.0.1]
-
-PLAY [Configure IPS policies] *************************************************
-
-TASK: [Build ips policies config template] ************************************
-changed: [172.16.0.1] => (item=ips_policy_info)
-
-TASK: [Apply ips policies] ****************************************************
-changed: [172.16.0.1]
-
-TASK: [Build ips policy apply template] ***************************************
-changed: [172.16.0.1] => (item={'src_zone': 'trust', 'dst_zone': 'untrust', 'policy_name': 'Allow_Policy'})
-
-TASK: [Activate ips policy] ***************************************************
-changed: [172.16.0.1]
-
 PLAY RECAP ********************************************************************
-172.16.0.1                 : ok=43   changed=40   unreachable=0    failed=0
+172.16.0.1                 : ok=32   changed=29   unreachable=0    failed=0
 
 vagrant@NetDevOps-Student:/vagrant/ansible$
 ```

@@ -26,15 +26,16 @@ The course is divided into multiple steps.
 	2.	[Configuring NAT with Ansible](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/configuringnatwansible.md)
 2.	[Basic Firewall Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/basicfwpolicies.md)
 3.	[VPN connection to headend](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/vpnconnectiontoheadend.md)
-	- Headend VPN connection
 4.	[Enabling Dynamic Routing](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/enablingdynamicrouting.md)
 5.	[Creating VPN Firewall Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/creatingfwpolicies.md)
 6.	[Automating Licenses](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/automatinglicense.md) (skip if you dont have licenses)
 7.	[Creating Application Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/creatingapppolicies.md) (skip if you dont have licenses)
 8.	[Creating IPS Policies](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/creatingipspolicies.md) (skip if you dont have licenses)
-9.	[Disaster Strikes!](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/disasterstrikes.md)
-10.	[Recovering the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/recoveringthelab.md)
-11.	[Reviewing the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/reviewingthelab.md) 
+9.	[Disaster Strikes!](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/disasterstrikes.md) (add disaster creating steps)
+10. Recovering the Lab
+	- [Recovering the lab with licenses](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/recoveringthelab.md)
+	- [Recovering the lab without licenses](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/recoveringthelabnolic.md)
+11.	[Reviewing the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/reviewingthelab.md)
 
 **VM Access Information**
 
@@ -49,4 +50,3 @@ TODO
 ====
 1.  Support VMware Workstation, Fusion, and Virtual Box
 	- Add in VMware instructions
-2.	Remove remote license requirements

@@ -30,8 +30,7 @@ First let's take a look at the playbook that is used to accomplish this task. We
 	-	They can be applied at many different locations for our run
 	-	But to keep everything together we have included the variables into the playbook
 	-	address_entires will be used to generate the address book entries
-	-	fw_policy_info will be used to define our policies
-		-	In this run we will be generating a policy for the VPN zone
+	-	nat_policy_info will be used to generate the NAT policies
 6.	Tasks - These are the tasks that we will use
 	-	The build phase for the playbook generates the Junos config from the templates
 	-	The apply phase will apply the configuration to the device
@@ -41,7 +40,7 @@ First let's take a look at the playbook that is used to accomplish this task. We
 
 ```yaml
 ---
-- name: Configure VPN NAT policies
+- name: Configure basic NAT policies
   hosts: mysrx
   connection: local
   gather_facts: no
@@ -50,7 +49,7 @@ First let's take a look at the playbook that is used to accomplish this task. We
     junos_password: "Juniper"
     build_dir: "/tmp/"
     address_entries: [ {'name':'LocalNet','prefix':'172.16.0.0/24'},{'name':'PrivateNet','prefix':'192.168.10.0/24'},{'name':'PublicNet','prefix':'10.10.0.0/22'} ]
-    nat_policy_info: [{'rule_set':'vpn-nat', 'src_zone':'trust', 'dst_zone':'vpn', 'rules':[{'name':'vpnrule','src_ips':['172.16.0.10/32'],'dst_ips':['0.0.0.0/0'], 'interface':True}]}]
+    nat_policy_info: [{'rule_set':'fw-nat', 'src_zone':'trust', 'dst_zone':'untrust', 'rules':[{'name':'rule1','src_ips':['172.16.0.0/24'],'dst_ips':['0.0.0.0/0'], 'interface':True}]}]
 
   tasks:
     - name: Build address book entries
@@ -91,11 +90,29 @@ set security address-book global address {{ i.name }} {{ i.prefix }}
 set security address-book global address NetDevOpsVM 172.16.0.10/32
 ```
 
-**Policy Template**
+**NAT Template**
 
-This template is a bit more complex. We need to loop through source IPs, Destination IPs, and applications. Each loop through these variables will generate a single line of "set" commands. Creating the template this way allows us to reuse it in the future when we have a larger list of addresses and applications to apply. In this example we generate multiple applications for the policy.
+This template is a bit more complex. We need to loop through source IPs, Destination IPs, and applications. Each loop through these variables will generate a single line of "set" commands. Creating the template this way allows us to reuse it in the future when we have a larger list of addresses and applications to apply.
 
 ```jinja2
+{% for item in nat_policy_info %}
+set security nat source rule-set {{ item.rule_set }} from zone {{ item.src_zone }}
+set security nat source rule-set {{ item.rule_set }} to zone {{ item.dst_zone }}
+    {% for rule in item.rules %}
+        {% for src_ip in rule.src_ips %}
+        set security nat source rule-set {{ item.rule_set }} rule {{ rule.name }} match source-address {{ src_ip }}
+        {% endfor %}
+        {% for dst_ip in rule.dst_ips %}
+        set security nat source rule-set {{ item.rule_set }} rule {{ rule.name }} match destination-address {{ dst_ip }}
+        {% endfor %}
+        {% if rule.interface is defined %}
+        set security nat source rule-set {{ item.rule_set }} rule {{ rule.name }} then source-nat interface
+        {% endif %}
+        {% if rule.pool_name is defined %}
+        set security nat source rule-set {{ item.rule_set }} rule {{ rule.name }} then source-nat pool {{ rule.pool_name }}
+        {% endif %}
+    {% endfor %}
+{% endfor %}
 
 ```
 
@@ -104,6 +121,11 @@ This template is a bit more complex. We need to loop through source IPs, Destina
 Once run here are the set commands that will be loaded onto the device. Again if additional elements are added they will be generated into individual set commands. While we could create the applications with a single command using a list of applications this keeps it simple to implement using individual commands.
 
 ```bash
+set security nat source rule-set fw-nat from zone trust
+set security nat source rule-set fw-nat to zone untrust
+set security nat source rule-set fw-nat rule rule1 match source-address 172.16.0.0/24
+set security nat source rule-set fw-nat rule rule1 match destination-address 0.0.0.0/0
+set security nat source rule-set fw-nat rule rule1 then source-nat interface
 ```
 
 Running the playbook
@@ -116,7 +138,7 @@ To run the playbook you must use the "ansible-playbook" command.
 Ensure before running the command you are in the "**ansible**" directory.
 
 ```bash
-vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Class/ansible$ ansible-playbook -i inventory.yml playbooks/basic_nat_policies.yml
+vagrant@NetDevOps-Student:/vagrant/ansible$ ansible-playbook -i inventory.yml playbooks/basic_nat_policies.yml
 ```
 
 **Playbook Run Example**
@@ -124,11 +146,44 @@ vagrant@NetDevOps-Student:~/JNPRAutomateDemo-Class/ansible$ ansible-playbook -i 
 Once run the output should look like the following
 
 ```bash
+vagrant@NetDevOps-Student:/vagrant/ansible$ ansible-playbook -i inventory.yml playbooks/basic_nat_policies.yml -K
+sudo password:
+
+PLAY [Configure basic NAT policies] *******************************************
+
+TASK: [Build address book entries] ********************************************
+changed: [172.16.0.1] => (item={'prefix': '172.16.0.0/24', 'name': 'LocalNet'})
+ok: [172.16.0.1] => (item={'prefix': '192.168.10.0/24', 'name': 'PrivateNet'})
+ok: [172.16.0.1] => (item={'prefix': '10.10.0.0/22', 'name': 'PublicNet'})
+
+TASK: [Apply address book entries] ********************************************
+changed: [172.16.0.1]
+
+TASK: [Build NAT policies] ****************************************************
+changed: [172.16.0.1] => (item={'rules': [{'interface': True, 'dst_ips': ['0.0.0.0/0'], 'name': 'rule1', 'src_ips': ['172.16.0.0/24']}], 'src_zone': 'trust', 'rule_set': 'fw-nat', 'dst_zone': 'untrust'})
+
+TASK: [Apply NAT policies] ****************************************************
+changed: [172.16.0.1]
+
+PLAY RECAP ********************************************************************
+172.16.0.1                 : ok=4    changed=4    unreachable=0    failed=0
 ```
 
-**Validating the playbook run**
+**Validate connectivity**
 
-Now connect to your vSRX instance from your NetDevOpsVM and validate the change
+To validate the connectivity you can issue a ping command from your NetDevOps VM. If everything is working correctly you should see a response from the host.
 
 ```bash
+vagrant@NetDevOps-Student:~$ ping 10.10.0.5
+PING 10.10.0.10 (10.10.0.5) 56(84) bytes of data.
+64 bytes from 10.10.0.5: icmp_seq=1 ttl=64 time=0.482 ms
+64 bytes from 10.10.0.5: icmp_seq=2 ttl=64 time=0.480 ms
+64 bytes from 10.10.0.5: icmp_seq=3 ttl=64 time=0.520 ms
+64 bytes from 10.10.0.5: icmp_seq=4 ttl=64 time=0.548 ms
+
+--- 10.10.0.5 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 2999ms
+rtt min/avg/max/mdev = 0.480/0.507/0.548/0.036 ms
+vagrant@NetDevOps-Student:~$
 ```
+If the ping request is not working? Then why?
