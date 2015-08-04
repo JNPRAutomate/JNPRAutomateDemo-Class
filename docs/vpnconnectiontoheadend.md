@@ -66,8 +66,6 @@ Here is a look at the YAMAL structure used by the above example. One of the keys
 -	We seperate "HeadEnd" and "students" into seperate structures to allow us to refer to each seperately.
 -	Inside each "student" we include a list of "vpns", which could allow us to configure multiple VPNs with this template.
 
-**You should edit the "student" variables below to match those provided during the registration process.**
-
 The template used for this example is found located in **"examples/vpn/vpn.yml"**
 
 ```yaml
