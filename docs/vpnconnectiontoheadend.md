@@ -84,18 +84,18 @@ HeadEnd:
 
 students:
   - pod-1:
-    shortname: "Pod 1"                           # <--- Change this Line to Match your pod number
-    desc: "This is Student Pod 1"                # <--- Change this Line to Match your pod number
+    shortname: "Pod 1"                           
+    desc: "This is Student Pod 1"                
     active: true
     vpns:
       - vpn:
         active: true
-        tunnel_int: st0.1                        # <--- Change this Line to Match your pod number
+        tunnel_int: st0.1                        
         int_descr: "Customer A Primary Link"
         active: true
         vpn_ext_interface: ge-0/0/2.0
         vpn_local_ip: 10.10.0.100
-        vpn_tunnel_ip: 10.255.1.2                # <--- Change this Line to Match your pod number
+        vpn_tunnel_ip: 10.255.1.2                
         vpn_zone: "vpn"
         shared_secret: "AwesomePassword123"
 
