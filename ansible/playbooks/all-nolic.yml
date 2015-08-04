@@ -1,0 +1,22 @@
+---
+- name: Run all tasks
+  hosts: mysrx
+  connection: local
+  gather_facts: no
+  vars:
+    junos_user: "root"
+    junos_password: "Juniper"
+    build_dir: "/tmp/"
+
+- include: basic_nat_policies.yml
+- include: basic_firewall_policies.yml
+- include: vpn_config.yml
+- include: vpn_ospf_config.yml
+- include: vpn_firewall_policies.yml
+- include: vpn_nat_policies.yml
+- include: add_vpn_gateway.yml
+#Since no licenses are avialable these tasjs are disabled
+#- include: idp_license.yml
+#- include: idp_secpak.yml
+#- include: appfw_policies.yml
+#- include: idp_policies.yml

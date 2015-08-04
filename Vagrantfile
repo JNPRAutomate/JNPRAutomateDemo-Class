@@ -36,6 +36,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     #Provisioning
+    ndo.vm.provision "file", source: "tools/gogoHTTP/gogoHTTPD", destination: "/tmp/gogoHTTPD"
+    ndo.vm.provision "file", source: "tools/gogoHTTP/gogohttpd.conf", destination: "/tmp/gogohttpd.conf"
     ndo.vm.provision "shell" do |s|
       # this script provisions the ndo box for you
       s.path = "scripts/ndo-setup.sh"

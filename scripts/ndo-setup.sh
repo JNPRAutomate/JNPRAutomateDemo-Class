@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+sudo mv /tmp/gogoHTTPD /usr/local/bin
+sudo mv /tmp/gogohttpd.conf /etc/init
+sudo chown root:root /usr/local/bin/gogoHTTPD
+sudo chmod 655 /usr/local/bin/gogoHTTPD
+sudo chown root:root /etc/init/gogohttpd.conf
+sudo chmod 644 /etc/init/gogohttpd.conf
+sudo service gogohttpd start
+
 export ANSIBLE_LIBRARY=/etc/ansible/roles/
 if ! grep -qe "export ANSIBLE_LIBRARY=/etc/ansible/roles/" "/home/vagrant/.bashrc"; then
     cat >> /home/vagrant/.bashrc <<EOF
