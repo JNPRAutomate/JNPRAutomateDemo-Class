@@ -1,8 +1,18 @@
 Automating License and IDP Package Installation
 ===============================================
 
-//TODO: Place license files in "licenses" directory in root of the project
-//TODO: Run basic web server on ndo box
+**Important**
+The licenses for this step are not included within the lab due to legal reasons. You will need to place the license files "utm.txt" and "appsecure.txt" into the licenses directory within the repository.
+
+An example license file will look something like this. It may also contain additional comments but the actual license component will look like this.
+```
+JUNOS604043 xxxqic a6ajc4 a2ob24 bhhqdj yhlqeq 6anha5
+            xxx5yb u4dvyc dpagtq oxbmhd smjxgm yecmbq
+            xxxtqo brg4ga 4tcbij lwk3tz ouqfu2 dbnztq
+            xxxdtn 6mhr4d bldwa7 26bcdg inj3wb p6tjq4
+            xxxq4x ms5lt4 5coxjv 52756a n3bark dw64
+```
+**Important**
 
 When deploying IPS there are a few steps you must take on a device before it is ready to utilize an IPS policy.
 
