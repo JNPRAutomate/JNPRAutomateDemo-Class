@@ -45,50 +45,6 @@ Almost all of the tasks are done using the Ansible playbook methodology of gener
 #- include: idp_policies.yml
 ```
 
-**Calling a script from a playbook**
-
-This play book will call the scripts the same way that we did from the command line. This allows us to reuse the tooling that was already built.
-
-```yaml
----
-- name: Install IDP Licenses
-  hosts: mysrx
-  connection: local
-  gather_facts: no
-  vars:
-    junos_user: "root"
-    junos_password: "Juniper"
-    build_dir: "/tmp/"
-
-  tasks:
-      - name: Install appsec Licenses
-        script: ../../tools/licensetool.py  --user {{ junos_user }} --password {{ junos_password }} --host {{ inventory_hostname }} --url http://10.10.0.10/license/appsecure.txt
-
-      - name: Install utm Licenses
-        script: ../../tools/licensetool.py  --user {{ junos_user }} --password {{ junos_password }} --host {{ inventory_hostname }} --url http://10.10.0.10/license/utm.txt
-
-```
-
-This play book follows the same idea, however it is used to download the security pack.
-
-```yaml
----
-- name: Install IDP Security Packages
-  hosts: mysrx
-  connection: local
-  gather_facts: no
-  vars:
-    junos_user: "root"
-    junos_password: "Juniper"
-    build_dir: "/tmp/"
-
-  tasks:
-      - name: Install package
-        script: ../../tools/idpsecpack.py --user {{ junos_user }} --password {{ junos_password}} --host {{ inventory_hostname }}
-
-
-```
-
 **Running the all Playbook**
 
 ```bash
