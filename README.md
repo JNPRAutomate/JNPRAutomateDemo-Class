@@ -7,6 +7,8 @@ This repository contains an entire class on creating network automation. It util
 
 The course is divided into multiple steps.
 
+[Complete PDF documentation](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/JNPRAutomateDemo-Class.pdf)
+
 ## Overview
 1.  [Getting a copy of the lab](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/installinglab.md)
 2.	[Topology Overview](https://github.com/JNPRAutomate/JNPRAutomateDemo-Class/blob/master/docs/topologyoverview.md)
