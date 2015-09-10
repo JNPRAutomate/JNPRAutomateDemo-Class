@@ -1,6 +1,6 @@
 # Installing the Lab Repository
 
-The lab is a set of files and directories that are hosted on github. This allows the lab to be completely open for everyone to participate in creation of the lab. While this may seem like a new concept, github is the new was that developers share ideas and code to make the world a better place.
+The lab is a set of files and directories that are hosted on github. This allows the lab to be completely open for everyone to participate in creation of the lab. While this may seem like a new concept, github is the new way that developers share ideas and code to make the world a better place.
 
 # Installing Git on your system
 
